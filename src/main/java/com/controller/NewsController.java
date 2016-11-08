@@ -21,15 +21,14 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/addNews", method = RequestMethod.GET)
-    public String addNews(News news) {
+    public String addNews() {
         System.out.println("addNews");
-        newsService.addNews(news);
         return "addNews";
     }
 
-    @RequestMapping(value = "/saveNews", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveNews", method = RequestMethod.POST)
     public String saveNews(News news) {
-        System.out.println("saveNews");
+        System.out.println(news.toString());
         newsService.addNews(news);
         return "redirect:/news/getNews";
     }
