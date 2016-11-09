@@ -40,7 +40,7 @@ public class NewsController {
         }else{
             totelPages=totleNewsList.size()/ pageSize+1;
         }
-        List<News> newsList = newsService.selectNewsByPage(currentPage*pageSize);
+        List<News> newsList = newsService.selectNewsByPage((currentPage-1)*pageSize);
 
         modelAndView.addObject("totelNews", totleNewsList.size());
         modelAndView.addObject("newsList", newsList);

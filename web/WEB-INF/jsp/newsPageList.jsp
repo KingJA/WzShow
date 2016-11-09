@@ -44,12 +44,17 @@
 </table>
 共${totelNews}条数据 &emsp;
 共${totelPages}页
-<c:if test="${currentPage>0}">
+<c:if test="${currentPage>1}">
     <a href="/news/getNewsByPage?page=${currentPage-1}">上一页</a>
 </c:if>
 
+<c:forEach var="x" begin="1" end="${totelPages}">
+    <a href="/news/getNewsByPage?page=${x}">${x}</a>
 
-<c:if test="${currentPage<totelPages-1}">
+</c:forEach>
+
+
+<c:if test="${currentPage<totelPages}">
     <a href="/news/getNewsByPage?page=${currentPage+1}">下一页</a>
 </c:if>
 </body>
