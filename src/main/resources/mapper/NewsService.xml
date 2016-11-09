@@ -11,6 +11,10 @@
     <select id="selectNews" resultType="com.bean.News">
         SELECT * FROM news
     </select>
+
+    <select id="selectNewsByPage" parameterType="int" resultType="com.bean.News">
+        SELECT * FROM news LIMIT #{page},2
+    </select>
     <select id="selectNewsById" parameterType="java.lang.Long" resultType="com.bean.News">
         SELECT * FROM news WHERE newsId=#{newsId}
     </select>
@@ -21,4 +25,8 @@
     <update id="editNews" parameterType="com.bean.News">
         UPDATE news SET title=#{title},content=#{content} ,category=#{category} ,author=#{author} WHERE newsId=#{newsId}
     </update>
+    <delete id="deleteNews" parameterType="java.lang.Long">
+            DELETE FROM news WHERE newsId=#{newsId}
+    </delete>
+
 </mapper>

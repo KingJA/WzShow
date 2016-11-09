@@ -33,10 +33,24 @@
                 <td>${news.author}</td>
                 <td>${news.createTime}</td>
                 <td>${news.modifyTime}</td>
-                <td><a href="/news/editNews/${news.newsId}">编辑</a></td>
+                <td>
+                    <a href="/news/editNews/${news.newsId}">编辑</a>
+                    <a href="/news/deleteNews/${news.newsId}">删除</a>
+                </td>
             </tr>
         </c:forEach>
     </c:if>>
+
 </table>
+共${totelNews}条数据 &emsp;
+共${totelPages}页
+<c:if test="${currentPage>0}">
+    <a href="/news/getNewsByPage?page=${currentPage-1}">上一页</a>
+</c:if>
+
+
+<c:if test="${currentPage<totelPages-1}">
+    <a href="/news/getNewsByPage?page=${currentPage+1}">下一页</a>
+</c:if>
 </body>
 </html>

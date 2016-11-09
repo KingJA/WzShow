@@ -13,8 +13,10 @@ public interface NewsService {
     News selectNewsById(long id);
 
     List<News> selectNews();
+    List<News> selectNewsByPage(int page);
 
     void addNews(News news);
 
     void editNews(News news);
+    void deleteNews(long id);
 }
