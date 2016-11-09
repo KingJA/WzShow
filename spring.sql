@@ -55,8 +55,9 @@ CREATE TABLE `news` (
   `modifyTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `category` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '新闻分类',
   `author` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '作者',
+  `imgUrl` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '新闻图片链接',
   PRIMARY KEY (`newsId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='新闻表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='新闻表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +66,7 @@ CREATE TABLE `news` (
 
 LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` VALUES (1,'第一条新闻','新闻内容','2016-11-09 00:49:33','2016-11-09 00:49:33','体育','牛百叶',NULL),(2,'NBA总冠军','乔丹所在公牛队\r\n','2016-11-09 01:08:11','2016-11-09 01:08:11','体育','再别康桥',NULL),(3,'第二条','新闻内容\r\n','2016-11-09 01:55:22','2016-11-09 01:55:22','体育','三本',NULL),(4,'第三条','新闻内容\r\n','2016-11-09 02:02:44','2016-11-09 02:02:44','体育','关于',NULL),(6,'再别康桥','新闻内容\r\n','2016-11-09 02:57:50','2016-11-09 02:57:50','体育','徐志摩',NULL),(7,'aaa','新闻内容\r\n','2016-11-09 03:13:40','2016-11-09 03:13:40','体育','bbb',NULL),(8,'稀土掘金','编辑推荐：稀土掘金，这是一个针对技术开发者的一个应用，你可以在掘金上获取最新最优质的技术干货，不仅仅是Android知识、前端、后端以至于产品和设计都有涉猎，想成为全栈工程师的朋友不要错过！','2016-11-09 05:03:06','2016-11-09 05:03:06','体育','稀土掘金',NULL),(9,'dsfa ','新闻内容\r\nsdf ','2016-11-09 05:42:00','2016-11-09 05:42:00','体育','sdf ',NULL);
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -77,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-08 18:02:28
+-- Dump completed on 2016-11-09 16:33:45

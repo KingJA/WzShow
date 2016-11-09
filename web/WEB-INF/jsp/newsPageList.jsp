@@ -14,7 +14,7 @@
 </head>
 <body>
 <a href="/news/addNews">添加新闻</a>
-<table cellpadding="0" cellspacing="0" border="1">
+<table cellpadding="4" cellspacing="0" border="1px">
     <th>id</th>
     <th>标题</th>
     <th>内容</th>
@@ -49,8 +49,13 @@
 </c:if>
 
 <c:forEach var="x" begin="1" end="${totelPages}">
-    <a href="/news/getNewsByPage?page=${x}">${x}</a>
 
+    <c:if test="${currentPage==x}">
+        <span>${x}</span>
+    </c:if>
+    <c:if test="${currentPage!=x}">
+        <a href="/news/getNewsByPage?page=${x}">${x}</a>
+    </c:if>
 </c:forEach>
 
 

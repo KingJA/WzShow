@@ -1,5 +1,9 @@
 package com.bean;
 
+import com.util.DateUtil;
+
+import java.util.Date;
+
 /**
  * Description：新闻实体
  * Create Time：2016/11/8 15:04
@@ -11,12 +15,14 @@ public class News {
     private long newsId;
     /*新闻标题*/
     private String title;
+    /*新闻图片地址*/
+    private String imgUrl;
     /*新闻内容*/
     private String content;
     /*创建时间*/
-    private String createTime;
+    private Date createTime;
     /*修改时间*/
-    private String modifyTime;
+    private Date modifyTime;
     /*分类*/
     private String category;
     /*作者*/
@@ -39,18 +45,18 @@ public class News {
     }
 
     public String getCreateTime() {
-        return createTime;
+        return DateUtil.getDateTime(createTime);
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     public String getModifyTime() {
-        return modifyTime;
+        return DateUtil.getDateTime(modifyTime);
     }
 
-    public void setModifyTime(String modifyTime) {
+    public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
 
@@ -87,5 +93,13 @@ public class News {
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
                 '}';
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
