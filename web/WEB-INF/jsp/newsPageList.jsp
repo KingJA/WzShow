@@ -42,7 +42,7 @@
     </c:if>>
 
 </table>
-共${totelNews}条数据 &emsp;
+共${totelNews}条数据&emsp;
 共${totelPages}页
 <c:if test="${currentPage>1}">
     <a href="/news/getNewsByPage?page=${currentPage-1}">上一页</a>
