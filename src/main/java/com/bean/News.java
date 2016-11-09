@@ -8,7 +8,7 @@ package com.bean;
  */
 public class News {
 
-    private long newId;
+    private long newsId;
     /*新闻标题*/
     private String title;
     /*新闻内容*/
@@ -70,18 +70,18 @@ public class News {
         this.author = author;
     }
 
-    public long getNewId() {
-        return newId;
+    public long getNewsId() {
+        return newsId;
     }
 
-    public void setNewId(long newId) {
-        this.newId = newId;
+    public void setNewsId(long newsId) {
+        this.newsId = newsId;
     }
 
     @Override
     public String toString() {
         return "News{" +
-                "newId=" + newId +
+                "newsId=" + newsId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", category='" + category + '\'' +

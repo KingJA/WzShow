@@ -10,11 +10,11 @@ import java.util.List;
  */
 @Repository
 public interface NewsService {
-    News selectNewsById(int id);
+    News selectNewsById(long id);
 
     List<News> selectNews();
 
-    void addNews(News user);
+    void addNews(News news);
 
-    void editNews(News user);
+    void editNews(News news);
 }

@@ -7,17 +7,18 @@
     <!--select :对应的接口类的方法-->
     <!--parameterType :对应的接口类的参数类型-->
     <!--resultType :对应的接口类的返回类型-->
+
     <select id="selectNews" resultType="com.bean.News">
-        SELECT * FROM account
+        SELECT * FROM news
     </select>
     <select id="selectNewsById" parameterType="java.lang.Long" resultType="com.bean.News">
-        SELECT * FROM account WHERE newId=#{newId}
+        SELECT * FROM news WHERE newsId=#{newsId}
     </select>
     <insert id="addNews" parameterType="com.bean.News">
         INSERT INTO news (title,content,category,author) VALUES (#{title},#{content},#{category},#{author})
     </insert>
 
     <update id="editNews" parameterType="com.bean.News">
-        UPDATE users seSETt title=#{title},acontentge=#{content} ,category=#{category} ,author=#{author} where newId=#{newId}
+        UPDATE news SET title=#{title},content=#{content} ,category=#{category} ,author=#{author} WHERE newsId=#{newsId}
     </update>
 </mapper>
