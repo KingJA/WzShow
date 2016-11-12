@@ -2,12 +2,10 @@ package com.controller;
 
 import com.bean.News;
 import com.service.NewsService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,6 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/news")
 public class NewsController {
+    private static Logger logger = Logger.getLogger(NewsController.class);
     private int pageSize = 2;
     @Autowired
     private NewsService newsService;
@@ -83,5 +82,17 @@ public class NewsController {
     public String deleteNews(@PathVariable long newsId) {
         newsService.deleteNews(newsId);
         return "redirect:/news/getNews";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getNewsJson/{newsId}", method = RequestMethod.GET)
+    public News getNewsJsonById(@PathVariable long newsId) {
+        // 记录debug级别的信息
+        logger.debug("This is debug message.");
+        // 记录info级别的信息
+        logger.info("This is info message.");
+        // 记录error级别的信息
+        logger.error("This is error message.");
+        News news = newsService.selectNewsById(newsId);
+        return news;
     }
 }

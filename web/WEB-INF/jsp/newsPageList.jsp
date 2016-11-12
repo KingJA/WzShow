@@ -36,6 +36,7 @@
                 <td>
                     <a href="/news/editNews/${news.newsId}">编辑</a>
                     <a href="/news/deleteNews/${news.newsId}">删除</a>
+                    <a href="/news/getNewsJson/${news.newsId}">Json</a>
                 </td>
             </tr>
         </c:forEach>
@@ -62,5 +63,6 @@
 <c:if test="${currentPage<totelPages}">
     <a href="/news/getNewsByPage?page=${currentPage+1}">下一页</a>
 </c:if>
+
 </body>
 </html>
