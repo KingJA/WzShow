@@ -2,12 +2,17 @@ package com.controller;
 
 import com.bean.News;
 import com.service.NewsService;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,7 +28,7 @@ public class NewsController {
 
     @RequestMapping(value = "/getNews", method = RequestMethod.GET)
     public ModelAndView getNews() {
-        ModelAndView modelAndView = new ModelAndView("newList");
+        ModelAndView modelAndView = new ModelAndView("newsList");
         List<News> newsList = newsService.selectNews();
         modelAndView.addObject("newsList", newsList);
         return modelAndView;
@@ -55,7 +60,23 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/saveNews", method = RequestMethod.POST)
-    public String saveNews(News news) {
+    public String saveNews(News news,@RequestParam("newsTopImg") MultipartFile file,HttpServletRequest request) {
+        logger.debug("saveNews");
+        if (!file.isEmpty()) {
+            logger.debug("文件不为空");
+            String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
+            String fileName = file.getOriginalFilename();
+            File saveFile = new File(realPath, fileName);
+            logger.debug(saveFile.getAbsolutePath());
+            news.setNewsTopUrl("/upload/"+fileName);
+            try {
+                FileUtils.copyInputStreamToFile(file.getInputStream(), saveFile);
+            } catch (IOException e) {
+                logger.debug("IOException"+e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
         System.out.println(news.toString());
         newsService.addNews(news);
         return "redirect:/news/getNews";

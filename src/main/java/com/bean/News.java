@@ -15,8 +15,6 @@ public class News {
     private long newsId;
     /*新闻标题*/
     private String title;
-    /*新闻图片地址*/
-    private String imgUrl;
     /*新闻内容*/
     private String content;
     /*创建时间*/
@@ -27,6 +25,10 @@ public class News {
     private String category;
     /*作者*/
     private String author;
+   /*新闻头图*/
+    private String newsTopUrl;
+    /*评论Id*/
+    private String CommentId;
 
     public String getTitle() {
         return title;
@@ -95,11 +97,20 @@ public class News {
                 '}';
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+
+    public String getNewsTopUrl() {
+        return newsTopUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setNewsTopUrl(String newsTopUrl) {
+        this.newsTopUrl = newsTopUrl;
+    }
+
+    public String getCommentId() {
+        return CommentId;
+    }
+
+    public void setCommentId(String commentId) {
+        CommentId = commentId;
     }
 }

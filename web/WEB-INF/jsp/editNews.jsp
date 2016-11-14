@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="/news/updateNews" method="post">
-    <input type="hidden " name="newsId" value="${news.newsId}">
+    <input type="hidden" name="newsId" value="${news.newsId}">
     <fieldset>
         <legend>编辑新闻</legend>
         <select name="category">
@@ -22,7 +22,8 @@
         </select>
         标题<input type="text" name="title"/><br>
         作者<input type="text" name="author"/><br>
-        <textarea rows="10" cols="30" name="content"></textarea>
+        <textarea rows="10" cols="30" name="content"></textarea><br>
+        新闻图片 <img src="${news.newsTopUrl}"><br>
         <input type="submit" value="保存">
     </fieldset>
 

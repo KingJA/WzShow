@@ -12,7 +12,7 @@
 </head>
 <body>
 <img src="/img/home.png">
-<form action="/news/saveNews" method="post">
+<form action="/news/saveNews" method="post" enctype="multipart/form-data">
     <fieldset>
         <legend>添加新闻</legend>
         <select name="category">
@@ -22,6 +22,7 @@
         </select>
         标题<input type="text" name="title"/><br>
         作者<input type="text" name="author"/><br>
+        添加图片<input type="file" name="newsTopImg"/><br>
         <textarea rows="10" cols="30" name="content">
 新闻内容
 </textarea>
