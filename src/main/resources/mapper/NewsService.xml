@@ -19,7 +19,7 @@
         SELECT * FROM news WHERE newsId=#{newsId}
     </select>
     <insert id="addNews" parameterType="com.bean.News">
-        INSERT INTO news (title,content,category,author,newsTopUrl) VALUES (#{title},#{content},#{category},#{author},#{newsTopUrl})
+        INSERT INTO news (title,content,category,author,newsTopUrl,newsContentUrl) VALUES (#{title},#{content},#{category},#{author},#{newsTopUrl},#{newsContentUrl})
     </insert>
 
     <update id="editNews" parameterType="com.bean.News">

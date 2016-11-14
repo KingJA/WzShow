@@ -19,13 +19,14 @@
             <option value="体育" selected="selected">体育</option>
             <option value="娱乐">娱乐</option>
             <option value="社会">社会</option>
-        </select>
+        </select><br>
+        新闻头图<input type="file" name="newsTopImg"/><br>
         标题<input type="text" name="title"/><br>
         作者<input type="text" name="author"/><br>
-        添加图片<input type="file" name="newsTopImg"/><br>
         <textarea rows="10" cols="30" name="content">
 新闻内容
-</textarea>
+</textarea><br>
+        新闻图片<input type="file" name="newsContentImgs" multiple="multiple"/><br>
         <input type="submit" value="提交">
     </fieldset>
 

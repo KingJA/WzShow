@@ -27,6 +27,8 @@ public class News {
     private String author;
    /*新闻头图*/
     private String newsTopUrl;
+    /*新闻头图*/
+    private String newsContentUrl;
     /*评论Id*/
     private String CommentId;
 
@@ -112,5 +114,13 @@ public class News {
 
     public void setCommentId(String commentId) {
         CommentId = commentId;
+    }
+
+    public String getNewsContentUrl() {
+        return newsContentUrl;
+    }
+
+    public void setNewsContentUrl(String newsContentUrl) {
+        this.newsContentUrl = newsContentUrl;
     }
 }

@@ -60,26 +60,39 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/saveNews", method = RequestMethod.POST)
-    public String saveNews(News news,@RequestParam("newsTopImg") MultipartFile file,HttpServletRequest request) {
+    public String saveNews(News news,@RequestParam("newsTopImg") MultipartFile file,@RequestParam("newsContentImgs") MultipartFile[] files,HttpServletRequest request) {
         logger.debug("saveNews");
-        if (!file.isEmpty()) {
-            logger.debug("文件不为空");
-            String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
-            String fileName = file.getOriginalFilename();
-            File saveFile = new File(realPath, fileName);
-            logger.debug(saveFile.getAbsolutePath());
-            news.setNewsTopUrl("/upload/"+fileName);
-            try {
-                FileUtils.copyInputStreamToFile(file.getInputStream(), saveFile);
-            } catch (IOException e) {
-                logger.debug("IOException"+e.getMessage());
-                e.printStackTrace();
+        if (files != null && files.length > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (MultipartFile singleFile : files) {
+                logger.debug("图片名称"+singleFile.getOriginalFilename());
+                uploadImg(singleFile, request);
+                sb.append("/upload/"+singleFile.getOriginalFilename()+"#");
             }
+            news.setNewsContentUrl(sb.toString());
+        }
+        if (file!=null&&!file.isEmpty()) {
+            logger.debug("文件不为空");
+            uploadImg(file, request);
+            news.setNewsTopUrl("/upload/"+file.getOriginalFilename());
         }
 
         System.out.println(news.toString());
         newsService.addNews(news);
         return "redirect:/news/getNews";
+    }
+
+    private void uploadImg( @RequestParam("newsTopImg") MultipartFile file, HttpServletRequest request) {
+        String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
+        String fileName = file.getOriginalFilename();
+        File saveFile = new File(realPath, fileName);
+        logger.debug(saveFile.getAbsolutePath());
+        try {
+            FileUtils.copyInputStreamToFile(file.getInputStream(), saveFile);
+        } catch (IOException e) {
+            logger.debug("IOException"+e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping(value = "/editNews/{newsId}", method = RequestMethod.GET)
