@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.bean.News;
-import com.service.NewsService;
+import com.dao.NewsService;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

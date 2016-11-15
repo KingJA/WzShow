@@ -23,8 +23,8 @@ CREATE TABLE `account` (
   `account_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8 NOT NULL,
   `password` varchar(45) CHARACTER SET utf8 NOT NULL,
-  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modifyTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifyTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `nickName` varchar(20) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '昵称',
   `phone` int(11) DEFAULT NULL,
   PRIMARY KEY (`account_id`)

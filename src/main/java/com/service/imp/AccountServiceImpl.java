@@ -4,6 +4,7 @@ import com.bean.Account;
 import com.dao.DaoAccount;
 import com.service.AccountService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
 @Service
 public class AccountServiceImpl implements AccountService {
     private static Logger logger = Logger.getLogger(AccountServiceImpl.class);
-    @Resource
+    @Autowired
     DaoAccount daoAccount;
 
     public Account login(String name, String password) {
@@ -25,6 +26,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public void register(Account account) {
+        logger.debug("AccountServiceImpl");
         if (daoAccount.selectAccount(account) > 0) {
             logger.debug("已经注册过");
         } else {
