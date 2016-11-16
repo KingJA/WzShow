@@ -12,6 +12,10 @@
     <insert id="insertAccount" parameterType="com.bean.Account">
         INSERT INTO account (name,password) VALUES (#{name},#{password})
     </insert>
+
+    <update id="insertAvatar" parameterType="map">
+       update account set avatar=#{avatar} where account_id=#{account_id}
+    </update>
     <update id="insertToken" parameterType="map">
         update account set token=#{token} where name=#{name}
     </update>
@@ -21,9 +25,18 @@
         SELECT count(*) FROM account
         where name = #{name} and password = #{password}
     </select>
+    <select id="selectAccountByName" parameterType="String" resultType="int">
+        SELECT count(*) FROM account
+        where name = #{name}
+    </select>
 
     <select id="selectAccountByMap" parameterType="map" resultType="com.bean.Account">
         SELECT * FROM account
         where name = #{name} and password = #{password}
+    </select>
+
+    <select id="selectIdByToken" parameterType="String" resultType="com.bean.Account">
+        SELECT * FROM account
+        where token = #{token}
     </select>
 </mapper>

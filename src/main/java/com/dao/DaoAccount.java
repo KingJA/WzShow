@@ -15,9 +15,16 @@ import java.util.Map;
 @Repository
 public interface DaoAccount {
     int selectAccount(Account account);
-    Account selectAccountByMap(Map<String,Object> map);
+
+    int selectAccountByName(@Param(value = "name") String name);
+
+    Account selectAccountByMap(Map<String, Object> map);
+
+    Account selectIdByToken(@Param(value = "token") String token);
 
     void insertAccount(Account account);
-    void insertToken(@Param(value = "token")String token, @Param(value = "name")String name);
+    void insertAvatar(@Param(value = "account_id") String account_id, @Param(value = "avatar")String avatar);
+
+    void insertToken(@Param(value = "token") String token, @Param(value = "name") String name);
 
 }

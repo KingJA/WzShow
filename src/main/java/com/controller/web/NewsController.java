@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.web;
 
 import com.bean.News;
 import com.dao.NewsService;

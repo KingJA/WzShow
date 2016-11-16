@@ -1,16 +1,13 @@
-package com.controller;
+package com.controller.web;
 
 import com.bean.Account;
-import com.bean.AppResult;
 import com.dao.DaoAccount;
 import com.service.AccountService;
-import com.util.StringUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,23 +62,6 @@ public class AccountController {
             logger.error("登录失败");
         }
         return modelAndView;
-    }
-    @ResponseBody
-    @RequestMapping(value = "doLogin.json", method = RequestMethod.POST)
-    public AppResult doApplogin(HttpServletRequest httpServletRequest) {
-        String name = httpServletRequest.getParameter("name");
-        String password = httpServletRequest.getParameter("password");
-        Account account = accountService.login(name, password);
-        AppResult<Account> accountAppResult = new AppResult<Account>();
-        if (account != null) {
-            String token = StringUtil.getUUID();
-            account.setToken(token);
-            daoAccount.insertToken(token,name);
-            accountAppResult.setResultCode(0).setResultText("登录成功").setDate(account);
-        }else{
-            accountAppResult.setResultCode(4).setResultText("登录失败").setDate(account);
-        }
-        return accountAppResult;
     }
 
 }
