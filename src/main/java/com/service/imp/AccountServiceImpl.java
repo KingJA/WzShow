@@ -7,7 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description：TODO
@@ -22,7 +23,11 @@ public class AccountServiceImpl implements AccountService {
     DaoAccount daoAccount;
 
     public Account login(String name, String password) {
-        return null;
+        Map<String, Object> map = new HashMap<String, Object>();
+        logger.debug("name:"+name+" password:"+password);
+        map.put("name",name);
+        map.put("password",password);
+        return daoAccount.selectAccountByMap(map);
     }
 
     public void register(Account account) {

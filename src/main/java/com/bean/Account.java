@@ -22,6 +22,7 @@ public class Account {
     private String modifyTime;
     private String nickName;
     private String phone;
+    private String token;
     public String getName() {
         return name;
     }
@@ -80,5 +81,11 @@ public class Account {
     }
 
 
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

@@ -9,13 +9,21 @@
     <!--resultType :对应的接口类的返回类型-->
 
 
-    <insert id="insertAccount"  parameterType="com.bean.Account" >
+    <insert id="insertAccount" parameterType="com.bean.Account">
         INSERT INTO account (name,password) VALUES (#{name},#{password})
     </insert>
+    <update id="insertToken" parameterType="map">
+        update account set token=#{token} where name=#{name}
+    </update>
 
 
-    <select id="selectAccount" parameterType="map" resultType="int" >
+    <select id="selectAccount" parameterType="com.bean.Account" resultType="int">
         SELECT count(*) FROM account
+        where name = #{name} and password = #{password}
+    </select>
+
+    <select id="selectAccountByMap" parameterType="map" resultType="com.bean.Account">
+        SELECT * FROM account
         where name = #{name} and password = #{password}
     </select>
 </mapper>

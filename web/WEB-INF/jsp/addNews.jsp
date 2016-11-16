@@ -11,7 +11,7 @@
     <title>添加新闻</title>
 </head>
 <body>
-<img src="/img/home.png">
+<img src="../img/home.png">
 <form action="/news/saveNews" method="post" enctype="multipart/form-data">
     <fieldset>
         <legend>添加新闻</legend>

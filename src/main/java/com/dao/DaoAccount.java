@@ -1,7 +1,10 @@
 package com.dao;
 
 import com.bean.Account;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 /**
  * Description：TODO
@@ -12,7 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DaoAccount {
     int selectAccount(Account account);
+    Account selectAccountByMap(Map<String,Object> map);
 
     void insertAccount(Account account);
+    void insertToken(@Param(value = "token")String token, @Param(value = "name")String name);
 
 }
