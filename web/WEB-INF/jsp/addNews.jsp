@@ -9,6 +9,11 @@
 <html>
 <head>
     <title>添加新闻</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <img src="../img/home.png">
@@ -27,7 +32,7 @@
 新闻内容
 </textarea><br>
         新闻图片<input type="file" name="newsContentImgs" multiple="multiple"/><br>
-        <input type="submit" value="提交">
+        <input type="submit" value="提交" class="btn btn-default">
     </fieldset>
 
 </form>

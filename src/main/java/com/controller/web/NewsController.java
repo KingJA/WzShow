@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping(value = "/news")
 public class NewsController {
     private static Logger logger = Logger.getLogger(NewsController.class);
-    private int pageSize = 2;
+    private int pageSize = 5;
     @Autowired
     private NewsService newsService;
 
@@ -44,7 +44,7 @@ public class NewsController {
         }else{
             totelPages=totleNewsList.size()/ pageSize+1;
         }
-        List<News> newsList = newsService.selectNewsByPage((currentPage-1)*pageSize);
+        List<News> newsList = newsService.selectNewsByPage((currentPage-1)*pageSize,pageSize);
 
         modelAndView.addObject("totelNews", totleNewsList.size());
         modelAndView.addObject("newsList", newsList);

@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.bean.News;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface NewsService {
 
     List<News> selectNews();
 
-    List<News> selectNewsByPage(int page);
+    List<News> selectNewsByPage(@Param(value = "page")int page, @Param(value = "pageSize")int pageSize);
 
     void addNews(News news);
 

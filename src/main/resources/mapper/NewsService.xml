@@ -12,8 +12,8 @@
         SELECT * FROM news
     </select>
 
-    <select id="selectNewsByPage" parameterType="int" resultType="com.bean.News">
-        SELECT * FROM news LIMIT #{page},2
+    <select id="selectNewsByPage"  resultType="com.bean.News">
+        SELECT * FROM news LIMIT #{page}, #{pageSize}
     </select>
     <select id="selectNewsById" parameterType="java.lang.Long" resultType="com.bean.News">
         SELECT * FROM news WHERE newsId=#{newsId}

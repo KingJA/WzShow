@@ -11,10 +11,13 @@
 <html>
 <head>
     <title>新闻列表</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <a href="/news/addNews">添加新闻</a>
-<table cellpadding="4" cellspacing="0" border="1px">
+<table class="table table-striped" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis; " >
     <th>id</th>
     <th>标题</th>
     <th>内容</th>

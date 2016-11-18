@@ -6,6 +6,7 @@ import com.bean.SingleText;
 import com.controller.web.NewsController;
 import com.dao.DaoAccount;
 import com.service.AccountService;
+import com.util.Constant;
 import com.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -36,6 +37,11 @@ public class AppAccountController {
     @Autowired
     DaoAccount daoAccount;
 
+    /**
+     * 登录
+     * @param httpServletRequest
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "doLogin.json", method = RequestMethod.POST)
     public AppResult doLogin(HttpServletRequest httpServletRequest) {
@@ -54,11 +60,16 @@ public class AppAccountController {
         return accountAppResult;
     }
 
+    /**
+     * 注册
+     * @param account
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "doRegister.json", method = RequestMethod.POST)
     public AppResult doRegister(Account account) {
         int count = daoAccount.selectAccountByName(account.getName());
-        AppResult<Account> appResult = new AppResult<Account>();
+        AppResult<Account> appResult = new AppResult();
         if (count > 0) {
             appResult.setResultCode(4).setResultText("用户名已经被注册").setDate(new SingleText());
         }else{
@@ -67,6 +78,14 @@ public class AppAccountController {
         }
         return appResult;
     }
+
+    /**
+     * 设置头像
+     * @param token
+     * @param file
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "setAvatar.json", method = RequestMethod.POST)
     public AppResult doRegister(@RequestParam("token")String token,@RequestParam("avatar") MultipartFile file, HttpServletRequest request) {
@@ -74,7 +93,7 @@ public class AppAccountController {
         long accountId = checkTokenAvail(token);
         if (accountId!=-1) {
             if (file!=null&&!file.isEmpty()) {
-                String savePath = uploadImg(file, request, "/upload/avatar/");
+                String savePath = uploadImg(file, request, Constant.saveAvatarPath);
                 appResult.setResultCode(0).setResultText("头像上传成功").setDate(new SingleText(savePath));
                 daoAccount.insertAvatar(accountId+"",savePath);
             }
@@ -85,7 +104,11 @@ public class AppAccountController {
     }
 
 
-
+    /**
+     * 检验token
+     * @param token
+     * @return
+     */
 
     public  long checkTokenAvail(String token) {
         long account_id=-1;
