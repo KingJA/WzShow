@@ -52,14 +52,6 @@
     </style>
 </head>
 <body>
-<%--
-<form action="/account/doRegister" method="post">
-    账号<input type="text" name="name"><br>
-    密码<input type="text" name="password"><br>
-    <input type="submit" name="注册"><br>
-
-
-</form>--%>
 <form class="form-signin" action="/account/doRegister" method="post">
     <h2 class="form-signin-heading">Please sign in</h2>
     <input type="text" class="input-block-level" placeholder="Name" name="name">
