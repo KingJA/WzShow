@@ -54,9 +54,11 @@ public class AccountController {
     public ModelAndView dologin(HttpServletRequest httpServletRequest) {
         String name = httpServletRequest.getParameter("name");
         String password = httpServletRequest.getParameter("password");
-        ModelAndView modelAndView = new ModelAndView("login");
+
+        ModelAndView modelAndView = new ModelAndView("home");
         Account account = accountService.login(name, password);
         if (account != null) {
+            modelAndView.addObject("userName",account.getName());
             logger.error("登录成功:" + account.getName());
         } else {
             logger.error("登录失败");

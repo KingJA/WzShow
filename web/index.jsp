@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -30,7 +29,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">Project name</a>
+      <a class="brand" href="#">介么办</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="active"><a href="#">Home</a></li>
