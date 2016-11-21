@@ -55,7 +55,7 @@ public class AccountController {
         String name = httpServletRequest.getParameter("name");
         String password = httpServletRequest.getParameter("password");
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         Account account = accountService.login(name, password);
         if (account != null) {
             modelAndView.addObject("userName",account.getName());

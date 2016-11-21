@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.QuestionDao">
+    <select id="selectAllTag" resultType="com.bean.Tag">
+        SELECT * FROM tag
+    </select>
+    <select id="selectQuestionsByPage" resultType="com.bean.Question">
+        SELECT * FROM question limit #{currentPage},#{pageSize}
+    </select>
+    <insert id="insertQuestion" parameterType="com.bean.Question">
+        INSERT INTO question (title,content,tagId,imgUrls) VALUES (#{title},#{content},#{tagId},#{imgUrls})
+    </insert>
+
+</mapper>

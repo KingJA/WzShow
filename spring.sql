@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-11-18 17:14:19
+Date: 2016-11-21 17:29:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,6 +47,35 @@ INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2016-11
 INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-11-18 13:55:54', '', '', '', '');
 
 -- ----------------------------
+-- Table structure for answer
+-- ----------------------------
+DROP TABLE IF EXISTS `answer`;
+CREATE TABLE `answer` (
+  `answerId` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '回答内容',
+  `imgUrls` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '回答图片',
+  `praiseCount` int(11) DEFAULT '0' COMMENT '点赞数',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '回答时间',
+  `modifyTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '回答修改时间',
+  `accountId` int(11) DEFAULT NULL,
+  `questionId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`answerId`),
+  KEY `accountId` (`accountId`),
+  KEY `questionId` (`questionId`),
+  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`account_id`),
+  CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of answer
+-- ----------------------------
+INSERT INTO `answer` VALUES ('1', '我觉得应该是这样的', '', '2', '2016-11-22 11:06:10', '2016-11-21 11:18:22', '5', '6');
+INSERT INTO `answer` VALUES ('2', '我觉得应该是这样的', '', '2', '2016-11-01 11:06:10', '2016-11-21 11:18:33', '6', '6');
+INSERT INTO `answer` VALUES ('3', '我觉得应该是这样的', '', '2', '2016-11-02 11:06:10', '2016-11-21 11:18:36', '7', '6');
+INSERT INTO `answer` VALUES ('4', '我觉得应该是这样的', '', '2', '2016-11-03 11:06:10', '2016-11-21 11:18:40', '5', '5');
+INSERT INTO `answer` VALUES ('5', '我觉得应该是这样的', '', '2', '2016-11-21 11:06:10', '2016-11-21 11:06:10', '5', '7');
+
+-- ----------------------------
 -- Table structure for my_answer
 -- ----------------------------
 DROP TABLE IF EXISTS `my_answer`;
@@ -76,11 +105,11 @@ INSERT INTO `my_answer` VALUES ('5', '9', '3', '2016-11-18 17:06:51');
 -- ----------------------------
 DROP TABLE IF EXISTS `my_attention`;
 CREATE TABLE `my_attention` (
-  `attentionId` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `attentionActId` int(11) DEFAULT NULL,
   `attentionedActId` int(11) DEFAULT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '关注时间',
-  PRIMARY KEY (`attentionId`),
+  PRIMARY KEY (`id`),
   KEY `a` (`attentionActId`),
   KEY `b` (`attentionedActId`),
   CONSTRAINT `a` FOREIGN KEY (`attentionActId`) REFERENCES `account` (`account_id`),
@@ -96,7 +125,7 @@ CREATE TABLE `my_attention` (
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
-  `newsId` int(32) NOT NULL AUTO_INCREMENT,
+  `newsId` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '新闻标题',
   `content` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '新闻内容',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -140,21 +169,33 @@ CREATE TABLE `question` (
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '问题标题',
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '问题内容',
   `imgUrls` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '问题图片',
-  `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '问题标签',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   `modifyTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `answerCount` int(5) DEFAULT '0' COMMENT '回答数',
-  PRIMARY KEY (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `accountId` int(11) DEFAULT NULL COMMENT '用户id',
+  `tagId` int(11) DEFAULT NULL COMMENT '标签id',
+  PRIMARY KEY (`questionId`),
+  KEY `accout_id` (`accountId`),
+  KEY `tag_id` (`tagId`),
+  CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`account_id`),
+  CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0');
-INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0');
-INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0');
-INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0');
-INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0');
+INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
+INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
+INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
+INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
+INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
+INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-21 15:53:46', '0', null, '6');
+INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-21 16:06:08', '0', null, '6');
+INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-21 16:06:23', '0', null, '6');
+INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-21 16:06:42', '0', null, '6');
+INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-21 16:07:11', '0', null, '6');
+INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-21 16:08:13', '0', null, '6');
+INSERT INTO `question` VALUES ('16', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-21 16:11:26', '0', null, '6');
 
 -- ----------------------------
 -- Table structure for question_answer
@@ -169,6 +210,27 @@ CREATE TABLE `question_answer` (
 -- ----------------------------
 -- Records of question_answer
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for tag
+-- ----------------------------
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `tagId` int(11) NOT NULL AUTO_INCREMENT,
+  `tagName` varchar(20) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '标签名',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`tagId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='标签表';
+
+-- ----------------------------
+-- Records of tag
+-- ----------------------------
+INSERT INTO `tag` VALUES ('1', '生活', '2016-11-21 10:25:57');
+INSERT INTO `tag` VALUES ('2', '娱乐', '2016-11-21 10:25:57');
+INSERT INTO `tag` VALUES ('3', '工作', '2016-11-21 10:25:57');
+INSERT INTO `tag` VALUES ('4', '感情', '2016-11-21 10:25:57');
+INSERT INTO `tag` VALUES ('5', '吐槽', '2016-11-21 10:25:57');
+INSERT INTO `tag` VALUES ('6', '求助', '2016-11-21 10:25:57');
 
 -- ----------------------------
 -- View structure for myview

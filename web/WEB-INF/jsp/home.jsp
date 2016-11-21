@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -49,35 +42,38 @@
     </div>
 
     <!-- Example row of columns -->
-    <div class="row">
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-    </div>
+    <c:if test="${!empty pageInfo.datas}">
+        <c:forEach items="${pageInfo.datas}" var="question">
+            <div class="row">
+                <div class="span10">
+                    <h2>${question.title}</h2>
+                    <p>${question.content}</p>
+                    <p><a class="btn" href="#">详情 &raquo;</a></p>
+                </div>
+            </div>
+            <hr>
+        </c:forEach>
 
-    <hr>
+    </c:if>
 
-    <footer>
-        <p>&copy; Company 2013</p>
-    </footer>
+    <c:if test="${pageInfo.currentPage>1}">
+        <a href="/question/questionPage?page=${pageInfo.currentPage-1}">上一页</a>
+    </c:if>
+
+    <c:forEach var="x" begin="1" end="${pageInfo.totelPages}">
+
+        <c:if test="${pageInfo.currentPage==x}">
+            <span>${x}</span>
+        </c:if>
+        <c:if test="${pageInfo.currentPage!=x}">
+            <a href="/question/questionPage?page=${x}">${x}</a>
+        </c:if>
+    </c:forEach>
+
+
+    <c:if test="${pageInfo.currentPage<pageInfo.totelPages}">
+        <a href="/question/questionPage?page=${pageInfo.currentPage+1}">下一页</a>
+    </c:if>
 
 </div> <!-- /container -->
 

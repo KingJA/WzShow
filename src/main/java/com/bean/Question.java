@@ -10,6 +10,7 @@ public class Question {
     private long queistionId;
     private String title;
     private String content;
+    private String imgUrls;
     private String tagId;
 
     public long getQueistionId() {
@@ -42,5 +43,13 @@ public class Question {
 
     public void setTagId(String tagId) {
         this.tagId = tagId;
+    }
+
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
     }
 }

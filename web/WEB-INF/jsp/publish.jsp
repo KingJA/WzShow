@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,29 +44,29 @@
 <div class="container">
     <!-- Main hero unit for a primary marketing message or call to action -->
     <div class="hero-unit">
-        <form action="/account/doLogin" method="post" >
+        <form action="/question/doPublish" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>发布问题</legend>
-                <input type="text" placeholder="请输入标题" class="input-xxlarge"><br>
-                <textarea rows="8" placeholder="请输入具体问题" class="input-xxlarge"></textarea>
+                <input type="text" placeholder="请输入标题" class="input-xxlarge" name="title"><br>
+                <textarea rows="8" placeholder="请输入具体问题" class="input-xxlarge" name="content"></textarea>
                 <br>
 
                 <input type="file" name="files" multiple="multiple">
                 <br>
-                <select name="tag">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
+                <select name="tagId" >
+                    <c:if test="${!empty tags}">
+                        <c:forEach items="${tags}" var="tag">
+                            <option value="${tag.tagId}">${tag.tagName}</option>
+                        </c:forEach>
+                    </c:if>
                 </select><br>
-                <button type="submit" class="btn btn-large btn-block btn-primary">发布</button><br>
+                <button type="submit" class="btn btn-large btn-block btn-primary">发布</button>
+                <br>
             </fieldset>
         </form>
     </div>
 
 </div> <!-- /container -->
-
 
 </body>
 </html>
