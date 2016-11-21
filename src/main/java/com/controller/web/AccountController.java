@@ -58,7 +58,6 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         Account account = accountService.login(name, password);
         if (account != null) {
-            modelAndView.addObject("userName",account.getName());
             logger.error("登录成功:" + account.getName());
         } else {
             logger.error("登录失败");

@@ -45,7 +45,7 @@ public class QuestionController {
     @RequestMapping(value = "doPublish", method = RequestMethod.POST)
     public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         logger.debug("doPublish");
-        ModelAndView modelAndView = new ModelAndView("/questionPage?page=1");
+        ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         questionService.saveQuestion(question, files, request);
         return modelAndView;
     }
@@ -53,6 +53,9 @@ public class QuestionController {
     public ModelAndView questionPage(@RequestParam( "page" ) String page) {
         Integer currentPage = Integer.valueOf(page);
         Page<Question> pageInfo = questionService.getQuestionsByPage(currentPage, 5);
+        logger.debug("pageInfo==============="+pageInfo.toString());
+        logger.debug("getTotelPages"+pageInfo.getTotelPages());
+        logger.debug("getTotelItems"+pageInfo.getTotelItems());
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("pageInfo",pageInfo);
         return modelAndView;

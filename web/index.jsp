@@ -21,25 +21,30 @@
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="#">介么办</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="/account/register">注册</a></li>
-          <li><a href="/account/login">登录</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
+      <a class="brand" href="#"></a>
     </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="/account/register">注册</a></li>
+        <li><a href="/account/login">登录</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
   </div>
-</div>
+</nav>
+
+
 
 <div class="container">
 

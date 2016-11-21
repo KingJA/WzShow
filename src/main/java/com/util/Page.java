@@ -16,6 +16,17 @@ public class Page<T> {
     private int totelItems;
     private List<T> datas;
 
+    @Override
+    public String toString() {
+        return "Page{" +
+                "pageSize=" + pageSize +
+                ", totelPages=" + totelPages +
+                ", currentPage=" + currentPage +
+                ", totelItems=" + totelItems +
+                ", datas=" + datas +
+                '}';
+    }
+
     public int getPageSize() {
         return pageSize;
     }
