@@ -17,18 +17,25 @@
        select count(*) from question
     </select>
     <!--根据问题Id获取问题详情-->
-    <select id="selectQuestionById">
+    <select id="selectQuestionById" resultType="com.bean.Question">
        select * from question WHERE questionId=#{questionId}
     </select>
 
     <!--根据问题Id获取提问者信息-->
-    <select id="selectAccountByQuestionId">
+    <select id="selectAccountByQuestionId" resultType="com.bean.Account">
       SELECT account.account_Id, account.name, account.avatar
       FROM question INNER JOIN account
       ON account.account_id=question.accountId
       WHERE question.questionId=#{questionId}
     </select>
     <!--根据问题Id获取回答-->
-
+<select id="selectAnsewerByQuestionId">
+    SELECT question.questionId,account.account_id,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
+FROM answer
+LEFT JOIN question
+ON answer.questionId=question.questionId
+LEFT JOIN account
+ON answer.accountId=account.account_id WHERE question.questionId=#{questionId}
+</select>
 
 </mapper>

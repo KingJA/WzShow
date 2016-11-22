@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.bean.Account;
+import com.bean.AnswerResult;
 import com.bean.Question;
 import com.bean.Tag;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,6 @@ public interface QuestionDao {
     Question selectQuestionById(@Param(value = "questionId") int questionId);
 
     Account selectAccountByQuestionId(@Param(value = "questionId") int questionId);
+
+    AnswerResult selectAnsewerByQuestionId(@Param(value = "questionId") int questionId);
 }
