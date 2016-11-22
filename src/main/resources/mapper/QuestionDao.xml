@@ -29,7 +29,7 @@
       WHERE question.questionId=#{questionId}
     </select>
     <!--根据问题Id获取回答-->
-<select id="selectAnsewerByQuestionId">
+<select id="selectAnsewerByQuestionId" resultMap="AnswerResult">
     SELECT question.questionId,account.account_id,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
 FROM answer
 LEFT JOIN question
@@ -37,5 +37,15 @@ ON answer.questionId=question.questionId
 LEFT JOIN account
 ON answer.accountId=account.account_id WHERE question.questionId=#{questionId}
 </select>
-
+    <resultMap type="com.bean.AnswerResult" id="AnswerResult">
+        <result property="questionId" column="questionId" />
+        <result property="accountId" column="account_id" />
+        <result property="name" column="name" />
+        <result property="avatar" column="avatar" />
+        <result property="answerId" column="answerId" />
+        <result property="content" column="content" />
+        <result property="createTime" column="createTime" />
+        <result property="praiseCount" column="praiseCount" />
+        <result property="collectCount" column="collectCount" />
+    </resultMap>
 </mapper>
