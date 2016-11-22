@@ -1,10 +1,12 @@
 package com.service.imp;
 
 import com.bean.Question;
+import com.controller.web.NewsController;
 import com.dao.QuestionDao;
 import com.service.QuestionService;
 import com.util.Page;
 import com.util.UploadUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @Service
 public class QuestionServiceImpl implements QuestionService {
+    private static Logger logger = Logger.getLogger(NewsController.class);
     @Autowired
     QuestionDao questionDao;
 
@@ -30,11 +33,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     public Page<Question> getQuestionsByPage(int currentPage, int pageSize) {
+        int questionCount = questionDao.selectQuestionCount();
         Page<Question> page = new Page<Question>();
+        page.setTotelItems(questionCount);
         page.setCurrentPage(currentPage);
         page.setPageSize(pageSize);
-        List<Question> questions = questionDao.selectQuestionsByPage(page.getCurrentPage()-1, page.getPageSize());
-        page.setDatas(questions);
+        List<Question> questions = questionDao.selectQuestionsByPage(page.getStartRow(), pageSize);
+        logger.debug("List<Question>============="+questions.toString());
+        page.setPageDatas(questions);
         return page;
     }
+
 }

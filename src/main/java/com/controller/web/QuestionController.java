@@ -52,7 +52,7 @@ public class QuestionController {
     @RequestMapping(value = "/questionPage", method = RequestMethod.GET)
     public ModelAndView questionPage(@RequestParam( "page" ) String page) {
         Integer currentPage = Integer.valueOf(page);
-        Page<Question> pageInfo = questionService.getQuestionsByPage(currentPage, 5);
+        Page<Question> pageInfo = questionService.getQuestionsByPage(currentPage, Page.DEFAULT_PAGE_SIZE);
         logger.debug("pageInfo==============="+pageInfo.toString());
         logger.debug("getTotelPages"+pageInfo.getTotelPages());
         logger.debug("getTotelItems"+pageInfo.getTotelItems());
@@ -60,7 +60,12 @@ public class QuestionController {
         modelAndView.addObject("pageInfo",pageInfo);
         return modelAndView;
     }
-
+    @RequestMapping(value = "detail", method = RequestMethod.GET)
+    public ModelAndView detail() {
+        logger.debug("questionDetail");
+        ModelAndView modelAndView = new ModelAndView("questionDetail");
+        return modelAndView;
+    }
 
 
 }

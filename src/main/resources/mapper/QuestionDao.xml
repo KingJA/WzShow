@@ -7,10 +7,13 @@
         SELECT * FROM tag
     </select>
     <select id="selectQuestionsByPage" resultType="com.bean.Question">
-        SELECT * FROM question limit #{currentPage},#{pageSize}
+        SELECT * FROM question ORDER BY createTime DESC  limit #{currentPage},#{pageSize}
     </select>
     <insert id="insertQuestion" parameterType="com.bean.Question">
         INSERT INTO question (title,content,tagId,imgUrls) VALUES (#{title},#{content},#{tagId},#{imgUrls})
     </insert>
 
+    <select id="selectQuestionCount" resultType="int">
+       select count(*) from question
+    </select>
 </mapper>

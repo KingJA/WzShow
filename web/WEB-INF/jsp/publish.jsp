@@ -22,29 +22,57 @@
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="#">${userName}</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="/account/register">退出登录</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="/account/register">退出登录</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-</div>
+</nav>
+
 
 <div class="container">
     <!-- Main hero unit for a primary marketing message or call to action -->
-    <div class="hero-unit">
+
+    <div class="jumbotron">
+        <h3>轻松发布</h3>
+        <p class="lead">话题越精准，越容易让相关领域专业人士看到你的问题</p>
         <form action="/question/doPublish" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" class="form-control"  placeholder="请输入标题" name="title">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="请输入内容" name="content"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" id="exampleInputFile">
+            </div>
+
+            <div class="form-group">
+                <select name="tagId" class="form-control">
+                    <c:if test="${!empty tags}">
+                        <c:forEach items="${tags}" var="tag">
+                            <option value="${tag.tagId}">${tag.tagName}</option>
+                        </c:forEach>
+                    </c:if>
+                </select>
+            </div>
+            <p> <button type="submit" class="btn btn-lg btn-success">Submit</button></p>
+        </form>
+       <%-- <form action="/question/doPublish" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>发布问题</legend>
                 <input type="text" placeholder="请输入标题" class="input-xxlarge" name="title"><br>
@@ -63,7 +91,13 @@
                 <button type="submit" class="btn btn-large btn-block btn-primary">发布</button>
                 <br>
             </fieldset>
-        </form>
+        </form>--%>
+    </div>
+
+
+    <div class="hero-unit">
+
+
     </div>
 
 </div> <!-- /container -->

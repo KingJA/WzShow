@@ -14,74 +14,81 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">${userName}</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="/account/register">退出登录</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-
-<div class="jumbotron">
-    <div class="container">
-        <h3>欢迎来到“介么办”</h3>
-        <p>“介么办”，是用户自己根据具有针对性地提出问题，通过积分奖励机制发动其他用户，来解决该问题的搜索模式。 同时，这些问题的答案又会进一步作为搜索结果，提供给其他有类似疑问的用户，达到分享知识的效果。</p>
-        <p><a href="/question/publish" class="btn btn-primary btn-large">发布问题 &raquo;</a></p>
-    </div>
-</div>
-
 <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">${userName}</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="/account/login">退出登录</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h3>欢迎来到“介么办”，马上体验问答的快乐</h3>
+        <a href="/question/publish" class="btn btn-lg btn-success">发布问题 &raquo;</a>
+    </div>
+
+
     <div class="row">
         <!-- Example row of columns -->
-        <c:if test="${!empty pageInfo.datas}">
-            <c:forEach items="${pageInfo.datas}" var="question">
-
-                <div class="span10">
-                    <h2>${question.title}</h2>
-                    <p>${question.content}</p>
-                    <p><a class="btn btn-default" href="#" role="button">详情 &raquo;</a></p>
+        <c:if test="${!empty pageInfo.pageDatas}">
+            <c:forEach items="${pageInfo.pageDatas}" var="question">
+                <div class="thumbnail">
+                    <div class="span8">
+                        <h2>${question.title}</h2>
+                        <p>${question.content}</p>
+                        <p><a class="btn btn-default" href="#" role="button">详情 &raquo;</a></p>
+                    </div>
                 </div>
-
-                <hr>
             </c:forEach>
 
         </c:if>
     </div>
 
     <ul class="pagination pagination">
-        <c:if test="${pageInfo.currentPage>1}">
+        <c:if test="${pageInfo.hasPrevious}">
             <li><a href="/question/questionPage?page=${pageInfo.currentPage-1}">&laquo;上一页</a></li>
         </c:if>
 
         <c:forEach var="x" begin="1" end="${pageInfo.totelPages}">
 
             <c:if test="${pageInfo.currentPage==x}">
-                <li class="disabled"><a href="#">${x}</a></li>
+                <li class="active"><a href="javascript:return false;">${x}</a></li>
             </c:if>
             <c:if test="${pageInfo.currentPage!=x}">
-                <li class="active"><a href="/question/questionPage?page=${x}">${x}</a></li>
+                <li><a href="/question/questionPage?page=${x}">${x}</a></li>
             </c:if>
         </c:forEach>
 
 
-        <c:if test="${pageInfo.currentPage<pageInfo.totelPages}">
+        <c:if test="${pageInfo.hasNext}">
             <li><a href="/question/questionPage?page=${pageInfo.currentPage+1}">下一页&raquo;</a></li>
         </c:if>
 
+
     </ul>
+
+
+    <!-- Site footer -->
+    <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+
+
 </div> <!-- /container -->
 
 <!-- Le javascript

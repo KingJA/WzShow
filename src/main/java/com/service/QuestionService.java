@@ -14,5 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface QuestionService {
     void saveQuestion(Question question, MultipartFile[] files, HttpServletRequest request);
+
     Page<Question> getQuestionsByPage(int currentPage, int pageSize);
+
 }

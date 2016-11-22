@@ -9,12 +9,30 @@ import java.util.List;
  * Email:kingjavip@gmail.com
  */
 public class Page<T> {
-    public static final int DEFAULT_PAGE_SIZE=5;
+    public static final int DEFAULT_PAGE_SIZE = 3;
     private int pageSize = DEFAULT_PAGE_SIZE;
     private int totelPages;
     private int currentPage;
     private int totelItems;
-    private List<T> datas;
+    private List<T> pageDatas;
+
+
+    private List<T> allDatas;
+    private boolean hasNext;
+    private boolean hasPrevious;
+    private int startRow;
+
+    public boolean isHasNext() {
+        return getCurrentPage() < getTotelPages();
+    }
+
+    public boolean isHasPrevious() {
+        return getCurrentPage() > 1;
+    }
+
+    public int getStartRow() {
+        return (getCurrentPage() - 1) * pageSize;
+    }
 
     @Override
     public String toString() {
@@ -23,7 +41,7 @@ public class Page<T> {
                 ", totelPages=" + totelPages +
                 ", currentPage=" + currentPage +
                 ", totelItems=" + totelItems +
-                ", datas=" + datas +
+                ", pageDatas=" + pageDatas +
                 '}';
     }
 
@@ -36,17 +54,14 @@ public class Page<T> {
     }
 
     public int getTotelPages() {
-        if (totelItems % pageSize != 0) {
-            totelPages = totelItems / pageSize + 1;
+        if (getTotelItems() % pageSize != 0) {
+            totelPages = getTotelItems() / pageSize + 1;
         } else {
-            totelPages = totelItems / pageSize;
+            totelPages = getTotelItems() / pageSize;
         }
         return totelPages;
     }
 
-    public void setTotelPages(int totelPages) {
-        this.totelPages = totelPages;
-    }
 
     public int getCurrentPage() {
         return currentPage;
@@ -57,18 +72,31 @@ public class Page<T> {
     }
 
     public int getTotelItems() {
-        return datas.size();
+        if (allDatas != null) {
+            return allDatas.size();
+        }else{
+            return  totelItems;
+        }
+    }
+
+
+    public List<T> getPageDatas() {
+        return pageDatas;
+    }
+
+    public void setPageDatas(List<T> pageDatas) {
+        this.pageDatas = pageDatas;
+    }
+
+    public List<T> getAllDatas() {
+        return allDatas;
+    }
+
+    public void setAllDatas(List<T> allDatas) {
+        this.allDatas = allDatas;
     }
 
     public void setTotelItems(int totelItems) {
         this.totelItems = totelItems;
-    }
-
-    public List<T> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<T> datas) {
-        this.datas = datas;
     }
 }

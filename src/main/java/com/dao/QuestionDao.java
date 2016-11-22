@@ -19,5 +19,7 @@ public interface QuestionDao {
 
     void insertQuestion(Question question);
 
+    int selectQuestionCount();
+
     List<Question> selectQuestionsByPage(@Param(value = "currentPage") int currentPage, @Param(value = "pageSize") int pageSize);
 }
