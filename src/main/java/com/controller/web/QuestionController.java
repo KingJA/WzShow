@@ -8,6 +8,7 @@ import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,8 +61,8 @@ public class QuestionController {
         modelAndView.addObject("pageInfo",pageInfo);
         return modelAndView;
     }
-    @RequestMapping(value = "detail", method = RequestMethod.GET)
-    public ModelAndView detail() {
+    @RequestMapping(value = "/detail/{questionId}", method = RequestMethod.GET)
+    public ModelAndView detail(@PathVariable String questionId) {
         logger.debug("questionDetail");
         ModelAndView modelAndView = new ModelAndView("questionDetail");
         return modelAndView;

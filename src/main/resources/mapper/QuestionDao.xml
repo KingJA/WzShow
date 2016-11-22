@@ -16,4 +16,19 @@
     <select id="selectQuestionCount" resultType="int">
        select count(*) from question
     </select>
+    <!--根据问题Id获取问题详情-->
+    <select id="selectQuestionById">
+       select * from question WHERE questionId=#{questionId}
+    </select>
+
+    <!--根据问题Id获取提问者信息-->
+    <select id="selectAccountByQuestionId">
+      SELECT account.account_Id, account.name, account.avatar
+      FROM question INNER JOIN account
+      ON account.account_id=question.accountId
+      WHERE question.questionId=#{questionId}
+    </select>
+    <!--根据问题Id获取回答-->
+
+
 </mapper>

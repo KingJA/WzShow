@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.bean.Account;
 import com.bean.Question;
 import com.bean.Tag;
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +23,8 @@ public interface QuestionDao {
     int selectQuestionCount();
 
     List<Question> selectQuestionsByPage(@Param(value = "currentPage") int currentPage, @Param(value = "pageSize") int pageSize);
+
+    Question selectQuestionById(@Param(value = "questionId") int questionId);
+
+    Account selectAccountByQuestionId(@Param(value = "questionId") int questionId);
 }
