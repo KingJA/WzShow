@@ -1,5 +1,9 @@
 package com.bean;
 
+import com.util.DateUtil;
+
+import java.util.Date;
+
 /**
  * Description：TODO
  * Create Time：2016/11/21 13:13
@@ -7,18 +11,19 @@ package com.bean;
  * Email:kingjavip@gmail.com
  */
 public class Question {
-    private long queistionId;
+    private long questionId;
     private String title;
     private String content;
     private String imgUrls;
     private String tagId;
+    private Date createTime;
 
-    public long getQueistionId() {
-        return queistionId;
+    public long getQuestionId() {
+        return questionId;
     }
 
-    public void setQueistionId(long queistionId) {
-        this.queistionId = queistionId;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 
     public String getTitle() {
@@ -51,5 +56,13 @@ public class Question {
 
     public void setImgUrls(String imgUrls) {
         this.imgUrls = imgUrls;
+    }
+
+    public String getCreateTime() {
+        return DateUtil.getDateTime(createTime);
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

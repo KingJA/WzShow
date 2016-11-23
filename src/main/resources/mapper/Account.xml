@@ -14,7 +14,7 @@
     </insert>
 
     <update id="insertAvatar" parameterType="map">
-       update account set avatar=#{avatar} where account_id=#{account_id}
+       update account set avatar=#{avatar} where accountId=#{accountId}
     </update>
     <update id="insertToken" parameterType="map">
         update account set token=#{token} where name=#{name}

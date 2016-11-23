@@ -9,7 +9,7 @@ package com.bean;
 public class AppResult<T> {
     private int resultCode;
     private String resultText;
-    private T date;
+    private T resultData;
 
     public String getResultText() {
         return resultText;
@@ -20,12 +20,12 @@ public class AppResult<T> {
         return this;
     }
 
-    public T getDate() {
-        return date;
+    public T getResultData() {
+        return resultData;
     }
 
-    public AppResult setDate(T date) {
-        this.date = date;
+    public AppResult setResultData(T resultData) {
+        this.resultData = resultData;
         return this;
     }
 

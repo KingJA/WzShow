@@ -23,7 +23,7 @@ public interface DaoAccount {
     Account selectIdByToken(@Param(value = "token") String token);
 
     void insertAccount(Account account);
-    void insertAvatar(@Param(value = "account_id") String account_id, @Param(value = "avatar")String avatar);
+    void insertAvatar(@Param(value = "accountId") String accountId, @Param(value = "avatar")String avatar);
 
     void insertToken(@Param(value = "token") String token, @Param(value = "name") String name);
 

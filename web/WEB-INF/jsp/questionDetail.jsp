@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +12,57 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function addCollection(){
+            if(false) window.location.href="/account/login";
+            else{
+                $.ajax({
+                    type : "POST",
+                    url :"/question/addTask.do",
+                    data:{
+                        "userId":"bd5ade7b068745a1be875eade365269f",
+                        "serviceId":2005,
+                        "serviceType":1
+                    },
+                    dataType : "json",
+                    success : function(retult){
+                        $("#addCollectionBtn").attr("onclick","deleteCollection()");
+                        $("#addCollectionBtn").text("取消收藏");
+                    },
+                    error : function() {
+                        alert("点赞！");
+                    }
+                });
+            }
+        }
+        function addPraise(answerId,obj){
 
+            if("${sessionScope.account.accountId}"=="") window.location.href="/account/login";
+            else{
+                $.ajax({
+                    type : "POST",
+                    url :"/question/detail/praise/",
+                    data:{
+                        "answerId":answerId,
+                        "accountId":"${sessionScope.account.accountId}"
+                    },
+                    dataType : "json",
+                    success : function(result){
+                        if (result.resultCode==0) {
+                            $(obj).text("赞("+result.resultData.resultInt+")");
+                        }else{
+                            alert("您已经点过赞啦")
+                        }
 
+                    },
+                    error : function() {
+//                        alert("失败");
+                    }
+                });
+            }
+        }
+
+    </script>
 </head>
 
 <body>
@@ -38,80 +88,60 @@
     </div>
 </nav>
 
-
 <div class="container">
-
 
     <!-- 问题 -->
     <div class="jumbotron">
         <div class="page-header">
-            <h2>蛋炒饭做法</h2>
+            <h2>${question.title}</h2>
             <h5><span class="label label-primary">生活</span></h5>
-            <p class="lead">有一首歌 歌里说 最简单也最困难 饭要粒粒分开 还要沾着蛋最简单也最困难 中国五千年 火的艺术 就在这一盘饭要粒粒分开 还要沾着蛋 怎么做 火的 艺术是指火候吗 该用什么火 蛋
-                要结的吗 放蛋是直接破壳然后放还是 先放在一碗里不停的搅?说的好在加分.</p>
+            <p class="lead">${question.content}</p>
         </div>
         <hr>
-        <img src="/img/default_img.png"><br>
-        <img src="/img/default_img.png"><br>
-        <img src="/img/default_img.png">
+        <c:forTokens items="${question.imgUrls}" delims="#" var="imgUrl">
+            <img src="${imgUrl}"><br>
+        </c:forTokens>
 
         <div class="row">
             <div class="pull-right">
-                <p class="lead"> 2016-10-18 10:25:22 <a href="#">Mark</a></p>
+                <p class="lead">${question.createTime}<a href="#">${account.name}</a></p>
             </div>
         </div>
 
     </div>
     <!-- 留言 -->
-    <p class="lead">共有<a>5</a>条留言</p>
+    <p class="lead">共有<a>${fn:length(answerResults)}</a>个回答</p>
     <div class="jumbotron">
 
-        <div class="row">
+        <%--回答开始--%>
+        <c:if test="${!empty answerResults}">
+            <c:forEach items="${answerResults}" var="answer">
+                <div class="answer">
+                    <div class="row">
+                        <img src="${answer.avatar}" width="48px" height="48px" class="img-circle">&nbsp;&nbsp;&nbsp;&nbsp;<a
+                            href="#">${answer.name}</a>
+                        <div class="pull-right">
+                            <p class="lead">${answer.createTime}</p>
+                        </div>
+                    </div>
 
-           <img src="/img/head.png" width="48px" height="48px"><a href="#">Mark</a>
+                    <p class="lead">${answer.content}</p>
 
-            <div class="pull-right">
-                <p class="lead">2016-10-18 10:25:22 </p>
-            </div>
-        </div>
+                    <div class="row">
+                        <div class="pull-right">
+                            <button  class="btn btn-success"  onclick="addPraise(${answer.answerId},this)"><i class="icon-white icon-heart"></i>
+                                赞(${answer.praiseCount})</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button  class="btn btn-success"  onclick=""><i class="icon-white icon-star"></i>
+                                收藏(${answer.collectCount})</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </c:forEach>
 
-
-        <p class="lead"> 你好，可以直接用剩饭:把鸡蛋放在油锅里面捣散不让他一大块一大块的（火不要太大怕烧焦）炒好鸡蛋先撩起来放在容器里备用，
-            然后在炒点蔬菜通常是胡萝卜丁等一些味道不是很有味道的，最后就把饭碾散开，加入炒好的蛋加点油开中火炒干水分即可。</p>
-
-        <div class="row">
-            <div class="pull-right">
-                <img src="/img/praise.png" width="24px" height="24px"> 5&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="/img/favorite.png" width="24px" height="24px"> 10
-            </div>
-        </div>
-
-        <hr>
-        <div class="row">
-
-            <img src="/img/head.png" width="48px" height="48px"><a href="#">Mark</a>
-
-            <div class="pull-right">
-                <p class="lead">2016-10-18 10:25:22 </p>
-            </div>
-        </div>
-
-
-        <p class="lead"> 你好，可以直接用剩饭:把鸡蛋放在油锅里面捣散不让他一大块一大块的（火不要太大怕烧焦）炒好鸡蛋先撩起来放在容器里备用，
-            然后在炒点蔬菜通常是胡萝卜丁等一些味道不是很有味道的，最后就把饭碾散开，加入炒好的蛋加点油开中火炒干水分即可。</p>
-
-        <div class="row">
-            <div class="pull-right">
-                <img src="/img/praise.png" width="24px" height="24px"> 5&nbsp;&nbsp;&nbsp;&nbsp;
-                <img src="/img/favorite.png" width="24px" height="24px"> 10
-            </div>
-        </div>
-
-        <hr>
-
+        </c:if>
+        <%--回答结束--%>
     </div>
-
-
     <!-- Site footer -->
     <div class="blog-footer">
         <p>

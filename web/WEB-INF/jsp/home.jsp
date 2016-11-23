@@ -38,7 +38,7 @@
 
     <!-- Jumbotron -->
     <div class="jumbotron">
-        <h3>欢迎来到“介么办”，马上体验问答的快乐</h3>
+        <h3>${sessionScope.account.name},欢迎来到“介么办”，马上体验问答的快乐</h3>
         <a href="/question/publish" class="btn btn-lg btn-success">发布问题 &raquo;</a>
     </div>
 
@@ -51,7 +51,7 @@
                     <div class="span8">
                         <h2>${question.title}</h2>
                         <p>${question.content}</p>
-                        <p><a class="btn btn-default" href="#" role="button">详情 &raquo;</a></p>
+                        <p><a class="btn btn-default" href="/question/detail/${question.questionId}" role="button">详情 &raquo;</a></p>
                     </div>
                 </div>
             </c:forEach>

@@ -1,17 +1,13 @@
 package com.controller.web;
 
-import com.bean.Question;
-import com.bean.Tag;
+import com.bean.*;
 import com.dao.QuestionDao;
 import com.service.QuestionService;
 import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,22 +46,47 @@ public class QuestionController {
         questionService.saveQuestion(question, files, request);
         return modelAndView;
     }
+
     @RequestMapping(value = "/questionPage", method = RequestMethod.GET)
-    public ModelAndView questionPage(@RequestParam( "page" ) String page) {
+    public ModelAndView questionPage(@RequestParam("page") String page) {
         Integer currentPage = Integer.valueOf(page);
         Page<Question> pageInfo = questionService.getQuestionsByPage(currentPage, Page.DEFAULT_PAGE_SIZE);
-        logger.debug("pageInfo==============="+pageInfo.toString());
-        logger.debug("getTotelPages"+pageInfo.getTotelPages());
-        logger.debug("getTotelItems"+pageInfo.getTotelItems());
+        logger.debug("pageInfo===============" + pageInfo.toString());
+        logger.debug("getTotelPages" + pageInfo.getTotelPages());
+        logger.debug("getTotelItems" + pageInfo.getTotelItems());
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("pageInfo",pageInfo);
+        modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;
     }
+
     @RequestMapping(value = "/detail/{questionId}", method = RequestMethod.GET)
     public ModelAndView detail(@PathVariable String questionId) {
-        logger.debug("questionDetail");
         ModelAndView modelAndView = new ModelAndView("questionDetail");
+        logger.debug("questionDetail");
+        Question question = questionDao.selectQuestionById(Integer.valueOf(questionId));
+        Account account = questionDao.selectAccountByQuestionId(Integer.valueOf(questionId));
+        List<AnswerResult> answerResults = questionDao.selectAnsewersByQuestionId(Integer.valueOf(questionId));
+        modelAndView.addObject("question", question);
+        modelAndView.addObject("account", account);
+        modelAndView.addObject("answerResults", answerResults);
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/detail/praise", method = RequestMethod.POST)
+    public AppResult praise(@RequestParam("accountId") long accountId,@RequestParam("answerId") long answerId) {
+        AppResult<SingleValue> appResult = new AppResult();
+        logger.debug("praise");
+        if (questionDao.selectPraiseRecord(accountId, answerId) > 0) {
+            appResult.setResultCode(4).setResultText("您已经点过赞了").setResultData(new SingleValue(0));
+        }else{
+            int praiseCount = questionDao.selectPraiseCountByAnswerId(answerId);
+            questionDao.addPraise(answerId);
+            questionDao.insertPraiseRecord(accountId,answerId);
+            appResult.setResultCode(0).setResultText("点赞成功").setResultData(new SingleValue(praiseCount + 1 ));
+        }
+
+        return appResult;
     }
 
 

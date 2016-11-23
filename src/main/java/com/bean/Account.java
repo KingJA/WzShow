@@ -1,5 +1,7 @@
 package com.bean;
 
+import com.util.DateUtil;
+
 /**
  * Description：TODO
  * Create Time：2016/11/15 15:17
@@ -15,7 +17,7 @@ public class Account {
                 '}';
     }
 
-    private long account_id;
+    private long accountId;
     private String name;
     private String password;
     private String createTime;
@@ -40,7 +42,7 @@ public class Account {
     }
 
     public String getCreateTime() {
-        return createTime;
+        return DateUtil.getDateTime(createTime);
     }
 
     public void setCreateTime(String createTime) {
@@ -48,7 +50,7 @@ public class Account {
     }
 
     public String getModifyTime() {
-        return modifyTime;
+        return DateUtil.getDateTime(modifyTime);
     }
 
     public void setModifyTime(String modifyTime) {
@@ -71,13 +73,13 @@ public class Account {
         this.phone = phone;
     }
 
-    public long getAccount_id() {
+    public long getAccountId() {
 
-        return account_id;
+        return accountId;
     }
 
-    public void setAccount_id(long account_id) {
-        this.account_id = account_id;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
 

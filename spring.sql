@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
-  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `accountId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `password` varchar(45) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -29,7 +29,7 @@ CREATE TABLE `account` (
   `phone` varchar(11) CHARACTER SET utf8 DEFAULT '',
   `token` varchar(32) CHARACTER SET utf8 DEFAULT '' COMMENT 'token',
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '头像',
-  PRIMARY KEY (`account_id`)
+  PRIMARY KEY (`accountId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `answer` (
   PRIMARY KEY (`answerId`),
   KEY `accountId` (`accountId`),
   KEY `questionId` (`questionId`),
-  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`account_id`),
+  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -82,12 +82,12 @@ DROP TABLE IF EXISTS `my_answer`;
 CREATE TABLE `my_answer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_Id` int(11) NOT NULL,
-  `account_Id` int(11) NOT NULL,
+  `accountId` int(11) NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   PRIMARY KEY (`id`),
   KEY `question_Id` (`question_Id`),
-  KEY `account_Id` (`account_Id`),
-  CONSTRAINT `account_Id` FOREIGN KEY (`account_Id`) REFERENCES `account` (`account_id`),
+  KEY `accountId` (`accountId`),
+  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `question_Id` FOREIGN KEY (`question_Id`) REFERENCES `question` (`questionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='我回答的问答';
 
@@ -112,8 +112,8 @@ CREATE TABLE `my_attention` (
   PRIMARY KEY (`id`),
   KEY `a` (`attentionActId`),
   KEY `b` (`attentionedActId`),
-  CONSTRAINT `a` FOREIGN KEY (`attentionActId`) REFERENCES `account` (`account_id`),
-  CONSTRAINT `b` FOREIGN KEY (`attentionedActId`) REFERENCES `account` (`account_id`)
+  CONSTRAINT `a` FOREIGN KEY (`attentionActId`) REFERENCES `account` (`accountId`),
+  CONSTRAINT `b` FOREIGN KEY (`attentionedActId`) REFERENCES `account` (`accountId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='关注表';
 
 -- ----------------------------
@@ -177,7 +177,7 @@ CREATE TABLE `question` (
   PRIMARY KEY (`questionId`),
   KEY `accout_id` (`accountId`),
   KEY `tag_id` (`tagId`),
-  CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`account_id`),
+  CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

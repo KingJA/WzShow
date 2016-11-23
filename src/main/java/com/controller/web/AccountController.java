@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Description：TODO
@@ -51,12 +52,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
-    public ModelAndView dologin(HttpServletRequest httpServletRequest) {
+    public ModelAndView dologin(HttpServletRequest httpServletRequest, HttpSession session) {
         String name = httpServletRequest.getParameter("name");
         String password = httpServletRequest.getParameter("password");
 
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         Account account = accountService.login(name, password);
+        session.setAttribute("account",account);
         if (account != null) {
             logger.error("登录成功:" + account.getName());
         } else {

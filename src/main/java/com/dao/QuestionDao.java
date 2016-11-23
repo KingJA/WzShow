@@ -23,11 +23,19 @@ public interface QuestionDao {
 
     int selectQuestionCount();
 
+    int selectPraiseCountByAnswerId(@Param(value = "answerId") long answerId);
+
     List<Question> selectQuestionsByPage(@Param(value = "currentPage") int currentPage, @Param(value = "pageSize") int pageSize);
 
     Question selectQuestionById(@Param(value = "questionId") int questionId);
 
     Account selectAccountByQuestionId(@Param(value = "questionId") int questionId);
 
-    AnswerResult selectAnsewerByQuestionId(@Param(value = "questionId") int questionId);
+    List<AnswerResult> selectAnsewersByQuestionId(@Param(value = "questionId") int questionId);
+
+    void addPraise(@Param(value = "answerId") long answerId);
+
+    void insertPraiseRecord(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
+
+    int selectPraiseRecord(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
 }

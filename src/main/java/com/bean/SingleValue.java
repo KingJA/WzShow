@@ -6,8 +6,13 @@ package com.bean;
  * Author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class SingleText {
+public class SingleValue {
     private String resultText="";
+    private long resultInt;
+
+    public SingleValue(long resultInt) {
+        this.resultInt = resultInt;
+    }
 
     public String getResultText() {
         return resultText;
@@ -17,11 +22,18 @@ public class SingleText {
         this.resultText = resultText;
     }
 
-    public SingleText(String resultText) {
+    public SingleValue(String resultText) {
         this.resultText = resultText;
     }
-    public SingleText() {
+    public SingleValue() {
 
     }
 
+    public long getResultInt() {
+        return resultInt;
+    }
+
+    public void setResultInt(long resultInt) {
+        this.resultInt = resultInt;
+    }
 }

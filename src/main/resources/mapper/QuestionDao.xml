@@ -3,6 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.QuestionDao">
+    <resultMap type="com.bean.AnswerResult" id="AnswerResult">
+        <result property="questionId" column="questionId"/>
+        <result property="accountId" column="accountId"/>
+        <result property="name" column="name"/>
+        <result property="avatar" column="avatar"/>
+        <result property="answerId" column="answerId"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="createTime"/>
+        <result property="praiseCount" column="praiseCount"/>
+        <result property="collectCount" column="collectCount"/>
+    </resultMap>
     <select id="selectAllTag" resultType="com.bean.Tag">
         SELECT * FROM tag
     </select>
@@ -23,29 +34,35 @@
 
     <!--根据问题Id获取提问者信息-->
     <select id="selectAccountByQuestionId" resultType="com.bean.Account">
-      SELECT account.account_Id, account.name, account.avatar
+      SELECT account.accountId, account.name, account.avatar
       FROM question INNER JOIN account
-      ON account.account_id=question.accountId
+      ON account.accountId=question.accountId
       WHERE question.questionId=#{questionId}
     </select>
     <!--根据问题Id获取回答-->
-<select id="selectAnsewerByQuestionId" resultMap="AnswerResult">
-    SELECT question.questionId,account.account_id,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
+    <select id="selectAnsewersByQuestionId" resultMap="AnswerResult">
+    SELECT question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
 FROM answer
 LEFT JOIN question
 ON answer.questionId=question.questionId
 LEFT JOIN account
-ON answer.accountId=account.account_id WHERE question.questionId=#{questionId}
+ON answer.accountId=account.accountId WHERE question.questionId=#{questionId}
 </select>
-    <resultMap type="com.bean.AnswerResult" id="AnswerResult">
-        <result property="questionId" column="questionId" />
-        <result property="accountId" column="account_id" />
-        <result property="name" column="name" />
-        <result property="avatar" column="avatar" />
-        <result property="answerId" column="answerId" />
-        <result property="content" column="content" />
-        <result property="createTime" column="createTime" />
-        <result property="praiseCount" column="praiseCount" />
-        <result property="collectCount" column="collectCount" />
-    </resultMap>
+    
+    <update id="addPraise">
+        UPDATE answer SET praiseCount=praiseCount+1 WHERE answerId=#{answerId}
+    </update>
+
+    <select id="selectPraiseCountByAnswerId" resultType="int">
+        select praiseCount from answer WHERE answerId=#{answerId}
+    </select>
+
+    <select id="selectPraiseRecord" resultType="int">
+        select count(*) FROM praise WHERE accountId=#{accountId} AND answerId=#{answerId}
+    </select>
+
+    <insert id="insertPraiseRecord">
+        INSERT INTO praise (accountId,answerId) VALUES (#{accountId},#{answerId})
+    </insert>
+
 </mapper>

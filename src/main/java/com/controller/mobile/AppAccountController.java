@@ -2,7 +2,7 @@ package com.controller.mobile;
 
 import com.bean.Account;
 import com.bean.AppResult;
-import com.bean.SingleText;
+import com.bean.SingleValue;
 import com.controller.web.NewsController;
 import com.dao.DaoAccount;
 import com.service.AccountService;
@@ -53,9 +53,9 @@ public class AppAccountController {
             String token = StringUtil.getUUID();
             account.setToken(token);
             daoAccount.insertToken(token,name);
-            accountAppResult.setResultCode(0).setResultText("登录成功").setDate(account);
+            accountAppResult.setResultCode(0).setResultText("登录成功").setResultData(account);
         }else{
-            accountAppResult.setResultCode(4).setResultText("登录失败").setDate(account);
+            accountAppResult.setResultCode(4).setResultText("登录失败").setResultData(account);
         }
         return accountAppResult;
     }
@@ -71,10 +71,10 @@ public class AppAccountController {
         int count = daoAccount.selectAccountByName(account.getName());
         AppResult<Account> appResult = new AppResult();
         if (count > 0) {
-            appResult.setResultCode(4).setResultText("用户名已经被注册").setDate(new SingleText());
+            appResult.setResultCode(4).setResultText("用户名已经被注册").setResultData(new SingleValue());
         }else{
             daoAccount.insertAccount(account);
-            appResult.setResultCode(0).setResultText("注册成功").setDate(account.getName());
+            appResult.setResultCode(0).setResultText("注册成功").setResultData(account.getName());
         }
         return appResult;
     }
@@ -89,16 +89,16 @@ public class AppAccountController {
     @ResponseBody
     @RequestMapping(value = "setAvatar.json", method = RequestMethod.POST)
     public AppResult doRegister(@RequestParam("token")String token,@RequestParam("avatar") MultipartFile file, HttpServletRequest request) {
-        AppResult<SingleText> appResult = new AppResult();
+        AppResult<SingleValue> appResult = new AppResult();
         long accountId = checkTokenAvail(token);
         if (accountId!=-1) {
             if (file!=null&&!file.isEmpty()) {
                 String savePath = uploadImg(file, request, Constant.saveAvatarPath);
-                appResult.setResultCode(0).setResultText("头像上传成功").setDate(new SingleText(savePath));
+                appResult.setResultCode(0).setResultText("头像上传成功").setResultData(new SingleValue(savePath));
                 daoAccount.insertAvatar(accountId+"",savePath);
             }
         }else{
-            appResult.setResultCode(4).setResultText("登录失效").setDate(new SingleText());
+            appResult.setResultCode(4).setResultText("登录失效").setResultData(new SingleValue());
         }
         return appResult;
     }
@@ -111,12 +111,12 @@ public class AppAccountController {
      */
 
     public  long checkTokenAvail(String token) {
-        long account_id=-1;
+        long accountId=-1;
         Account account = daoAccount.selectIdByToken(token);
         if (account != null) {
-            account_id=account.getAccount_id();
+            accountId=account.getAccountId();
         }
-        return account_id;
+        return accountId;
     }
 
     private String uploadImg( @RequestParam("newsTopImg") MultipartFile file, HttpServletRequest request,String savePath) {
