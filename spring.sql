@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-11-21 17:29:33
+Date: 2016-11-23 17:14:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,21 +30,23 @@ CREATE TABLE `account` (
   `token` varchar(32) CHARACTER SET utf8 DEFAULT '' COMMENT 'token',
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '头像',
   PRIMARY KEY (`accountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', '韩梅梅', '123456', '2016-11-15 15:01:37', '2016-11-15 15:01:37', '', null, '', '');
-INSERT INTO `account` VALUES ('2', '哈哈', '哈哈', '2016-11-15 15:01:37', '2016-11-15 15:01:37', '', null, '', '');
-INSERT INTO `account` VALUES ('3', '哈哈adsdf', '哈哈111', '2016-11-15 15:01:37', '2016-11-15 15:01:37', '', null, '', '');
-INSERT INTO `account` VALUES ('4', 'dsfd ', '都是', '2016-11-15 15:01:37', '2016-11-15 15:01:37', '', null, '', '');
-INSERT INTO `account` VALUES ('5', '科比', '也来了', '2016-11-15 15:01:37', '2016-11-16 16:43:04', '', null, '1350ebd07b7b416f9180b9756d3d9fca', '/upload/avatar/bg_logo_login.png');
-INSERT INTO `account` VALUES ('6', '科比', '也来了', '2016-11-16 15:09:57', '2016-11-16 15:09:57', '', '', '', '');
-INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2016-11-16 15:17:04', '', '', '', '');
-INSERT INTO `account` VALUES ('8', '乔丹', 'ccc', '2016-11-16 15:17:21', '2016-11-16 15:17:21', '', '', '', '');
-INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2016-11-18 13:34:13', '', '', '', '');
-INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-11-18 13:55:54', '', '', '', '');
+INSERT INTO `account` VALUES ('1', '韩梅梅', '123456', '2016-11-15 15:01:37', '2016-11-23 09:37:02', '', null, '', '/upload/avatar/head_1.jpg');
+INSERT INTO `account` VALUES ('2', '哈哈', '哈哈', '2016-11-15 15:01:37', '2016-11-23 09:37:26', '', null, '', '/upload/avatar/head_2.jpg');
+INSERT INTO `account` VALUES ('3', '哈哈adsdf', '哈哈111', '2016-11-15 15:01:37', '2016-11-23 09:37:28', '', null, '', '/upload/avatar/head_3.jpg');
+INSERT INTO `account` VALUES ('4', 'dsfd ', '都是', '2016-11-15 15:01:37', '2016-11-23 09:37:30', '', null, '', '/upload/avatar/head_4.jpg');
+INSERT INTO `account` VALUES ('5', '科比', '也来了', '2016-11-15 15:01:37', '2016-11-23 09:37:32', '', null, '1350ebd07b7b416f9180b9756d3d9fca', '/upload/avatar/head_5.jpg');
+INSERT INTO `account` VALUES ('6', '詹姆斯', '也来了', '2016-11-16 15:09:57', '2016-11-23 09:37:36', '', '', '', '/upload/avatar/head_6.jpg');
+INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2016-11-23 09:37:39', '', '', '', '/upload/avatar/head_7.jpg');
+INSERT INTO `account` VALUES ('8', '乔丹', 'ccc', '2016-11-16 15:17:21', '2016-11-23 09:37:42', '', '', '', '/upload/avatar/head_8.jpg');
+INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2016-11-23 09:37:47', '', '', '', '/upload/avatar/head_9.jpg');
+INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-11-23 09:37:58', '', '', '', '/upload/avatar/head_default.jpg');
+INSERT INTO `account` VALUES ('11', '1', '1', '2016-11-22 10:58:32', '2016-11-23 09:37:59', '', '', '', '/upload/avatar/head_default.jpg');
+INSERT INTO `account` VALUES ('12', '', '', '2016-11-22 10:58:36', '2016-11-23 14:02:33', '', '', '', '/upload/avatar/head_default.jpg');
 
 -- ----------------------------
 -- Table structure for answer
@@ -55,10 +57,12 @@ CREATE TABLE `answer` (
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '回答内容',
   `imgUrls` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '回答图片',
   `praiseCount` int(11) DEFAULT '0' COMMENT '点赞数',
+  `collectCount` int(11) DEFAULT '0' COMMENT '收藏数',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '回答时间',
   `modifyTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '回答修改时间',
   `accountId` int(11) DEFAULT NULL,
   `questionId` int(11) DEFAULT NULL,
+  `bestQuestion` tinyint(1) DEFAULT '0' COMMENT '是否是最佳答案1：是 0 ：否',
   PRIMARY KEY (`answerId`),
   KEY `accountId` (`accountId`),
   KEY `questionId` (`questionId`),
@@ -69,11 +73,11 @@ CREATE TABLE `answer` (
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
-INSERT INTO `answer` VALUES ('1', '我觉得应该是这样的', '', '2', '2016-11-22 11:06:10', '2016-11-21 11:18:22', '5', '6');
-INSERT INTO `answer` VALUES ('2', '我觉得应该是这样的', '', '2', '2016-11-01 11:06:10', '2016-11-21 11:18:33', '6', '6');
-INSERT INTO `answer` VALUES ('3', '我觉得应该是这样的', '', '2', '2016-11-02 11:06:10', '2016-11-21 11:18:36', '7', '6');
-INSERT INTO `answer` VALUES ('4', '我觉得应该是这样的', '', '2', '2016-11-03 11:06:10', '2016-11-21 11:18:40', '5', '5');
-INSERT INTO `answer` VALUES ('5', '我觉得应该是这样的', '', '2', '2016-11-21 11:06:10', '2016-11-21 11:06:10', '5', '7');
+INSERT INTO `answer` VALUES ('1', '有点道理', '', '16', '0', '2016-11-22 11:06:10', '2016-11-23 16:39:23', '5', '17', '0');
+INSERT INTO `answer` VALUES ('2', '我觉得应该是这样的', '', '5', '0', '2016-11-01 11:06:10', '2016-11-23 16:40:32', '6', '17', '0');
+INSERT INTO `answer` VALUES ('3', '好像是的', '', '3', '0', '2016-11-02 11:06:10', '2016-11-23 14:43:30', '7', '17', '0');
+INSERT INTO `answer` VALUES ('4', '这个可以有', '', '2', '0', '2016-11-03 11:06:10', '2016-11-23 14:05:09', '5', '5', '0');
+INSERT INTO `answer` VALUES ('5', '必须点', '', '2', '0', '2016-11-21 11:06:10', '2016-11-23 15:42:12', '5', '7', '0');
 
 -- ----------------------------
 -- Table structure for my_answer
@@ -82,12 +86,12 @@ DROP TABLE IF EXISTS `my_answer`;
 CREATE TABLE `my_answer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_Id` int(11) NOT NULL,
-  `accountId` int(11) NOT NULL,
+  `account_Id` int(11) NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
   PRIMARY KEY (`id`),
   KEY `question_Id` (`question_Id`),
-  KEY `accountId` (`accountId`),
-  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
+  KEY `account_Id` (`account_Id`),
+  CONSTRAINT `account_Id` FOREIGN KEY (`account_Id`) REFERENCES `account` (`accountId`),
   CONSTRAINT `question_Id` FOREIGN KEY (`question_Id`) REFERENCES `question` (`questionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='我回答的问答';
 
@@ -161,6 +165,29 @@ INSERT INTO `news` VALUES ('17', 'sdf s', '新闻内容\r\n', '2016-11-16 09:37:
 INSERT INTO `news` VALUES ('18', 'sss', '编辑推荐：稀土掘金，这是一个针对技术开发者的一个应用，你可以在掘金上获取最新最优质的技术干货，不仅仅是Android知识、前端、后端以至于产品和设计都有涉猎，想成为全栈工程师的朋友不要错过！编辑推荐：稀土掘金，这是一个针对技术开发者的一个应用，你可以在掘金上获取最新最优质的技术干货，不仅仅是Android知识、前端、后端以至于产品和设计都有涉猎，想成为全栈工程师的朋友不要错过！', '2016-11-18 11:35:11', '2016-11-18 11:35:11', '娱乐', 'ddd', '/upload/bg_logo_login.png', null, '/upload/bg_msg.png#', null);
 
 -- ----------------------------
+-- Table structure for praise
+-- ----------------------------
+DROP TABLE IF EXISTS `praise`;
+CREATE TABLE `praise` (
+  `praiseId` int(11) NOT NULL AUTO_INCREMENT COMMENT '点赞Id',
+  `accountId` int(11) DEFAULT NULL COMMENT '用户Id',
+  `answerId` int(11) DEFAULT NULL COMMENT '回答Id',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) DEFAULT '0' COMMENT '点赞状态 1: 有效 0：无效',
+  PRIMARY KEY (`praiseId`),
+  KEY `accountId` (`accountId`),
+  KEY `answerId` (`answerId`),
+  CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
+  CONSTRAINT `praise_ibfk_2` FOREIGN KEY (`answerId`) REFERENCES `answer` (`answerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of praise
+-- ----------------------------
+INSERT INTO `praise` VALUES ('1', '9', '1', '2016-11-23 16:39:23', '0');
+INSERT INTO `praise` VALUES ('2', '9', '2', '2016-11-23 16:40:32', '0');
+
+-- ----------------------------
 -- Table structure for question
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
@@ -179,23 +206,26 @@ CREATE TABLE `question` (
   KEY `tag_id` (`tagId`),
   CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
-INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
-INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
-INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
-INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2016-11-18 17:05:30', '0', null, null);
-INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-21 15:53:46', '0', null, '6');
-INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-21 16:06:08', '0', null, '6');
-INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-21 16:06:23', '0', null, '6');
-INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-21 16:06:42', '0', null, '6');
-INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-21 16:07:11', '0', null, '6');
-INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-21 16:08:13', '0', null, '6');
-INSERT INTO `question` VALUES ('16', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-21 16:11:26', '0', null, '6');
+INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-22 17:22:35', '0', '1', null);
+INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-22 17:22:36', '0', '2', null);
+INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-22 17:22:37', '0', '3', null);
+INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2016-11-22 17:22:38', '0', '4', null);
+INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2016-11-22 17:38:09', '0', '3', null);
+INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-22 17:22:45', '0', '1', '6');
+INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-22 17:22:57', '0', '4', '6');
+INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-22 17:22:55', '0', '3', '6');
+INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-22 17:22:55', '0', '3', '6');
+INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-22 17:22:54', '0', '2', '6');
+INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-22 17:22:53', '0', '2', '6');
+INSERT INTO `question` VALUES ('16', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-22 17:22:49', '0', '1', '6');
+INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2016-11-22 17:22:50', '0', '1', '6');
+INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2016-11-22 17:22:51', '0', '1', '1');
+INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '2', '1');
 
 -- ----------------------------
 -- Table structure for question_answer
