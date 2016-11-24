@@ -1,7 +1,7 @@
 package com.controller.web;
 
 import com.bean.Account;
-import com.dao.DaoAccount;
+import com.dao.AccountDao;
 import com.service.AccountService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AccountController {
     @Autowired
     AccountService accountService;
     @Autowired
-    DaoAccount daoAccount;
+    AccountDao accountDao;
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public ModelAndView register() {

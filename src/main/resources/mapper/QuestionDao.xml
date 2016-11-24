@@ -14,16 +14,19 @@
         <result property="praiseCount" column="praiseCount"/>
         <result property="collectCount" column="collectCount"/>
     </resultMap>
+    <!--获取标签-->
     <select id="selectAllTag" resultType="com.bean.Tag">
         SELECT * FROM tag
     </select>
+    <!--获取问题分页信息-->
     <select id="selectQuestionsByPage" resultType="com.bean.Question">
         SELECT * FROM question ORDER BY createTime DESC  limit #{currentPage},#{pageSize}
     </select>
+    <!--添加问题-->
     <insert id="insertQuestion" parameterType="com.bean.Question">
         INSERT INTO question (title,content,tagId,imgUrls) VALUES (#{title},#{content},#{tagId},#{imgUrls})
     </insert>
-
+    <!--获取问题数量-->
     <select id="selectQuestionCount" resultType="int">
        select count(*) from question
     </select>
@@ -41,28 +44,41 @@
     </select>
     <!--根据问题Id获取回答-->
     <select id="selectAnsewersByQuestionId" resultMap="AnswerResult">
-    SELECT question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
-FROM answer
-LEFT JOIN question
-ON answer.questionId=question.questionId
-LEFT JOIN account
-ON answer.accountId=account.accountId WHERE question.questionId=#{questionId}
-</select>
-    
+        SELECT question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
+        FROM answer
+        LEFT JOIN question
+        ON answer.questionId=question.questionId
+        LEFT JOIN account
+        ON answer.accountId=account.accountId 
+        WHERE question.questionId=#{questionId}
+  </select>
+    <!--增加点赞数量-->
     <update id="addPraise">
         UPDATE answer SET praiseCount=praiseCount+1 WHERE answerId=#{answerId}
     </update>
-
+    <!--获取点赞数量-->
     <select id="selectPraiseCountByAnswerId" resultType="int">
         select praiseCount from answer WHERE answerId=#{answerId}
     </select>
-
+    <!--查找是否收藏过-->
     <select id="selectPraiseRecord" resultType="int">
         select count(*) FROM praise WHERE accountId=#{accountId} AND answerId=#{answerId}
     </select>
-
+    <!--收藏记录表，防止重复点赞-->
     <insert id="insertPraiseRecord">
         INSERT INTO praise (accountId,answerId) VALUES (#{accountId},#{answerId})
     </insert>
+    <!--收藏问题-->
+    <insert id="addCollect">
+        INSERT INTO collect (accountId,questionId) VALUE (#{accountId},#{questionId})
+    </insert>
+    <!--取消收藏问题-->
+    <delete id="cancelCollect">
+        DELETE FROM collect WHERE accountId=#{accountId} AND questionId=#{questionId}
+    </delete>
+    <!--判断是否收藏过-->
+    <select id="selectIfCollect" resultType="int">
+        select count(*) FROM collect WHERE accountId=#{accountId} AND questionId=#{questionId}
+    </select>
 
 </mapper>

@@ -27,15 +27,22 @@ public interface QuestionDao {
 
     List<Question> selectQuestionsByPage(@Param(value = "currentPage") int currentPage, @Param(value = "pageSize") int pageSize);
 
-    Question selectQuestionById(@Param(value = "questionId") int questionId);
+    Question selectQuestionById(@Param(value = "questionId") long questionId);
 
-    Account selectAccountByQuestionId(@Param(value = "questionId") int questionId);
+    Account selectAccountByQuestionId(@Param(value = "questionId") long questionId);
 
-    List<AnswerResult> selectAnsewersByQuestionId(@Param(value = "questionId") int questionId);
+    List<AnswerResult> selectAnsewersByQuestionId(@Param(value = "questionId") long questionId);
 
     void addPraise(@Param(value = "answerId") long answerId);
 
     void insertPraiseRecord(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
 
     int selectPraiseRecord(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
+    /*添加收藏问题*/
+    int addCollect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
+    /*取消收藏问题*/
+    int cancelCollect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
+     /*判断你是否收藏的问题*/
+    int selectIfCollect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
+
 }

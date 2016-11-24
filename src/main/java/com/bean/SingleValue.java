@@ -7,7 +7,7 @@ package com.bean;
  * Email:kingjavip@gmail.com
  */
 public class SingleValue {
-    private String resultText="";
+    private String resultText = "";
     private long resultInt;
 
     public SingleValue(long resultInt) {
@@ -25,8 +25,14 @@ public class SingleValue {
     public SingleValue(String resultText) {
         this.resultText = resultText;
     }
+
     public SingleValue() {
 
+    }
+
+    public SingleValue(long resultInt, String resultText) {
+        this.resultText = resultText;
+        this.resultInt = resultInt;
     }
 
     public long getResultInt() {

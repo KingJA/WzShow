@@ -4,7 +4,7 @@ import com.bean.Account;
 import com.bean.AppResult;
 import com.bean.SingleValue;
 import com.controller.web.NewsController;
-import com.dao.DaoAccount;
+import com.dao.AccountDao;
 import com.service.AccountService;
 import com.util.Constant;
 import com.util.StringUtil;
@@ -35,7 +35,7 @@ public class AppAccountController {
     @Autowired
     AccountService accountService;
     @Autowired
-    DaoAccount daoAccount;
+    AccountDao accountDao;
 
     /**
      * 登录
@@ -52,7 +52,7 @@ public class AppAccountController {
         if (account != null) {
             String token = StringUtil.getUUID();
             account.setToken(token);
-            daoAccount.insertToken(token,name);
+            accountDao.insertToken(token,name);
             accountAppResult.setResultCode(0).setResultText("登录成功").setResultData(account);
         }else{
             accountAppResult.setResultCode(4).setResultText("登录失败").setResultData(account);
@@ -68,12 +68,12 @@ public class AppAccountController {
     @ResponseBody
     @RequestMapping(value = "doRegister.json", method = RequestMethod.POST)
     public AppResult doRegister(Account account) {
-        int count = daoAccount.selectAccountByName(account.getName());
+        int count = accountDao.selectAccountByName(account.getName());
         AppResult<Account> appResult = new AppResult();
         if (count > 0) {
             appResult.setResultCode(4).setResultText("用户名已经被注册").setResultData(new SingleValue());
         }else{
-            daoAccount.insertAccount(account);
+            accountDao.insertAccount(account);
             appResult.setResultCode(0).setResultText("注册成功").setResultData(account.getName());
         }
         return appResult;
@@ -95,7 +95,7 @@ public class AppAccountController {
             if (file!=null&&!file.isEmpty()) {
                 String savePath = uploadImg(file, request, Constant.saveAvatarPath);
                 appResult.setResultCode(0).setResultText("头像上传成功").setResultData(new SingleValue(savePath));
-                daoAccount.insertAvatar(accountId+"",savePath);
+                accountDao.insertAvatar(accountId+"",savePath);
             }
         }else{
             appResult.setResultCode(4).setResultText("登录失效").setResultData(new SingleValue());
@@ -112,7 +112,7 @@ public class AppAccountController {
 
     public  long checkTokenAvail(String token) {
         long accountId=-1;
-        Account account = daoAccount.selectIdByToken(token);
+        Account account = accountDao.selectIdByToken(token);
         if (account != null) {
             accountId=account.getAccountId();
         }

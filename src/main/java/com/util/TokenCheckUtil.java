@@ -2,7 +2,7 @@ package com.util;
 
 import com.bean.Account;
 import com.bean.AppResult;
-import com.dao.DaoAccount;
+import com.dao.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class TokenCheckUtil {
     @Autowired
-    DaoAccount daoAccount;
+    AccountDao accountDao;
 
     public  <T> AppResult<T> checkToken(String token) {
-        Account account = daoAccount.selectIdByToken(token);
+        Account account = accountDao.selectIdByToken(token);
         if (account != null) {
 
         }else{

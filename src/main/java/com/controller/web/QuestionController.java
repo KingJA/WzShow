@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -60,14 +61,17 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/detail/{questionId}", method = RequestMethod.GET)
-    public ModelAndView detail(@PathVariable String questionId) {
+    public ModelAndView detail(@PathVariable long questionId, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("questionDetail");
+        Account currentAccount = (Account) session.getAttribute("account");
+        int ifCollect = questionDao.selectIfCollect(currentAccount.getAccountId(), questionId);
         logger.debug("questionDetail");
-        Question question = questionDao.selectQuestionById(Integer.valueOf(questionId));
-        Account account = questionDao.selectAccountByQuestionId(Integer.valueOf(questionId));
-        List<AnswerResult> answerResults = questionDao.selectAnsewersByQuestionId(Integer.valueOf(questionId));
+        Question question = questionDao.selectQuestionById(questionId);
+        Account questionCccount = questionDao.selectAccountByQuestionId(questionId);
+        List<AnswerResult> answerResults = questionDao.selectAnsewersByQuestionId(questionId);
+        modelAndView.addObject("collect",new SingleValue(ifCollect>0?0:1,ifCollect>0?"取消收藏":"收藏"));
         modelAndView.addObject("question", question);
-        modelAndView.addObject("account", account);
+        modelAndView.addObject("account", questionCccount);
         modelAndView.addObject("answerResults", answerResults);
         return modelAndView;
     }
@@ -87,6 +91,20 @@ public class QuestionController {
         }
 
         return appResult;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/detail/collect", method = RequestMethod.POST)
+    public SingleValue collect(@RequestParam("accountId") long accountId,@RequestParam("questionId") long questionId,@RequestParam("collectCode") int collectCode) {
+         SingleValue singleValue=null;
+        logger.debug("collect");
+        if (collectCode == 1) {//添加收藏
+            questionDao.addCollect(accountId,questionId);
+            singleValue=new SingleValue(0,"取消收藏");
+        }else{//取消收藏
+            questionDao.cancelCollect(accountId,questionId);
+            singleValue=new SingleValue(1,"收藏");
+        }
+        return singleValue;
     }
 
 

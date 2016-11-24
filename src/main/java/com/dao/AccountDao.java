@@ -13,7 +13,7 @@ import java.util.Map;
  * Email:kingjavip@gmail.com
  */
 @Repository
-public interface DaoAccount {
+public interface AccountDao {
     int selectAccount(Account account);
 
     int selectAccountByName(@Param(value = "name") String name);
