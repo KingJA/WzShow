@@ -14,6 +14,26 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script >
+        /*完全显示iframe* 实际中使用变量bHeight可以正好得到完整的高度，如有需要可以使用dHeight，并得到两者的最大值，
+        但实际应用中使用dHeight，只是记录每一次得到的最大值，会带来一些问题。具体应用还是看需求吧/
+         */
+        function reinitIframe() {
+            var iframe = document.getElementById("urlIframe");
+            try
+            {
+                var bHeight = iframe.contentWindow.document.body.scrollHeight;
+                /*
+                 var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+                 var height = Math.max(bHeight, dHeight);
+                 iframe.height = height;                */
+                iframe.height = bHeight;
+            }
+            catch (ex) { }
+        }
+
+
+    </script>
 </head>
 
 <body>
@@ -38,6 +58,8 @@
                     <li><a href="/account/register">注册</a></li>
                     <li><a href="/account/login">登录</a></li>
                     <li><a href="/question/detail/17">详情</a></li>
+                    <li><a href="/main/a" target="myframe">跳转A</a></li>
+                    <li><a href="/main/b" target="myframe">跳转B</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -46,7 +68,7 @@
 
 
 
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+   <%-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -72,19 +94,15 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+--%>
 
-    <!-- 介绍 -->
-    <div class="jumbotron">
-        <div class="container">
-            <h3>欢迎来到“介么办”</h3>
-            <p>“介么办”，是用户自己根据具有针对性地提出问题，通过积分奖励机制发动其他用户，来解决该问题的搜索模式。 同时，这些问题的答案又会进一步作为搜索结果，提供给其他有类似疑问的用户，达到分享知识的效果。</p>
-        </div>
-    </div>
-
+    <iframe name="myframe" src="/main/a" frameborder="0" scrolling="no" width="100%" height="100%" id="urlIframe" onload="reinitIframe()" ></iframe>
 </div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+
 
 </body>
 </html>

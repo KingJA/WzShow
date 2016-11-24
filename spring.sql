@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-11-23 17:14:59
+Date: 2016-11-24 17:12:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,7 +68,7 @@ CREATE TABLE `answer` (
   KEY `questionId` (`questionId`),
   CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of answer
@@ -78,6 +78,28 @@ INSERT INTO `answer` VALUES ('2', '我觉得应该是这样的', '', '5', '0', '
 INSERT INTO `answer` VALUES ('3', '好像是的', '', '3', '0', '2016-11-02 11:06:10', '2016-11-23 14:43:30', '7', '17', '0');
 INSERT INTO `answer` VALUES ('4', '这个可以有', '', '2', '0', '2016-11-03 11:06:10', '2016-11-23 14:05:09', '5', '5', '0');
 INSERT INTO `answer` VALUES ('5', '必须点', '', '2', '0', '2016-11-21 11:06:10', '2016-11-23 15:42:12', '5', '7', '0');
+INSERT INTO `answer` VALUES ('6', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:03:48', '2016-11-24 15:03:48', '9', null, '0');
+INSERT INTO `answer` VALUES ('7', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:09:51', '2016-11-24 15:09:51', '9', '17', '0');
+INSERT INTO `answer` VALUES ('8', '自己家门口', '/upload/#', '0', '0', '2016-11-24 15:20:54', '2016-11-24 15:20:54', '9', '17', '0');
+INSERT INTO `answer` VALUES ('9', '我也不知道啊', '/upload/#', '0', '0', '2016-11-24 15:22:14', '2016-11-24 15:22:14', '9', '17', '0');
+INSERT INTO `answer` VALUES ('10', '我想想', '/upload/#', '1', '0', '2016-11-24 15:24:36', '2016-11-24 15:39:08', '9', '17', '0');
+
+-- ----------------------------
+-- Table structure for collect
+-- ----------------------------
+DROP TABLE IF EXISTS `collect`;
+CREATE TABLE `collect` (
+  `collectId` int(11) NOT NULL AUTO_INCREMENT,
+  `accountId` int(11) DEFAULT NULL,
+  `questionId` int(11) DEFAULT NULL,
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`collectId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of collect
+-- ----------------------------
+INSERT INTO `collect` VALUES ('1', '9', '17', '2016-11-24 10:33:35');
 
 -- ----------------------------
 -- Table structure for my_answer
@@ -179,13 +201,14 @@ CREATE TABLE `praise` (
   KEY `answerId` (`answerId`),
   CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `praise_ibfk_2` FOREIGN KEY (`answerId`) REFERENCES `answer` (`answerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of praise
 -- ----------------------------
 INSERT INTO `praise` VALUES ('1', '9', '1', '2016-11-23 16:39:23', '0');
 INSERT INTO `praise` VALUES ('2', '9', '2', '2016-11-23 16:40:32', '0');
+INSERT INTO `praise` VALUES ('3', '9', '10', '2016-11-24 15:39:08', '0');
 
 -- ----------------------------
 -- Table structure for question
@@ -206,7 +229,7 @@ CREATE TABLE `question` (
   KEY `tag_id` (`tagId`),
   CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of question
@@ -226,6 +249,7 @@ INSERT INTO `question` VALUES ('16', '怎么上火星', '怎么上火星', '/upl
 INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2016-11-22 17:22:50', '0', '1', '6');
 INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2016-11-22 17:22:51', '0', '1', '1');
 INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '2', '1');
+INSERT INTO `question` VALUES ('20', '', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-24 15:01:38', '0', '9', null);
 
 -- ----------------------------
 -- Table structure for question_answer
