@@ -10,11 +10,7 @@
 
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="shortcut icon" href="/img/head_default.jpg">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

@@ -12,6 +12,8 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
     <script type="text/javascript">
 
         function setCollect(obj, collectCode) {//collectCode 1收藏0取消收藏
@@ -149,6 +151,27 @@
         </c:if>
         <%--回答结束--%>
     </div>
+
+    <%--我来回答--%>
+    <p class="lead">我来回答</p>
+    <div class="jumbotron">
+        <form role="form" enctype="multipart/form-data" action="/question/detail/answer" method="post">
+            <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="请输入内容" name="content"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" id="exampleInputFile" name="files">
+                <div class="pull-right">
+                    <button class="btn btn-success" ><i class="icon-white icon-heart"></i>发布</button>
+                </div>
+            </div>
+            <input type="hidden" name="questionId" value="${question.questionId}">
+
+        </form>
+    </div>
+    <div style="height: 50px;"></div>
+
+
     <!-- Site footer -->
     <div class="blog-footer">
         <p>
@@ -156,6 +179,7 @@
         </p>
     </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

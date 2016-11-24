@@ -4,6 +4,7 @@ import com.bean.*;
 import com.dao.QuestionDao;
 import com.service.QuestionService;
 import com.util.Page;
+import com.util.UploadUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -105,6 +106,19 @@ public class QuestionController {
             singleValue=new SingleValue(1,"收藏");
         }
         return singleValue;
+    }
+
+    @RequestMapping(value = "/detail/answer", method = RequestMethod.POST)
+    public ModelAndView answer(@RequestParam("content") String content,@RequestParam("questionId") long questionId, @RequestParam("files") MultipartFile[] files,
+                               HttpServletRequest request,HttpSession session) {
+        logger.debug("answer");
+        logger.debug("questionId============="+questionId);
+        ModelAndView modelAndView = new ModelAndView("redirect:/question/detail/"+questionId);
+        Account account = (Account) session.getAttribute("account");
+        long accountId = account.getAccountId();
+        String imgUrls = UploadUtil.uploadMultiImages(files, request);
+        questionDao.answerQuestion(accountId,questionId,content,imgUrls);
+        return modelAndView;
     }
 
 

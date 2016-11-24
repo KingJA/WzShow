@@ -51,6 +51,7 @@
         LEFT JOIN account
         ON answer.accountId=account.accountId 
         WHERE question.questionId=#{questionId}
+        ORDER BY answer.createTime DESC
   </select>
     <!--增加点赞数量-->
     <update id="addPraise">
@@ -80,5 +81,11 @@
     <select id="selectIfCollect" resultType="int">
         select count(*) FROM collect WHERE accountId=#{accountId} AND questionId=#{questionId}
     </select>
+    <!--回答问题-->
+
+    <insert id="answerQuestion">
+        INSERT INTO answer (accountId,questionId,content,imgUrls) VALUES (#{accountId},#{questionId},#{content},#{imgUrls})
+    </insert>
+
 
 </mapper>

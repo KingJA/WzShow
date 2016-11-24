@@ -32,10 +32,15 @@
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="/account/login">退出登录</a></li>
                 </ul>
+                <form class="navbar-form navbar-right" role="form" action="/home/search" method="post">
+                    <div class="form-group">
+                        <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
+                    </div>
+                    <button class="btn btn-primary btn-success" type="submit">搜索</button>
+                </form>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-
     <!-- Jumbotron -->
     <div class="jumbotron">
         <h3>${sessionScope.account.name},欢迎来到“介么办”，马上体验问答的快乐</h3>
@@ -51,7 +56,8 @@
                     <div class="span8">
                         <h2>${question.title}</h2>
                         <p>${question.content}</p>
-                        <p><a class="btn btn-default" href="/question/detail/${question.questionId}" role="button">详情 &raquo;</a></p>
+                        <p><a class="btn btn-default" href="/question/detail/${question.questionId}"
+                              role="button">详情 &raquo;</a></p>
                     </div>
                 </div>
             </c:forEach>

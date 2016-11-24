@@ -45,4 +45,7 @@ public interface QuestionDao {
      /*判断你是否收藏的问题*/
     int selectIfCollect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
 
+    int answerQuestion(@Param(value = "accountId") long accountId,@Param(value = "questionId") long questionId, @Param(value = "content") String content,@Param(value = "imgUrls") String imgUrls);
+
+
 }
