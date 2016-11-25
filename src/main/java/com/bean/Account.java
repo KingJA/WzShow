@@ -25,6 +25,16 @@ public class Account {
     private String nickName;
     private String phone;
     private String token;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    private String avatar;
     public String getName() {
         return name;
     }

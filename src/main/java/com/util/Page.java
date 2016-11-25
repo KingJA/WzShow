@@ -9,7 +9,7 @@ import java.util.List;
  * Email:kingjavip@gmail.com
  */
 public class Page<T> {
-    public static final int DEFAULT_PAGE_SIZE = 3;
+    public static final int DEFAULT_PAGE_SIZE = 10;
     private int pageSize = DEFAULT_PAGE_SIZE;
     private int totelPages;
     private int currentPage;
