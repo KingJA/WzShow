@@ -16,7 +16,7 @@ import java.util.List;
 public interface PersonalDao {
 
 //    List<Question> selectQuestionsByAccountId(@Param(value = "accountId") int accountId, @Param(value = "currentPage") int currentPage, @Param(value = "pageSize") int pageSize);
-    List<Question> selectQuestionsByAccountId(@Param(value = "accountId") int accountId);
+    List<Question> selectQuestionsByAccountId(@Param(value = "accountId") long accountId);
 
 
 }

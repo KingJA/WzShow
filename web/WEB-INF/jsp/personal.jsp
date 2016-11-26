@@ -21,13 +21,13 @@
             if (false) window.location.href = "/account/login";
             else {
                 $.ajax({
-                    type:"GET",
-                    url:"/personal/"+$(obj).attr("id"),
-                    dataType:"json",
-                    success:function (result) {
+                    type: "GET",
+                    url: "/personal/" + $(obj).attr("id"),
+                    dataType: "json",
+                    success: function (result) {
                         $("#selectContainer").html(result.resultText);
                     },
-                    error:function () {
+                    error: function () {
                         alert("厉害了，哈哈");
                     }
 
@@ -43,51 +43,50 @@
     </script>
 </head>
 
-<body style="padding-top: 50px >
+<body style="padding-top: 50px">
 <%--==================================导航============================================--%>
-        <nav class=" navbar navbar-inverse navbar-fixed-top
-">
-<div class="container">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="brand" href="#">${sessionScope.account.name}</a>
+<nav class=" navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="form" action="/home/search" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
+                </div>
+                <button class="btn btn-primary btn-success" type="submit">搜索</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <%-- <li><a href="#">Link</a></li>--%>
+                <li class="dropdown">
+                    <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
+                        <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
+                        <span class="caret"></span></div>
+                    <ul class="dropdown-menu dropdown-menu-left" role="menu">
+                        <li><a href="/personal">个人中心</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/account/login">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div><!--/.nav-collapse -->
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-        </ul>
-
-        <form class="navbar-form navbar-left" role="form" action="/home/search" method="post">
-            <div class="form-group">
-                <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
-            </div>
-            <button class="btn btn-primary btn-success" type="submit">搜索</button>
-        </form>
-
-        <ul class="nav navbar-nav navbar-right">
-            <%-- <li><a href="#">Link</a></li>--%>
-            <li class="dropdown">
-                <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
-                    <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
-                    <span class="caret"></span></div>
-                <ul class="dropdown-menu dropdown-menu-left" role="menu">
-                    <li><a href="/personal">个人中心</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="/account/login">退出</a></li>
-                </ul>
-            </li>
-        </ul>
-
-    </div><!--/.nav-collapse -->
-</div>
 </nav>
 
 
@@ -128,7 +127,7 @@
                     <div class="nav-content">
                         <p class="lead" id="selectTitle">页面标题</p>
                         <hr>
-                        <div class="nav-page" style="background: #6feed2;height: 70%" id="selectContainer">
+                        <div class="nav-page" id="selectContainer">
                             <div class="selectItem">
                                 <h3 class="selectTitle">怎么提高支付宝芝麻分</h3>
                                 <p class="selectContent">
