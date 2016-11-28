@@ -7,7 +7,27 @@
     <select id="selectQuestionsByAccountId" resultType="com.bean.Question">
         select * FROM question WHERE accountId=#{accountId} ORDER BY createTime DESC
     </select>
-    <!--回答问题-->
+    <!--我的问题-->
+    <select id="selectMyAskByAccountId" resultType="com.bean.Question">
+        select * FROM question WHERE accountId=#{accountId}  ORDER BY createTime DESC  limit #{startRow},#{pageSize}
+    </select>
+    <select id="selectMyAskCountAccountId" resultType="int">
+        select count(*) FROM question WHERE accountId=#{accountId}
+    </select>
+
+    <!--我的回答-->
+    <select id="selectMyAnswerByAccountId" resultType="com.bean.MyAnswer">
+select answer.questionId,answer.praiseCount,answer.content,answer.createTime,question.title
+FROM answer
+LEFT JOIN question
+ON answer.questionId=question.questionId
+WHERE answer.accountId=#{accountId}
+ORDER BY answer.createTime DESC
+limit #{startRow},#{pageSize}
+    </select>
+    <select id="selectMyAnswerCountAccountId" resultType="int">
+        select count(*) FROM answer WHERE accountId=#{accountId}
+    </select>
 
 
 

@@ -73,7 +73,7 @@
                     <div class="question_border">
                         <h2>${question.title}</h2>
                         <p>${question.content}</p>
-                        <p><a class="btn btn-default" href="/question/detail/${question.questionId}"
+                        <p><a  class="btn btn-default" href="/question/detail/${question.questionId}"
                               role="button">详情 &raquo;</a></p>
                     </div>
                 </c:forEach>

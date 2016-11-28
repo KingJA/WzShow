@@ -16,27 +16,49 @@
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        function setSelectTitle(obj) {
-            $("#selectTitle").text($(obj).text());
+        function myAsk(currentPage) {
+            $("#selectTitle").text("我的提问");
             if (false) window.location.href = "/account/login";
             else {
                 $.ajax({
-                    type: "GET",
-                    url: "/personal/" + $(obj).attr("id"),
+                    type: "POST",
+                    url: "/personal/myAsk",
                     dataType: "json",
+                    data: {
+                        "accountId": ${sessionScope.account.accountId},
+                        "currentPage": currentPage
+                    },
                     success: function (result) {
                         $("#selectContainer").html(result.resultText);
                     },
                     error: function () {
-                        alert("厉害了，哈哈");
+                        alert("厉害了，myask");
                     }
 
                 });
             }
         }
+        function myAnswer(currentPage) {
+            $("#selectTitle").text("我的回答");
+            if (false) window.location.href = "/account/login";
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/personal/myAnswer",
+                    dataType: "json",
+                    data: {
+                        "accountId": ${sessionScope.account.accountId},
+                        "currentPage": currentPage
+                    },
+                    success: function (result) {
+                        $("#selectContainer").html(result.resultText);
+                    },
+                    error: function () {
+                        alert("厉害了，myask");
+                    }
 
-        function getQuestions(url) {
-
+                });
+            }
         }
 
 
@@ -114,8 +136,8 @@
                 <div class="col-md-2 ">
                     <div>
                         <ul class="nav nav-pills nav-stacked profile__nav">
-                            <li><a href="javascript:void(0);" onclick="setSelectTitle(this)" id="myAsk">我的提问</a></li>
-                            <li><a href="javascript:void(0);" onclick="setSelectTitle(this)" id="myAnswer">我的回答</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAsk(1)">我的提问</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAnswer(1)">我的回答</a></li>
                             <li><a href="javascript:void(0);" onclick="setSelectTitle(this)">我的关注</a></li>
                             <li><a href="javascript:void(0);" onclick="setSelectTitle(this)">我的收藏</a></li>
                         </ul>

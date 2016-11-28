@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-11-26 16:41:43
+Date: 2016-11-28 17:14:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,7 +78,7 @@ INSERT INTO `answer` VALUES ('2', '我觉得应该是这样的', '', '5', '0', '
 INSERT INTO `answer` VALUES ('3', '好像是的', '', '3', '0', '2016-11-02 11:06:10', '2016-11-23 14:43:30', '7', '17', '0');
 INSERT INTO `answer` VALUES ('4', '这个可以有', '', '2', '0', '2016-11-03 11:06:10', '2016-11-23 14:05:09', '5', '5', '0');
 INSERT INTO `answer` VALUES ('5', '必须点', '', '2', '0', '2016-11-21 11:06:10', '2016-11-23 15:42:12', '5', '7', '0');
-INSERT INTO `answer` VALUES ('6', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:03:48', '2016-11-24 15:03:48', '9', null, '0');
+INSERT INTO `answer` VALUES ('6', '楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:03:48', '2016-11-28 16:29:18', '9', '7', '0');
 INSERT INTO `answer` VALUES ('7', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:09:51', '2016-11-24 15:09:51', '9', '17', '0');
 INSERT INTO `answer` VALUES ('8', '自己家门口', '/upload/#', '0', '0', '2016-11-24 15:20:54', '2016-11-24 15:20:54', '9', '17', '0');
 INSERT INTO `answer` VALUES ('9', '我也不知道啊', '/upload/#', '0', '0', '2016-11-24 15:22:14', '2016-11-24 15:22:14', '9', '17', '0');
@@ -94,12 +94,13 @@ CREATE TABLE `collect` (
   `questionId` int(11) DEFAULT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`collectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of collect
 -- ----------------------------
 INSERT INTO `collect` VALUES ('1', '9', '17', '2016-11-24 10:33:35');
+INSERT INTO `collect` VALUES ('2', '9', '18', '2016-11-28 15:29:20');
 
 -- ----------------------------
 -- Table structure for my_answer
@@ -243,13 +244,13 @@ INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upl
 INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-22 17:22:57', '0', '4', '6');
 INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-22 17:22:55', '0', '3', '6');
 INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-22 17:22:55', '0', '3', '6');
-INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-22 17:22:54', '0', '2', '6');
-INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-22 17:22:53', '0', '2', '6');
-INSERT INTO `question` VALUES ('16', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-26 10:40:39', '0', '9', '6');
+INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-28 13:03:27', '0', '9', '6');
+INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-28 11:18:21', '0', '9', '6');
+INSERT INTO `question` VALUES ('16', '搞清楚上述内容后，我想就不必要纠结于经验获得的公式算法了，相反经验和升级不是一个公式化就能搞定的东西，有些情况下可以根据实际需求进行调整，当然调整的手段和规模尽量保证低风险和高效用', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-28 14:59:47', '0', '9', '6');
 INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2016-11-26 10:40:41', '0', '9', '6');
-INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2016-11-22 17:22:51', '0', '1', '1');
+INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2016-11-26 17:34:33', '0', '9', '1');
 INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '2', '1');
-INSERT INTO `question` VALUES ('20', '', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-24 15:01:38', '0', '9', null);
+INSERT INTO `question` VALUES ('20', '哪里可以吃到好吃的饺子', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-28 11:17:45', '0', '9', null);
 
 -- ----------------------------
 -- Table structure for question_answer

@@ -1,19 +1,20 @@
 package com.controller.web;
 
-import com.bean.Account;
+import com.bean.MyAnswer;
 import com.bean.Question;
 import com.bean.SingleValue;
 import com.dao.PersonalDao;
+import com.service.PersonalService;
+import com.util.HtmlBuilder;
+import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * Description：TODO
@@ -28,6 +29,9 @@ public class PersonalController {
     @Autowired
     PersonalDao personalDao;
 
+    @Autowired
+    PersonalService personalService;
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView personal() {
@@ -37,39 +41,53 @@ public class PersonalController {
 
     /**
      * 我的问题
+     *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "myAsk", method = RequestMethod.GET)
-    public SingleValue myAsk(HttpSession session) {
-        Account account = (Account) session.getAttribute("account");
+    @RequestMapping(value = "myAsk", method = RequestMethod.POST)
+    public SingleValue myAsk(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
+        Page<Question> page = personalService.getMyAskByPage(accountId, currentPage, 2);
         StringBuilder sb = new StringBuilder();
-        List<Question> questions = personalDao.selectQuestionsByAccountId(account.getAccountId());
-        for (Question question : questions) {
-            sb.append("<div class=\"selectItem\">\n" +
-                    "                                <h3 class=\"selectTitle\">"+question.getTitle()+"</h3>\n" +
-                    "                                <p class=\"selectContent\">\n" +
-                    "                                    "+question.getContent()+"</p>\n" +
-                    "                            </div>");
+        for (Question question : page.getPageDatas()) {
+            //TODO 增加点赞
+            sb.append("<div class='selectItem row'>" +
+                    "<div class='col-md-1'> <a  class='btn btn-success btn-xs'><span class='glyphicon glyphicon-star'></span> 5</a></div>" +
+                    "<div class='col-md-9'><a target='_blank' class='text-overflow' href='/question/detail/" + question.getQuestionId() + "'>" + question.getTitle() + "</a></div>" +
+                    "<div class='col-md-2'><span class=''>" + question.getCreateYearDay() + "</span></div>" +
+                    "</div>");
         }
-
+        sb.append(HtmlBuilder.getPageHtml(page, "myAsk"));
         SingleValue singleValue = new SingleValue(sb.toString());
-        logger.debug("myAsk");
         return singleValue;
     }
+
     /**
      * 我的回答
+     *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "myAnswer", method = RequestMethod.GET)
-    public SingleValue myAnswer() {
-        SingleValue singleValue = new SingleValue("<div class=\"selectItem\">\n" +
-                "                                <h3 class=\"selectTitle\">我回答的怎么提高支付宝芝麻分</h3>\n" +
-                "                                <p class=\"selectContent\">\n" +
-                "                                    多使用支付宝信用卡还款功能并及时还。及时还信用卡可以证明你的偿还能力没问题。关联的信用卡越多，信用额度越高，芝麻分越有可能提升。</p>\n" +
-                "                            </div>");
-        logger.debug("myAnswer");
+    @RequestMapping(value = "myAnswer", method = RequestMethod.POST)
+    public SingleValue myAnswer(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
+        Page<MyAnswer> page = personalService.getMyAnswerByPage(accountId, currentPage, 2);
+        StringBuilder sb = new StringBuilder();
+        for (MyAnswer answer : page.getPageDatas()) {
+            sb.append("<div class='selectItem '>" +
+                    "<div class='row'>" +
+                    "<div class='col-md-1'>"+"问题"+"</div>" +
+                    "<div class='col-md-11'><a target='_blank' class='text-overflow' href='/question/detail/" + answer.getQuestionId() + "'>" + answer.getTitle() + "</a></div>" +
+                    "</div>" +
+                    "<div class='row'>" +
+                    "<div class='col-md-1'>"+"回答"+"</div>" +
+                    "<div class='col-md-8'><a target='_blank' class='text-overflow' href='/question/detail/" + answer.getContent() + "'>" + answer.getContent() + "</a></div>" +
+                    "<div class='col-md-1'> <a  class='btn btn-success btn-xs'><span class='glyphicon glyphicon-thumbs-up'></span> 5</a></div>" +
+                    "<div class='col-md-2'><span class=''>" + answer.getCreateYearDay() + "</span></div>" +
+                    "</div>" +
+                    "</div>");
+        }
+        sb.append(HtmlBuilder.getPageHtml(page, "myAnswer"));
+        SingleValue singleValue = new SingleValue(sb.toString());
         return singleValue;
     }
 

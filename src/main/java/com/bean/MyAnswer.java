@@ -6,17 +6,16 @@ import java.util.Date;
 
 /**
  * Description：TODO
- * Create Time：2016/11/21 13:13
+ * Create Time：2016/11/28 16:32
  * Author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class Question {
+public class MyAnswer {
     private long questionId;
-    private String title;
+    private int paiseCount;
     private String content;
-    private String imgUrls;
-    private String tagId;
     private Date createTime;
+    private String title;
 
     public long getQuestionId() {
         return questionId;
@@ -26,12 +25,12 @@ public class Question {
         this.questionId = questionId;
     }
 
-    public String getTitle() {
-        return title;
+    public int getPaiseCount() {
+        return paiseCount;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPaiseCount(int paiseCount) {
+        this.paiseCount = paiseCount;
     }
 
     public String getContent() {
@@ -42,31 +41,22 @@ public class Question {
         this.content = content;
     }
 
-    public String getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(String tagId) {
-        this.tagId = tagId;
-    }
-
-    public String getImgUrls() {
-        return imgUrls;
-    }
-
-    public void setImgUrls(String imgUrls) {
-        this.imgUrls = imgUrls;
-    }
-
     public String getCreateTime() {
         return DateUtil.getDateTime(createTime);
     }
 
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
     public String getCreateYearDay() {
         return DateUtil.getYearDay(createTime);
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
