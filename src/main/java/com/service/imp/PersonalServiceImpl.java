@@ -1,6 +1,7 @@
 package com.service.imp;
 
 import com.bean.MyAnswer;
+import com.bean.MyAttention;
 import com.bean.MyCollect;
 import com.bean.Question;
 import com.controller.web.NewsController;
@@ -57,6 +58,18 @@ public class PersonalServiceImpl implements PersonalService {
         page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<MyCollect> collects = personalDao.selectMyCollectByAccountId(accountId,page.getStartRow(), pageSize);
         page.setPageDatas(collects);
+        return page;
+    }
+
+    public Page<MyAttention> getMyAttentionByPage(long accountId, int currentPage, int pageSize) {
+        int attentionCount = personalDao.selectMyAttentionCountById(accountId);
+        Page<MyAttention> page = new Page<MyAttention>();
+        page.setTotelItems(attentionCount);
+        page.setCurrentPage(currentPage);
+        page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
+        List<MyAttention> attentions = personalDao.selectMyAttentionByAccountId(accountId,page.getStartRow(), pageSize);
+        page.setPageDatas(attentions);
         return page;
     }
 }

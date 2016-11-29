@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Description：TODO
@@ -75,7 +76,9 @@ public class PersonalController {
         sb.append(HtmlBuilder.getPageHtml(page, "myAsk", Page.DEFAULT_VISIBLE_PAGE_SIZE));
         SingleValue singleValue = new SingleValue(sb.toString());
         return singleValue;
-    }  /**
+    }
+
+    /**
      * 我的收藏
      *
      * @return
@@ -96,6 +99,40 @@ public class PersonalController {
                     "</div>");
         }
         sb.append(HtmlBuilder.getPageHtml(page, "myCollect", Page.DEFAULT_VISIBLE_PAGE_SIZE));
+        SingleValue singleValue = new SingleValue(sb.toString());
+        return singleValue;
+    }
+
+    /**
+     * 我的关注
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "myAttention", method = RequestMethod.POST)
+    public SingleValue myAttention(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
+        Page<MyAttention> page = personalService.getMyAttentionByPage(accountId, currentPage, Page.DEFAULT_PAGE_SIZE);
+        StringBuilder sb = new StringBuilder();
+        List<MyAttention> pageDatas = page.getPageDatas();
+        if (!(pageDatas.size() > 0)) {
+            sb = new StringBuilder("<h3>暂无内容</h3>");
+        }
+
+        for (int i = 0; i < pageDatas.size(); i++) {
+
+            if (i % 3 == 0) {//另起一行
+                sb.append("<div class='row'>");
+                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+            } else if ((i + 1) % 3 == 0) {
+                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+                sb.append("</div >");
+            } else{
+                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+            }
+        }
+        sb.append("</div >");
+
+        sb.append(HtmlBuilder.getPageHtml(page, "myAttention", Page.DEFAULT_VISIBLE_PAGE_SIZE));
         SingleValue singleValue = new SingleValue(sb.toString());
         return singleValue;
     }

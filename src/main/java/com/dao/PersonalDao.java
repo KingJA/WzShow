@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.bean.MyAnswer;
+import com.bean.MyAttention;
 import com.bean.MyCollect;
 import com.bean.Question;
 import org.apache.ibatis.annotations.Param;
@@ -25,9 +26,11 @@ public interface PersonalDao {
 
     int selectMyAnswerCountAccountId(@Param(value = "accountId") long accountId);
     int selectMyCollectCountAccountId(@Param(value = "accountId") long accountId);
+    int selectMyAttentionCountById(@Param(value = "accountId") long accountId);
 
     List<MyAnswer> selectMyAnswerByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
     List<MyCollect> selectMyCollectByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
+    List<MyAttention> selectMyAttentionByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
 
 
 }

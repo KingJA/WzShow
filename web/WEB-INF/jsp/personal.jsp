@@ -83,6 +83,27 @@
 
                 });
             }
+        } function myAttention(currentPage) {
+            $("#selectTitle").text("我的关注");
+            if (false) window.location.href = "/account/login";
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/personal/myAttention",
+                    dataType: "json",
+                    data: {
+                        "accountId": ${sessionScope.account.accountId},
+                        "currentPage": currentPage
+                    },
+                    success: function (result) {
+                        $("#selectContainer").html(result.resultText);
+                    },
+                    error: function () {
+                        alert("厉害了，myAttention");
+                    }
+
+                });
+            }
         }
 
 
