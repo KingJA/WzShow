@@ -15,6 +15,8 @@
     <link href="/css/personal.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/css/base.css" rel="stylesheet">
+
     <script type="text/javascript">
         function myAsk(currentPage) {
             $("#selectTitle").text("我的提问");
@@ -55,6 +57,28 @@
                     },
                     error: function () {
                         alert("厉害了，myask");
+                    }
+
+                });
+            }
+        }
+        function myCollect(currentPage) {
+            $("#selectTitle").text("我的收藏");
+            if (false) window.location.href = "/account/login";
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/personal/myCollect",
+                    dataType: "json",
+                    data: {
+                        "accountId": ${sessionScope.account.accountId},
+                        "currentPage": currentPage
+                    },
+                    success: function (result) {
+                        $("#selectContainer").html(result.resultText);
+                    },
+                    error: function () {
+                        alert("厉害了，myCollect");
                     }
 
                 });
@@ -120,11 +144,25 @@
                 <div class="col-md-2 ">
                     <div class="head_icon">
                         <img src="/img/head_3.jpg" alt="..." class="img-circle" width="160px" height="160px">
-
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <h3>${sessionScope.account.name}</h3>
+                    <div>
+                        <span class="glyphicon glyphicon-tag"></span> <span class="">等级:</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-tag"></span> <span class="">金币:</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-tag"></span> <span class="">兴趣:</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-tag"></span> <span class="">擅长:</span>
                     </div>
 
                 </div>
-                <div class="col-md-10">简洁</div>
+                <div class="col-md-5">其他</div>
             </div>
 
         </div>
@@ -133,13 +171,15 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-2 ">
+                <div class="col-md-2">
+
+
                     <div>
                         <ul class="nav nav-pills nav-stacked profile__nav">
                             <li><a href="javascript:void(0);" onclick="myAsk(1)">我的提问</a></li>
                             <li><a href="javascript:void(0);" onclick="myAnswer(1)">我的回答</a></li>
-                            <li><a href="javascript:void(0);" onclick="setSelectTitle(this)">我的关注</a></li>
-                            <li><a href="javascript:void(0);" onclick="setSelectTitle(this)">我的收藏</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAttention(1)">我的关注</a></li>
+                            <li><a href="javascript:void(0);" onclick="myCollect(1)">我的收藏</a></li>
                         </ul>
 
                     </div>
@@ -148,25 +188,7 @@
                 <div class="col-md-10">
                     <div class="nav-content">
                         <p class="lead" id="selectTitle">页面标题</p>
-                        <hr>
                         <div class="nav-page" id="selectContainer">
-                            <div class="selectItem">
-                                <h3 class="selectTitle">怎么提高支付宝芝麻分</h3>
-                                <p class="selectContent">
-                                    多使用支付宝信用卡还款功能并及时还。及时还信用卡可以证明你的偿还能力没问题。关联的信用卡越多，信用额度越高，芝麻分越有可能提升。</p>
-                            </div>
-                            <div class="selectItem">
-                                <h3 class="selectTitle">怎么提高支付宝芝麻分</h3>
-                                <p class="selectContent">
-                                    多使用支付宝信用卡还款功能并及时还。及时还信用卡可以证明你的偿还能力没问题。关联的信用卡越多，信用额度越高，芝麻分越有可能提升。</p>
-
-                            </div>
-                            <div class="selectItem">
-                                <h3 class="selectTitle">怎么提高支付宝芝麻分</h3>
-                                <p class="selectContent">
-                                    多使用支付宝信用卡还款功能并及时还。及时还信用卡可以证明你的偿还能力没问题。关联的信用卡越多，信用额度越高，芝麻分越有可能提升。</p>
-
-                            </div>
 
                         </div>
                     </div>
@@ -181,7 +203,7 @@
 </div>
 
 
-<div class="copyright text-center">
+<div class="text-center footer">
     Copyright &copy; 2011-2016 SegmentFault. 当前呈现版本 16.11.22<br>
     <a href="http://www.miibeian.gov.cn/" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
     <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000"

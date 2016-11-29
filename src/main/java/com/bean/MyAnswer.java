@@ -44,12 +44,12 @@ public class MyAnswer {
     public String getCreateTime() {
         return DateUtil.getDateTime(createTime);
     }
+    public String getCreateYearDay() {
+        return DateUtil.getYearDay(createTime);
+    }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-    public String getCreateYearDay() {
-        return DateUtil.getYearDay(createTime);
     }
 
     public String getTitle() {

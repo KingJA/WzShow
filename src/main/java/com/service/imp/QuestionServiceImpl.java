@@ -38,6 +38,7 @@ public class QuestionServiceImpl implements QuestionService {
         page.setTotelItems(questionCount);
         page.setCurrentPage(currentPage);
         page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<Question> questions = questionDao.selectQuestionsByPage(page.getStartRow(), pageSize);
         logger.debug("List<Question>============="+questions.toString());
         page.setPageDatas(questions);

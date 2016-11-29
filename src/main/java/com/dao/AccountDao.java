@@ -17,6 +17,7 @@ public interface AccountDao {
     int selectAccount(Account account);
 
     int selectAccountByName(@Param(value = "name") String name);
+    Account selectAccountById(@Param(value = "accountId") long accountId);
 
     Account selectAccountByMap(Map<String, Object> map);
 

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Page<T> {
     public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int DEFAULT_VISIBLE_PAGE_SIZE = 10;
     private int pageSize = DEFAULT_PAGE_SIZE;
     private int totelPages;
     private int currentPage;
@@ -21,6 +22,21 @@ public class Page<T> {
     private boolean hasNext;
     private boolean hasPrevious;
     private int startRow;
+    private int pageStart;
+    private int pageEnd;
+    private int visiblePages=10;
+    private int rightPages;
+    private int leftPages;
+
+    public int getPageStart() {
+        return getCurrentPage()>visiblePages?(getCurrentPage()-leftPages):1;
+    }
+
+
+    public int getPageEnd() {
+        return (getCurrentPage()>visiblePages?(getCurrentPage()+rightPages):(getTotelPages()>=visiblePages?visiblePages:getTotelPages()));
+    }
+
 
     public boolean isHasNext() {
         return getCurrentPage() < getTotelPages();
@@ -98,5 +114,15 @@ public class Page<T> {
 
     public void setTotelItems(int totelItems) {
         this.totelItems = totelItems;
+    }
+
+    public int getVisiblePages() {
+        return visiblePages;
+    }
+
+    public void setVisiblePages(int visiblePages) {
+        rightPages = (visiblePages-1)/2;
+        leftPages = visiblePages- rightPages -1;
+        this.visiblePages = visiblePages;
     }
 }

@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -71,7 +72,7 @@
             <c:if test="${!empty pageInfo.pageDatas}">
                 <c:forEach items="${pageInfo.pageDatas}" var="question">
                     <div class="question_border">
-                        <h2>${question.title}</h2>
+                        <h3 class="singleText">${question.title}</h3>
                         <p>${question.content}</p>
                         <p><a  class="btn btn-default" href="/question/detail/${question.questionId}"
                               role="button">详情 &raquo;</a></p>
@@ -85,7 +86,7 @@
                     <li><a href="/question/questionPage?page=${pageInfo.currentPage-1}">&laquo;上一页</a></li>
                 </c:if>
 
-                <c:forEach var="x" begin="1" end="${pageInfo.totelPages}">
+                <c:forEach var="x" begin="${pageInfo.currentPage>5?pageInfo.currentPage-2:1}" end="${pageInfo.currentPage>5?pageInfo.currentPage+2:(pageInfo.totelPages>=5?5:pageInfo.totelPages)}">
 
                     <c:if test="${pageInfo.currentPage==x}">
                         <li class="active"><a href="javascript:return false;">${x}</a></li>

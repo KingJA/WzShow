@@ -1,6 +1,7 @@
 package com.service.imp;
 
 import com.bean.MyAnswer;
+import com.bean.MyCollect;
 import com.bean.Question;
 import com.controller.web.NewsController;
 import com.dao.PersonalDao;
@@ -29,6 +30,7 @@ public class PersonalServiceImpl implements PersonalService {
         page.setTotelItems(questionCount);
         page.setCurrentPage(currentPage);
         page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<Question> questions = personalDao.selectMyAskByAccountId(accountId,page.getStartRow(), pageSize);
         page.setPageDatas(questions);
         return page;
@@ -40,8 +42,21 @@ public class PersonalServiceImpl implements PersonalService {
         page.setTotelItems(answerCount);
         page.setCurrentPage(currentPage);
         page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<MyAnswer> answers = personalDao.selectMyAnswerByAccountId(accountId,page.getStartRow(), pageSize);
         page.setPageDatas(answers);
+        return page;
+    }
+
+    public Page<MyCollect> getMyCollectByPage(long accountId, int currentPage, int pageSize) {
+        int collectCount = personalDao.selectMyCollectCountAccountId(accountId);
+        Page<MyCollect> page = new Page<MyCollect>();
+        page.setTotelItems(collectCount);
+        page.setCurrentPage(currentPage);
+        page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
+        List<MyCollect> collects = personalDao.selectMyCollectByAccountId(accountId,page.getStartRow(), pageSize);
+        page.setPageDatas(collects);
         return page;
     }
 }
