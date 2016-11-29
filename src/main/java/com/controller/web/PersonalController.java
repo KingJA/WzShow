@@ -122,15 +122,15 @@ public class PersonalController {
 
             if (i % 3 == 0) {//另起一行
                 sb.append("<div class='row'>");
-                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
             } else if ((i + 1) % 3 == 0) {
-                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
                 sb.append("</div >");
-            } else{
-                sb.append("<div class='col-md-4 selectItem'><img src='"+pageDatas.get(i).getAvatar()+"' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/"+pageDatas.get(i).getOtherAccountId()+"'>"+pageDatas.get(i).getName()+"</a></div>");
+            } else {
+                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
             }
         }
-        sb.append("</div >");
+        sb.append("</div>");
 
         sb.append(HtmlBuilder.getPageHtml(page, "myAttention", Page.DEFAULT_VISIBLE_PAGE_SIZE));
         SingleValue singleValue = new SingleValue(sb.toString());

@@ -163,7 +163,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 ">
-                    <div class="head_icon">
+                    <div class="">
                         <img src="/img/head_3.jpg" alt="..." class="img-circle" width="160px" height="160px">
                     </div>
                 </div>
