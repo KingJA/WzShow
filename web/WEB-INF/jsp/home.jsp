@@ -41,7 +41,7 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                <%-- <li><a href="#">Link</a></li>--%>
+                 <li><a href="/shop/1">礼品商店</a></li>
                 <li class="dropdown">
                     <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
                         <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
