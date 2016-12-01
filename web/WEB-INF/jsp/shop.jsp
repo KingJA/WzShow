@@ -20,7 +20,37 @@
     <link href="/css/shop.css" rel="stylesheet">
 
     <script type="text/javascript">
+        function showBuyModal(giftId, giftName, giftCost, giftUrl) {
+            $("#giftName").text(giftName)
+            $("#giftCost").text(giftCost)
+            $("#giftUrl").attr("src", giftUrl);
+            $("#giftId").text(giftId)
+            $("#giftCount").val("1")
 
+            $('#buyModal').modal('show')
+        }
+        function buyGift() {
+            if (false) window.location.href = "/account/login";
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/shop/buy",
+                    data: {
+                        "accountId": "${sessionScope.account.accountId}",
+                        "giftId": $("#giftId").text(),
+                        "giftCost": $("#giftCost").text(),
+                        "giftCount": $("#giftCount").val()
+                    },
+                    dataType: "json",
+                    success: function (retult) {
+                        alert(retult.resultText);
+                    },
+                    error: function () {
+                        alert("哈哈，buyGift");
+                    }
+                });
+            }
+        }
 
     </script>
 </head>
@@ -60,7 +90,7 @@
                     <ul class="dropdown-menu dropdown-menu-left" role="menu">
                         <li><a href="/personal">个人中心</a></li>
                         <li class="divider"></li>
-                        <li><a href="/account/login">退出</a></li>
+                        <li><a href="/account/quit">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -84,63 +114,79 @@
 
             <div class="row">
                 <div class="col-md-10"><%--col-md-10开始--%>
+
+                    <p class="lead">
+                        <span>
+                            <img src="/img/coin/coin.png" width="20px"height="20px"class="img-rounded">
+                        </span>
+                        <span>${gift.giftCost}</span>
+                    </p>
                     <div class="border-20 shopWindow">
                         <%--  //${idx.index}--%>
                         <c:if test="${!empty gitfPage.pageDatas}">
 
-                            <c:forEach items="${gitfPage.pageDatas}" var="gift" varStatus="idx">
+                        <c:forEach items="${gitfPage.pageDatas}" var="gift" varStatus="idx">
 
-                                <c:choose>
-                                    <c:when test="${idx.index%4== 0}">
-                                        <div class="row">
-                                        <div class="col-md-3 ">
-                                            <div class="border-10-yellow">
-                                                <p class="text-center"><img src="${gift.giftUrl}" width="80px"
-                                                                            height="80px"
-                                                                            class="img-rounded"></p>
-                                                <p class="text-center">${gift.giftName}</p>
-                                                <p class="text-center">${gift.giftCost} <a href="#"
-                                                                                           class="btn btn-warning btn-xs">购买</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </c:when>
-                                    <c:when test="${(idx.index+1)%4== 0}">
-                                        <div class="col-md-3">
-                                            <div class="border-10-yellow">
-                                                <p class="text-center"><img src="${gift.giftUrl}" width="80px"
-                                                                            height="80px"
-                                                                            class="img-rounded"></p>
-                                                <p class="text-center">${gift.giftName}</p>
-                                                <p class="text-center">${gift.giftCost} <a href="#"
-                                                                                           class="btn btn-warning btn-xs">购买</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="col-md-3">
-                                            <div class="border-10-yellow">
-                                                <p class="text-center"><img src="${gift.giftUrl}" width="80px"
-                                                                            height="80px"
-                                                                            class="img-rounded"></p>
-                                                <p class="text-center">${gift.giftName}</p>
-                                                <p class="text-center">${gift.giftCost} <a href="#"
-                                                                                           class="btn btn-warning btn-xs">购买</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                                    <c:if test="${(idx.index==fn:length(gitfPage.pageDatas)-1)&&!((idx.index+1)%4== 0)}">
-                                         </div>
-                                    </c:if>
-                            </c:forEach>
-                        </c:if>
-
-
+                        <c:choose>
+                            <c:when test="${idx.index%4== 0}">
+                                <div class="row">
+                                <div class="col-md-3 ">
+                                    <div class="border-10-yellow">
+                                        <p class="text-center"><img src="${gift.giftUrl}" width="80px"
+                                                                    height="80px"
+                                                                    class="img-rounded"></p>
+                                        <p class="text-center"><span>${gift.giftName}</span><span><img
+                                                src="/img/coin/coin.png" width="20px"
+                                                height="20px"
+                                                class="img-rounded"></span><span>${gift.giftCost}</span></p>
+                                        <p class="text-center"><a
+                                                onclick="showBuyModal('${gift.giftId}','${gift.giftName}','${gift.giftCost}','${gift.giftUrl}')"
+                                                class="btn btn-warning btn-xs">购买</a></p>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:when test="${(idx.index+1)%4== 0}">
+                                <div class="col-md-3">
+                                    <div class="border-10-yellow">
+                                        <p class="text-center"><img src="${gift.giftUrl}" width="80px"
+                                                                    height="80px"
+                                                                    class="img-rounded"></p>
+                                        <p class="text-center"><span>${gift.giftName}</span><span><img
+                                                src="/img/coin/coin.png" width="20px"
+                                                height="20px"
+                                                class="img-rounded"></span><span>${gift.giftCost}</span></p>
+                                        <p class="text-center"><a
+                                                onclick="showBuyModal('${gift.giftId}','${gift.giftName}','${gift.giftCost}','${gift.giftUrl}')"
+                                                class="btn btn-warning btn-xs">购买</a></p>
+                                    </div>
+                                </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-md-3">
+                                    <div class="border-10-yellow">
+                                        <p class="text-center"><img src="${gift.giftUrl}" width="80px"
+                                                                    height="80px"
+                                                                    class="img-rounded"></p>
+                                        <p class="text-center"><span>${gift.giftName}</span><span><img
+                                                src="/img/coin/coin.png" width="20px"
+                                                height="20px"
+                                                class="img-rounded"></span><span>${gift.giftCost}</span></p>
+                                        <p class="text-center"><a
+                                                onclick="showBuyModal('${gift.giftId}','${gift.giftName}','${gift.giftCost}','${gift.giftUrl}')"
+                                                class="btn btn-warning btn-xs">购买</a></p>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:if test="${(idx.index==fn:length(gitfPage.pageDatas)-1)&&!((idx.index+1)%4== 0)}">
                     </div>
+                    </c:if>
+                    </c:forEach>
+                    </c:if>
+
+
+                </div>
                 <%--分页--%>
                 <ul class="pagination pagination">
                     <c:if test="${gitfPage.hasPrevious}">
@@ -165,21 +211,22 @@
                 </ul>
 
 
-
-                </div><%--col-md-10结束--%>
-                <div class="col-md-2"><%--col-md-2开始--%>
-                    <div class="border-20">
-                        购买排行
-                    </div>
-                </div><%--col-md-2结束--%>
-
-
             </div>
+            <%--col-md-10结束--%>
+            <div class="col-md-2"><%--col-md-2开始--%>
+                <div class="border-20">
+                    购买排行
+                </div>
+            </div>
+            <%--col-md-2结束--%>
+
 
         </div>
 
-
     </div>
+
+
+</div>
 </div>
 
 </div>
@@ -195,5 +242,37 @@
        rel="nofollow">浙公网安备 33010602002000号</a>
 </div>
 
+
+<%--................................................隐藏内容........................................................--%>
+
+<!-- Modal -->
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                   <span>
+                       <img id="giftUrl" width="24px" height="24px" class="img-rounded">
+                   </span>
+                    <span id="giftName">名称</span>
+                    <span id="giftCost">价格</span>
+                    <span class="pull-right"> <span>数量:</span><input id="giftCount" type="number" min="1" max="999"
+                                                                     maxlength="3"
+                                                                     style="width: 50px;text-align: center">
+                    </span>
+                    <span id="giftId" hidden></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="buyGift();">购买</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

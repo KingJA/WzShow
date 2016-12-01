@@ -1,6 +1,7 @@
 package com.service.imp;
 
 import com.bean.Gift;
+import com.bean.SingleValue;
 import com.controller.web.NewsController;
 import com.dao.ShopDao;
 import com.service.ShopService;
@@ -8,6 +9,7 @@ import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,5 +35,26 @@ public class ShopServiceImpl implements ShopService {
         List<Gift> collects = shopDao.selectGiftByPage(page.getStartRow(), pageSize);
         page.setPageDatas(collects);
         return page;
+    }
+
+    @Transactional
+    public SingleValue buyGift(long accountId, long giftId, int giftCount, int giftCost) {
+        //检查金币是否够
+        //根据accountId 查找gitfId是否存在
+        //不存在则插入
+        //存在则修改数量
+        //减掉对应金币数
+        int coin = shopDao.selectCoin(accountId);
+        if (coin >= giftCount * giftCost) {//可以购买
+            if (shopDao.selectGift(accountId, giftId) > 0) {
+                shopDao.addMyGift(accountId, giftId, giftCount);
+            } else {
+                shopDao.insertMyGift(accountId, giftId, giftCount);
+            }
+            shopDao.reduceMyGift(accountId,giftCount*giftCost);
+            return new SingleValue("交易成功");
+        } else {//金币不够
+            return new SingleValue("金币不够");
+        }
     }
 }

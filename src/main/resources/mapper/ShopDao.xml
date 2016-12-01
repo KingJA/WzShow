@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ShopDao">
+    <select id="selectGiftById" resultType="com.bean.Gift">
+        select * from gift ORDER BY giftCost ASC
+    </select>
+    <select id="selectGiftByPage" resultType="com.bean.Gift">
+        select * from gift ORDER BY giftCost ASC limit #{startRow},#{pageSize}
+    </select>
+    <select id="selectGiftCount" resultType="int">
+        select count(*) from gift
+    </select>
+
+    <select id="selectCoin" resultType="int">
+        SELECT coin from account WHERE accountId=#{accountId}
+
+    </select>
+
+    <select id="selectGift" resultType="int">
+        SELECT count(*) from my_gift WHERE accountId=#{accountId} AND giftId=#{giftId}
+    </select>
+
+    <insert id="insertMyGift">
+       INSERT INTO my_gift(accountId,giftId,giftCount)VALUES (#{accountId},#{giftId},#{giftCount})
+    </insert>
+
+    <update id="addMyGift">
+        UPDATE my_gift SET giftCount=giftCount+#{giftCount} WHERE accountId=#{accountId} AND giftId=#{giftId}
+    </update>
+    <update id="updateMyGift">
+        UPDATE my_gift SET giftCount=giftCount+#{giftCount} WHERE accountId=#{accountId} AND giftId=#{giftId}
+    </update>
+    <update id="reduceMyGift">
+        UPDATE account SET coin=coin-#{giftTotleCost} WHERE accountId=#{accountId}
+    </update>
+
+</mapper>

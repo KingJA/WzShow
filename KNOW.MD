@@ -1,0 +1,1 @@
+* 为了防止ajax post提交,form 提交get请求，需要设置form onsubmit="return false"

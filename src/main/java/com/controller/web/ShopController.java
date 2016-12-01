@@ -1,15 +1,14 @@
 package com.controller.web;
 
 import com.bean.Gift;
+import com.bean.SingleValue;
 import com.dao.ShopDao;
 import com.service.ShopService;
 import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -38,6 +37,23 @@ public class ShopController {
         Page<Gift> gitfPage = shopService.getGiftByPage(currentPage, 8);
         modelAndView.addObject("gitfPage",gitfPage);
         return modelAndView;
+    }
+
+    /**
+     * 购买礼品
+     * @return
+     */
+
+    @ResponseBody
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    public SingleValue buy(@RequestParam("giftId") long giftId, @RequestParam("giftCount") int giftCount, @RequestParam("giftCost") int giftCost, @RequestParam("accountId") long accountId) {
+        logger.error("==========================giftId==========================="+giftId);
+        logger.error("==========================giftCount==========================="+giftCount);
+        logger.error("==========================giftCost==========================="+giftCost);
+        logger.error("==========================accountId==========================="+accountId);
+        logger.error("==========================accountId==========================="+accountId);
+        SingleValue singleValue = shopService.buyGift(accountId, giftId, giftCount, giftCost);
+        return singleValue;
     }
 
 

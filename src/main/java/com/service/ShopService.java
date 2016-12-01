@@ -1,6 +1,7 @@
 package com.service;
 
 import com.bean.Gift;
+import com.bean.SingleValue;
 import com.util.Page;
 
 /**
@@ -12,5 +13,7 @@ import com.util.Page;
 public interface ShopService {
 
     Page<Gift> getGiftByPage(int currentPage, int pageSize);
+
+    SingleValue buyGift(long accountId, long giftId, int giftCount, int giftCost);
 
 }

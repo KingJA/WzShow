@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2016/11/15
-  Time: 15:12
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="ctx" value="${pageContext.servletContext.contextPath}"/>
 <html>
 <head>
     <title>注册</title>
@@ -15,6 +10,30 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function doLogin() {
+            $.ajax({
+                cache: false,
+                async: false,
+                type: "POST",
+                url: "/account/doLogin",
+                data: $("#loginForm").serialize(),
+                dataType: "json",
+                success: function (retult) {
+                    if (retult.resultInt) {
+                        window.location.href = "/question/questionPage?page=1";
+                    } else {
+                        alert(retult.resultText);
+                        window.location.href = "/account/login";
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+
+    </script>
     <style type="text/css">
         body {
             padding-top: 40px;
@@ -54,16 +73,16 @@
 <body>
 <div class="container">
 
-    <form class="form-signin" action="/account/doLogin" method="post">
+    <form class="form-signin" id="loginForm" onsubmit="return false">
         <h2 class="form-signin-heading">用户登录</h2>
-        <input type="text"  class="form-control" placeholder="Name"  name="name">
-        <input type="password"  class="form-control" placeholder="Password"  name="password">
+        <input type="text" class="form-control" placeholder="Name" name="name">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> 记住密码
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <button class="btn btn-lg btn-primary btn-block"  onClick="doLogin();">登录</button>
     </form>
 
 </div>

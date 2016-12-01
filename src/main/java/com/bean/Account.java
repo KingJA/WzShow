@@ -25,6 +25,7 @@ public class Account {
     private String nickName;
     private String phone;
     private String token;
+    private int coin;
 
     public String getAvatar() {
         return avatar;
@@ -99,5 +100,13 @@ public class Account {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
     }
 }
