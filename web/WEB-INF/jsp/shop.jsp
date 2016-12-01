@@ -39,11 +39,13 @@
                         "accountId": "${sessionScope.account.accountId}",
                         "giftId": $("#giftId").text(),
                         "giftCost": $("#giftCost").text(),
+
                         "giftCount": $("#giftCount").val()
                     },
                     dataType: "json",
                     success: function (retult) {
                         alert(retult.resultText);
+                        $("#coinCount").text(retult.resultInt);
                     },
                     error: function () {
                         alert("哈哈，buyGift");
@@ -115,12 +117,11 @@
             <div class="row">
                 <div class="col-md-10"><%--col-md-10开始--%>
 
-                    <p class="lead">
-                        <span>
-                            <img src="/img/coin/coin.png" width="20px"height="20px"class="img-rounded">
-                        </span>
-                        <span>${gift.giftCost}</span>
-                    </p>
+                    <div>
+                        <p>我的金币:<span>
+                            <img src="/img/coin/coin.png" width="20px" height="20px" class="img-rounded">
+                        </span><span id="coinCount">${account.coin}</span></p>
+                    </div>
                     <div class="border-20 shopWindow">
                         <%--  //${idx.index}--%>
                         <c:if test="${!empty gitfPage.pageDatas}">

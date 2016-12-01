@@ -1,7 +1,9 @@
 package com.controller.web;
 
+import com.bean.Account;
 import com.bean.Gift;
 import com.bean.SingleValue;
+import com.dao.AccountDao;
 import com.dao.ShopDao;
 import com.service.ShopService;
 import com.util.Page;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Description：TODO
@@ -23,6 +27,8 @@ public class ShopController {
     @Autowired
     private ShopDao shopDao;
     @Autowired
+    private AccountDao accountDao;
+    @Autowired
     private ShopService shopService;
     private static Logger logger = Logger.getLogger(NewsController.class);
 
@@ -31,11 +37,14 @@ public class ShopController {
      * @return
      */
     @RequestMapping(value = "/{currentPage}", method = RequestMethod.GET)
-    public ModelAndView shop(@PathVariable int currentPage) {
+    public ModelAndView shop(@PathVariable int currentPage, HttpSession session) {
         logger.error("==========================shop===========================");
         ModelAndView modelAndView = new ModelAndView("shop");
         Page<Gift> gitfPage = shopService.getGiftByPage(currentPage, 8);
+        Account account = (Account) session.getAttribute("account");
+        Account currentAccount = accountDao.selectAccountById(account.getAccountId());
         modelAndView.addObject("gitfPage",gitfPage);
+        modelAndView.addObject("account",currentAccount);
         return modelAndView;
     }
 

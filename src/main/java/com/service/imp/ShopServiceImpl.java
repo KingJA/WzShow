@@ -52,7 +52,8 @@ public class ShopServiceImpl implements ShopService {
                 shopDao.insertMyGift(accountId, giftId, giftCount);
             }
             shopDao.reduceMyGift(accountId,giftCount*giftCost);
-            return new SingleValue("交易成功");
+            int leftCoin=coin-giftCount*giftCost;
+            return new SingleValue(leftCoin,"交易成功");
         } else {//金币不够
             return new SingleValue("金币不够");
         }
