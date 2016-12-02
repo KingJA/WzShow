@@ -8,7 +8,7 @@ package com.bean;
  */
 public class SingleValue {
     private String resultText = "";
-    private long resultInt;
+    private long resultInt=-1;
 
     public SingleValue(long resultInt) {
         this.resultInt = resultInt;

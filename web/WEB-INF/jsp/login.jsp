@@ -14,7 +14,6 @@
         function doLogin() {
             $.ajax({
                 cache: false,
-                async: false,
                 type: "POST",
                 url: "/account/doLogin",
                 data: $("#loginForm").serialize(),

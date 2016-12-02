@@ -39,13 +39,14 @@
                         "accountId": "${sessionScope.account.accountId}",
                         "giftId": $("#giftId").text(),
                         "giftCost": $("#giftCost").text(),
-
                         "giftCount": $("#giftCount").val()
                     },
                     dataType: "json",
                     success: function (retult) {
                         alert(retult.resultText);
-                        $("#coinCount").text(retult.resultInt);
+                        if(retult.resultInt!=-1) {
+                            $("#coinCount").text(retult.resultInt);
+                        }
                     },
                     error: function () {
                         alert("哈哈，buyGift");
@@ -84,7 +85,7 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop">礼品商店</a></li>
+                <li><a href="/shop/1">礼品商店</a></li>
                 <li class="dropdown">
                     <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
                         <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
