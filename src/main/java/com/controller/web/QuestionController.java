@@ -2,6 +2,7 @@ package com.controller.web;
 
 import com.bean.*;
 import com.dao.QuestionDao;
+import com.service.OperationService;
 import com.service.QuestionService;
 import com.util.Page;
 import com.util.UploadUtil;
@@ -30,6 +31,8 @@ public class QuestionController {
     QuestionDao questionDao;
     @Autowired
     QuestionService questionService;
+    @Autowired
+    OperationService operationService;
 
     @RequestMapping(value = "publish", method = RequestMethod.GET)
     public ModelAndView publish() {
@@ -42,10 +45,14 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "doPublish", method = RequestMethod.POST)
-    public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request,HttpSession session) {
         logger.debug("recordDoPublish");
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
-        questionService.saveQuestion(question, files, request);
+        Long accountId =(Long) (session.getAttribute("accountId"));
+        long questionId = questionService.saveQuestion(question, files, request);
+        logger.debug("//////////////////////questionId//////////////////////"+questionId);
+        logger.debug("//////////////////////accountId//////////////////////"+accountId);
+        operationService.doPublish(accountId,questionId,question.getTitle());
         return modelAndView;
     }
 

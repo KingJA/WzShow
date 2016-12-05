@@ -71,6 +71,7 @@ public class AccountController {
         Account account = accountService.login(name, password);
         if (account != null) {
             session.setAttribute("account", account);
+            session.setAttribute("accountId", account.getAccountId());
             logger.error("登录成功:" + account.getName());
             return new SingleValue(1,"登录成功");
         } else {

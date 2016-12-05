@@ -7,35 +7,35 @@
         UPDATE account SET experience=experience+#{experience}, coin=coin+#{coin}   WHERE accountId=#{accountId}
     </update>
 
-    <insert id="doPublish">
+    <insert id="recordDoPublish">
         INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (1,#{accountId},#{questionId},#{title},#{experience},#{coin})
     </insert>
-    <insert id="doAnswer">
+    <insert id="recordDoAnswer">
         INSERT INTO path (operationCode,accountId,operationCode,questionId,title,experience,coin) VALUES (2,#{accountId},#{questionId},#{title},#{experience},#{coin})
     </insert>
-    <insert id="doPraise">
+    <insert id="recordDoPraise">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (3,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="bePraised">
+    <insert id="recordBePraised">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (4,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="doAccepteAnswer">
+    <insert id="recordDoAccepteAnswer">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (5,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="beAccepteAnswer">
+    <insert id="recordBeAccepteAnswer">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (6,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="beQuestionCollected">
+    <insert id="recordBeQuestionCollected">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (7,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="beAttentioned">
+    <insert id="recordBeAttentioned">
         INSERT INTO path (operationCode,accountId,accountBId,name,experience,coin) VALUES (8,#{accountId},#{accountBId},#{name},#{experience},#{coin})
     </insert>
-    <insert id="doReward">
+    <insert id="recordDoReward">
         INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (9,#{accountId},#{questionId},#{title},#{experience},#{coin})
     </insert>
 
-    <insert id="doRegister">
+    <insert id="recordDoRegister">
         INSERT INTO path (accountId,operationCode,experience,coin) VALUES (10,#{accountId},#{experience},#{coin})
     </insert>
 

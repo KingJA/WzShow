@@ -10,8 +10,12 @@ public class RankInfo {
     private int rank;
     private int upExperience;
     private String title;
+
     private int currentExperience;
 
+    public int getCurrentExperience() {
+        return currentExperience;
+    }
 
     public RankInfo(int currentExperience) {
         this.currentExperience = currentExperience;

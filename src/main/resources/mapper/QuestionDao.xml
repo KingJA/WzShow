@@ -23,7 +23,7 @@
         SELECT * FROM question ORDER BY createTime DESC  limit #{currentPage},#{pageSize}
     </select>
     <!--添加问题-->
-    <insert id="insertQuestion" parameterType="com.bean.Question">
+    <insert id="insertQuestion" parameterType="com.bean.Question" useGeneratedKeys="true" keyProperty="questionId">
         INSERT INTO question (title,content,tagId,imgUrls) VALUES (#{title},#{content},#{tagId},#{imgUrls})
     </insert>
     <!--获取问题数量-->

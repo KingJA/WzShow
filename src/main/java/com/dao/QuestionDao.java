@@ -19,7 +19,7 @@ import java.util.List;
 public interface QuestionDao {
     List<Tag> selectAllTag();
 
-    void insertQuestion(Question question);
+    int insertQuestion(Question question);
 
     int selectQuestionCount();
 

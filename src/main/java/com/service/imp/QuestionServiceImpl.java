@@ -26,10 +26,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     QuestionDao questionDao;
 
-    public void saveQuestion(Question question, MultipartFile[] files, HttpServletRequest request) {
+    public long saveQuestion(Question question, MultipartFile[] files, HttpServletRequest request) {
         String imgUrls = UploadUtil.uploadMultiImages(files, request);
         question.setImgUrls(imgUrls);
         questionDao.insertQuestion(question);
+        return question.getQuestionId();
     }
 
     public Page<Question> getQuestionsByPage(int currentPage, int pageSize) {

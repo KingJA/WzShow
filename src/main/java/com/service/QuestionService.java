@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * Email:kingjavip@gmail.com
  */
 public interface QuestionService {
-    void saveQuestion(Question question, MultipartFile[] files, HttpServletRequest request);
+    long saveQuestion(Question question, MultipartFile[] files, HttpServletRequest request);
 
     Page<Question> getQuestionsByPage(int currentPage, int pageSize);
 
