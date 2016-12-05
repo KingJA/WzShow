@@ -25,7 +25,23 @@ public class Account {
     private String nickName;
     private String phone;
     private String token;
+    private String avatar;
     private int coin;
+    private int experience;
+
+    public RankInfo getRankInfo() {
+        return new RankInfo(experience);
+    }
+
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
 
     public String getAvatar() {
         return avatar;
@@ -35,7 +51,7 @@ public class Account {
         this.avatar = avatar;
     }
 
-    private String avatar;
+
     public String getName() {
         return name;
     }

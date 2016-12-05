@@ -54,7 +54,7 @@ public class AccountController {
 
     @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
     public ModelAndView doRegister(Account account) {
-        logger.debug("doRegister");
+        logger.debug("recordDoRegister");
         logger.debug("account" + account.toString());
         ModelAndView modelAndView = new ModelAndView("register");
         accountService.register(account);

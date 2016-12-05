@@ -72,7 +72,7 @@
             </div>
             <p> <button type="submit" class="btn btn-lg btn-success">Submit</button></p>
         </form>
-       <%-- <form action="/question/doPublish" method="post" enctype="multipart/form-data">
+       <%-- <form action="/question/recordDoPublish" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>发布问题</legend>
                 <input type="text" placeholder="请输入标题" class="input-xxlarge" name="title"><br>

@@ -43,7 +43,7 @@ public class QuestionController {
 
     @RequestMapping(value = "doPublish", method = RequestMethod.POST)
     public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
-        logger.debug("doPublish");
+        logger.debug("recordDoPublish");
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         questionService.saveQuestion(question, files, request);
         return modelAndView;

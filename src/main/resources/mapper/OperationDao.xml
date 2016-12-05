@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OperationDao">
+    <update id="addIncome">
+        UPDATE account SET experience=experience+#{experience}, coin=coin+#{coin}   WHERE accountId=#{accountId}
+    </update>
+
+    <insert id="doPublish">
+        INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (1,#{accountId},#{questionId},#{title},#{experience},#{coin})
+    </insert>
+    <insert id="doAnswer">
+        INSERT INTO path (operationCode,accountId,operationCode,questionId,title,experience,coin) VALUES (2,#{accountId},#{questionId},#{title},#{experience},#{coin})
+    </insert>
+    <insert id="doPraise">
+        INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (3,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="bePraised">
+        INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (4,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="doAccepteAnswer">
+        INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (5,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="beAccepteAnswer">
+        INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (6,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="beQuestionCollected">
+        INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (7,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="beAttentioned">
+        INSERT INTO path (operationCode,accountId,accountBId,name,experience,coin) VALUES (8,#{accountId},#{accountBId},#{name},#{experience},#{coin})
+    </insert>
+    <insert id="doReward">
+        INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (9,#{accountId},#{questionId},#{title},#{experience},#{coin})
+    </insert>
+
+    <insert id="doRegister">
+        INSERT INTO path (accountId,operationCode,experience,coin) VALUES (10,#{accountId},#{experience},#{coin})
+    </insert>
+
+</mapper>
