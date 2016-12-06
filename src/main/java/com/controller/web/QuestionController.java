@@ -50,8 +50,6 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         Long accountId =(Long) (session.getAttribute("accountId"));
         long questionId = questionService.saveQuestion(question, files, request);
-        logger.debug("//////////////////////questionId//////////////////////"+questionId);
-        logger.debug("//////////////////////accountId//////////////////////"+accountId);
         operationService.doPublish(accountId,questionId,question.getTitle());
         return modelAndView;
     }
@@ -86,7 +84,9 @@ public class QuestionController {
 
     @ResponseBody
     @RequestMapping(value = "/detail/praise", method = RequestMethod.POST)
-    public AppResult praise(@RequestParam("accountId") long accountId,@RequestParam("answerId") long answerId) {
+    public AppResult praise(@RequestParam("accountId") long accountId,@RequestParam("answerId") long answerId,
+                            @RequestParam("questionId") long questionId,@RequestParam("title") String title,
+                            @RequestParam("accountBId") long accountBId,@RequestParam("name") String name) {
         AppResult<SingleValue> appResult = new AppResult();
         logger.debug("praise");
         if (questionDao.selectPraiseRecord(accountId, answerId) > 0) {
@@ -95,6 +95,7 @@ public class QuestionController {
             int praiseCount = questionDao.selectPraiseCountByAnswerId(answerId);
             questionDao.addPraise(answerId);
             questionDao.insertPraiseRecord(accountId,answerId);
+            operationService.doPraise(accountId,questionId,title,accountBId,name);
             appResult.setResultCode(0).setResultText("点赞成功").setResultData(new SingleValue(praiseCount + 1 ));
         }
 

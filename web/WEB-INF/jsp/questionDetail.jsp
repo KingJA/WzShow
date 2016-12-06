@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +38,7 @@
                 });
             }
         }
-        function addPraise(answerId, obj) {
-
+        function addPraise(answerId, accountBId, name, obj) {
             if ("${sessionScope.account.accountId}" == "") window.location.href = "/account/login";
             else {
                 $.ajax({
@@ -47,6 +46,10 @@
                     url: "/question/detail/praise/",
                     data: {
                         "answerId": answerId,
+                        "accountBId": accountBId,
+                        "name": name,
+                        "questionId": "${question.questionId}",
+                        "title": "${question.title}",
                         "accountId": "${sessionScope.account.accountId}"
                     },
                     dataType: "json",
@@ -160,7 +163,8 @@
 
                     <div class="row">
                         <div class="pull-right">
-                            <button class="btn btn-success" onclick="addPraise(${answer.answerId},this)"><i
+                            <button class="btn btn-success"
+                                    onclick="addPraise('${answer.answerId}','${answer.accountId}','${answer.name}',this)"><i
                                     class="icon-white icon-heart"></i>
                                 赞(${answer.praiseCount})
                             </button>
@@ -185,7 +189,7 @@
             <div class="form-group">
                 <input type="file" id="exampleInputFile" name="files">
                 <div class="pull-right">
-                    <button class="btn btn-success" ><i class="icon-white icon-heart"></i>发布</button>
+                    <button class="btn btn-success"><i class="icon-white icon-heart"></i>发布</button>
                 </div>
             </div>
             <input type="hidden" name="questionId" value="${question.questionId}">
