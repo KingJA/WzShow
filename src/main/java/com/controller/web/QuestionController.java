@@ -117,7 +117,7 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/detail/answer", method = RequestMethod.POST)
-    public ModelAndView answer(@RequestParam("content") String content,@RequestParam("questionId") long questionId, @RequestParam("files") MultipartFile[] files,
+    public ModelAndView answer(@RequestParam("content") String content,@RequestParam("questionId") long questionId,@RequestParam("title") String title, @RequestParam("files") MultipartFile[] files,
                                HttpServletRequest request,HttpSession session) {
         logger.debug("answer");
         logger.debug("questionId============="+questionId);
@@ -126,6 +126,7 @@ public class QuestionController {
         long accountId = account.getAccountId();
         String imgUrls = UploadUtil.uploadMultiImages(files, request);
         questionDao.answerQuestion(accountId,questionId,content,imgUrls);
+        operationService.doAnswer(accountId,questionId,title);
         return modelAndView;
     }
 

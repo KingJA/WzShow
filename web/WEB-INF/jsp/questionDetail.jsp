@@ -187,12 +187,14 @@
                 <textarea class="form-control" rows="5" placeholder="请输入内容" name="content"></textarea>
             </div>
             <div class="form-group">
+
                 <input type="file" id="exampleInputFile" name="files">
                 <div class="pull-right">
                     <button class="btn btn-success"><i class="icon-white icon-heart"></i>发布</button>
                 </div>
             </div>
             <input type="hidden" name="questionId" value="${question.questionId}">
+            <input type="hidden" name="title" value="${question.title}">
 
         </form>
     </div>

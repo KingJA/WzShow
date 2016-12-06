@@ -25,7 +25,7 @@ public class OperationServiceImpl implements OperationService {
 
     public void doAnswer(long accountId, long questionId, String title) {
         operationDao.addIncome(accountId, 5, 5);
-        operationDao.recordDoAnswer(accountId, questionId, title, 10, 10);
+        operationDao.recordDoAnswer(accountId, questionId, title, 5, 5);
     }
 
     public void doPraise(long accountId, long questionId, String title, long accountBId, String name) {

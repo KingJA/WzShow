@@ -11,7 +11,7 @@
         INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (1,#{accountId},#{questionId},#{title},#{experience},#{coin})
     </insert>
     <insert id="recordDoAnswer">
-        INSERT INTO path (operationCode,accountId,operationCode,questionId,title,experience,coin) VALUES (2,#{accountId},#{questionId},#{title},#{experience},#{coin})
+        INSERT INTO path (operationCode,accountId,questionId,title,experience,coin) VALUES (2,#{accountId},#{questionId},#{title},#{experience},#{coin})
     </insert>
     <insert id="recordDoPraise">
         INSERT INTO path (operationCode,accountId,questionId,title,accountBId,name,experience,coin) VALUES (3,#{accountId},#{questionId},#{title},#{accountBId},#{name},#{experience},#{coin})
