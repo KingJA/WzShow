@@ -27,7 +27,7 @@
                     url: "/personal/myAsk",
                     dataType: "json",
                     data: {
-                        "accountId": ${sessionScope.account.accountId},
+                        "accountId": ${account.accountId},
                         "currentPage": currentPage
                     },
                     success: function (result) {
@@ -49,7 +49,7 @@
                     url: "/personal/myAnswer",
                     dataType: "json",
                     data: {
-                        "accountId": ${sessionScope.account.accountId},
+                        "accountId": ${account.accountId},
                         "currentPage": currentPage
                     },
                     success: function (result) {
@@ -71,7 +71,7 @@
                     url: "/personal/myCollect",
                     dataType: "json",
                     data: {
-                        "accountId": ${sessionScope.account.accountId},
+                        "accountId": ${account.accountId},
                         "currentPage": currentPage
                     },
                     success: function (result) {
@@ -92,7 +92,7 @@
                     url: "/personal/myAttention",
                     dataType: "json",
                     data: {
-                        "accountId": ${sessionScope.account.accountId},
+                        "accountId": ${account.accountId},
                         "currentPage": currentPage
                     },
                     success: function (result) {
@@ -140,7 +140,7 @@
                 <%-- <li><a href="#">Link</a></li>--%>
                 <li class="dropdown">
                     <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
-                        <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
+                        <img src="${account.avatar}" width="32px" height="32px" class="img-circle">
                         <span class="caret"></span></div>
                     <ul class="dropdown-menu dropdown-menu-left" role="menu">
                         <li><a href="/personal">个人中心</a></li>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <h3>${sessionScope.account.name}</h3>
+                    <h3>${account.name}</h3>
                     <div>
                         <span class="glyphicon glyphicon-tag"></span> <span class="">等级:</span>
                     </div>
