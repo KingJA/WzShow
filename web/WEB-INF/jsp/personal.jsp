@@ -225,12 +225,13 @@
 </div>
 
 
-<div class="text-center footer">
+<%--<div class="text-center footer">
     Copyright &copy; 2011-2016 SegmentFault. 当前呈现版本 16.11.22<br>
     <a href="http://www.miibeian.gov.cn/" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
     <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000"
        rel="nofollow">浙公网安备 33010602002000号</a>
-</div>
+</div>--%>
 
+<jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 </html>
