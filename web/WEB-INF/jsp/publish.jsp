@@ -22,26 +22,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">${userName}</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="/account/quit">退出</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+<jsp:include page="common/nav.jsp"></jsp:include>
 
 
 <div class="container">
@@ -72,35 +53,11 @@
             </div>
             <p> <button type="submit" class="btn btn-lg btn-success">Submit</button></p>
         </form>
-       <%-- <form action="/question/recordDoPublish" method="post" enctype="multipart/form-data">
-            <fieldset>
-                <legend>发布问题</legend>
-                <input type="text" placeholder="请输入标题" class="input-xxlarge" name="title"><br>
-                <textarea rows="8" placeholder="请输入具体问题" class="input-xxlarge" name="content"></textarea>
-                <br>
-
-                <input type="file" name="files" multiple="multiple">
-                <br>
-                <select name="tagId" >
-                    <c:if test="${!empty tags}">
-                        <c:forEach items="${tags}" var="tag">
-                            <option value="${tag.tagId}">${tag.tagName}</option>
-                        </c:forEach>
-                    </c:if>
-                </select><br>
-                <button type="submit" class="btn btn-large btn-block btn-primary">发布</button>
-                <br>
-            </fieldset>
-        </form>--%>
     </div>
 
 
-    <div class="hero-unit">
+</div>
 
-
-    </div>
-
-</div> <!-- /container -->
-
+<jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 </html>

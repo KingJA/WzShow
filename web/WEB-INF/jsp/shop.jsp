@@ -59,51 +59,9 @@
 </head>
 
 <body style="padding-top: 50px">
-<%--==================================导航============================================--%>
-<nav class=" navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-            </ul>
-
-            <form class="navbar-form navbar-left" role="form" action="/home/search" method="post">
-                <div class="form-group">
-                    <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
-                </div>
-                <button class="btn btn-primary btn-success" type="submit">搜索</button>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop/1">礼品商店</a></li>
-                <li class="dropdown">
-                    <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
-                        <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
-                        <span class="caret"></span></div>
-                    <ul class="dropdown-menu dropdown-menu-left" role="menu">
-                        <li><a href="/personal">个人中心</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/account/quit">退出</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+<jsp:include page="common/nav.jsp"></jsp:include>
 
 
-<%--==============================================================================--%>
 <div class="personal-root">
     <div class="head">
         <div class="container">
@@ -116,7 +74,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-10"><%--col-md-10开始--%>
+                <div class="col-md-10">
 
                     <div>
                         <p>我的金币:<span>
@@ -276,5 +234,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 </html>

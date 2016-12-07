@@ -83,7 +83,8 @@
 
                 });
             }
-        } function myAttention(currentPage) {
+        }
+        function myAttention(currentPage) {
             $("#selectTitle").text("我的关注");
             if (false) window.location.href = "/account/login";
             else {
@@ -111,56 +112,12 @@
 </head>
 
 <body style="padding-top: 50px">
-<%--==================================导航============================================--%>
-<nav class=" navbar navbar-inverse navbar-fixed-top">
+<jsp:include page="common/nav.jsp"></jsp:include>
+<%--头部导航栏--%>
+
+<div class="personal-container">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-            </ul>
-
-            <form class="navbar-form navbar-left" role="form" action="/home/search" method="post">
-                <div class="form-group">
-                    <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
-                </div>
-                <button class="btn btn-primary btn-success" type="submit">搜索</button>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-                <%-- <li><a href="#">Link</a></li>--%>
-                <li class="dropdown">
-                    <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
-                        <img src="${account.avatar}" width="32px" height="32px" class="img-circle">
-                        <span class="caret"></span></div>
-                    <ul class="dropdown-menu dropdown-menu-left" role="menu">
-                        <li><a href="/personal">个人中心</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/account/quit">退出</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-
-
-<%--==============================================================================--%>
-<div class="personal-root">
-    <div class="head">
-        <div class="container">
+        <div class="personal-head">
             <div class="row">
                 <div class="col-md-2 ">
                     <div class="">
@@ -187,14 +144,11 @@
             </div>
 
         </div>
-    </div>
-    <div class="content">
-        <div class="container">
+        <%--personal-head--%>
 
+        <div class="personal-content">
             <div class="row">
                 <div class="col-md-2">
-
-
                     <div>
                         <ul class="nav nav-pills nav-stacked profile__nav">
                             <li><a href="javascript:void(0);" onclick="myAsk(1)">${who}的提问</a></li>
@@ -203,9 +157,7 @@
                             <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的收藏</a></li>
                             <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的礼物</a></li>
                         </ul>
-
                     </div>
-
                 </div>
                 <div class="col-md-10">
                     <div class="nav-content">
@@ -214,24 +166,14 @@
 
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+        <%--personal-content--%>
 
     </div>
-
-
+    <%--container--%>
 </div>
-
-
-<%--<div class="text-center footer">
-    Copyright &copy; 2011-2016 SegmentFault. 当前呈现版本 16.11.22<br>
-    <a href="http://www.miibeian.gov.cn/" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
-    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000"
-       rel="nofollow">浙公网安备 33010602002000号</a>
-</div>--%>
-
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 </html>

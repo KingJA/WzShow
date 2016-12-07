@@ -7,7 +7,8 @@
     text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
 .footer{
-    margin-top: 30px;
+    margin-top: 40px;
+    background: #94eee1;
 }
 .border-20{
     padding: 20px;

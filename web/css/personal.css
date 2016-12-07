@@ -1,11 +1,11 @@
-.head,.nav-page {
+.personal-head,.nav-page {
     background: #eeeeee;
 }
 .head_icon {
     background: #c0c0c0;
 }
 
-.content {
+.personal-content {
     min-height: 70%;
 }
 .body{
