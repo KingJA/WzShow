@@ -19,6 +19,7 @@
 # 2016/12/07
 * 我的礼物
 * jsp:include 引入页脚
+* jquery.load(url) 加载页面 实现导航切换
 
 
 
