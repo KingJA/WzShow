@@ -197,10 +197,11 @@
 
                     <div>
                         <ul class="nav nav-pills nav-stacked profile__nav">
-                            <li><a href="javascript:void(0);" onclick="myAsk(1)">我的提问</a></li>
-                            <li><a href="javascript:void(0);" onclick="myAnswer(1)">我的回答</a></li>
-                            <li><a href="javascript:void(0);" onclick="myAttention(1)">我的关注</a></li>
-                            <li><a href="javascript:void(0);" onclick="myCollect(1)">我的收藏</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAsk(1)">${who}的提问</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAnswer(1)">${who}的回答</a></li>
+                            <li><a href="javascript:void(0);" onclick="myAttention(1)">${who}的关注</a></li>
+                            <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的收藏</a></li>
+                            <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的礼物</a></li>
                         </ul>
 
                     </div>

@@ -43,10 +43,13 @@ public class PersonalController {
     @RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
     public ModelAndView personal(@PathVariable long accountId, HttpSession session) {
         Account sessionAccount = (Account) session.getAttribute("account");
+        ModelAndView modelAndView = new ModelAndView("personal");
         if (sessionAccount.getAccountId() == accountId) {
-            return new ModelAndView("personal");
+            modelAndView.addObject("who", "我");
+        }else{
+            modelAndView.addObject("who", "TA");
         }
-        ModelAndView modelAndView = new ModelAndView("personalOther");
+
         Account account = accountDao.selectAccountById(accountId);
         modelAndView.addObject("account", account);
         return modelAndView;
