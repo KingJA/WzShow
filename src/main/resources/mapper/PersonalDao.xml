@@ -45,7 +45,6 @@ ORDER BY collect.createTime DESC
     </select>
 
 
-
     <!--我的关注-->
     <select id="selectMyAttentionByAccountId" resultType="com.bean.MyAttention">
 select attention.attentionId,attention.otherAccountId,account.name,account.avatar ,attention.createTime
@@ -57,8 +56,22 @@ ORDER BY attention.createTime DESC
         limit #{startRow},#{pageSize}
     </select>
 
+    <!--我的礼物-->
+    <select id="selectMyGift" resultType="com.bean.MyGift">
+select my_gift.accountId,my_gift.giftId,my_gift.giftCount,gift.giftCost,gift.giftName,gift.giftUrl,gift.giftRank,my_gift.createTime
+FROM my_gift LEFT JOIN gift ON my_gift.giftId=gift.giftId
+WHERE my_gift.accountId=#{accountId}
+ORDER BY my_gift.createTime DESC
+        limit #{startRow},#{pageSize}
+    </select>
+
     <select id="selectMyAttentionCountById" resultType="int">
         select count(*) FROM attention WHERE myAccountId=#{accountId}
+    </select>
+
+
+    <select id="selectMyGiftCount" resultType="int">
+        select count(*) FROM my_gift WHERE accountId=#{accountId}
     </select>
 
 </mapper>

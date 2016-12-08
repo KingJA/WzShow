@@ -33,10 +33,10 @@ public class PersonalController {
     @Autowired
     PersonalService personalService;
 
-
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView personal() {
         ModelAndView modelAndView = new ModelAndView("personal");
+
         return modelAndView;
     }
 
@@ -52,6 +52,16 @@ public class PersonalController {
 
         Account account = accountDao.selectAccountById(accountId);
         modelAndView.addObject("account", account);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/mygift", method = RequestMethod.POST)
+    public ModelAndView personal(@RequestParam("accountId") long accountId,@RequestParam("currentPage") int currentPage) {
+        logger.error("==========================accountId======================="+accountId);
+        logger.error("==========================currentPage======================="+currentPage);
+        ModelAndView modelAndView = new ModelAndView("personal/myGift");
+        Page<MyGift> myGiftByPage = personalService.getMyGiftByPage(accountId, currentPage, 8);
+        modelAndView.addObject("gitfPage",myGiftByPage);
+        modelAndView.addObject("accountId",accountId);
         return modelAndView;
     }
 

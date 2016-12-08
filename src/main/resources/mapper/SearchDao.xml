@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SearchDao">
+    <select id="searchQuestion" resultType="com.bean.Question">
+        select * from question WHERE title like CONCAT('%',#{keyword},'%')
+         limit #{startRow},#{pageSize}
+    </select>
+
+</mapper>
+
+
+
+<!--
+<where>
+<if test="userCustom.sex != null and userCustom.sex != ''">
+    and title = #{userCustom.sex}
+</if>
+<if test="userCustom.username != null">
+    and content like CONCAT('%',#{keyword},'%')
+</if>
+</where>-->

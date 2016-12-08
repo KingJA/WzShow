@@ -106,9 +106,13 @@
                 });
             }
         }
-        function myGift() {
-            alert("ddd");
-                $("#selectContainer").load("/account/login");
+        function myGift(accountId,currentPage) {
+            $("#selectContainer").load("/personal/mygift",
+                    {
+                        "accountId": accountId,
+                        "currentPage": currentPage
+                    }, function () {
+                    });
         }
 
     </script>
@@ -158,7 +162,7 @@
                             <li><a href="javascript:void(0);" onclick="myAnswer(1)">${who}的回答</a></li>
                             <li><a href="javascript:void(0);" onclick="myAttention(1)">${who}的关注</a></li>
                             <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的收藏</a></li>
-                            <li><a href="javascript:void(0);" onclick="myGift()">${who}的礼物</a></li>
+                            <li><a href="javascript:void(0);" onclick="myGift('${account.accountId}',1)">${who}的礼物</a></li>
                         </ul>
                     </div>
                 </div>

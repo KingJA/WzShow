@@ -1,9 +1,6 @@
 package com.dao;
 
-import com.bean.MyAnswer;
-import com.bean.MyAttention;
-import com.bean.MyCollect;
-import com.bean.Question;
+import com.bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -27,10 +24,12 @@ public interface PersonalDao {
     int selectMyAnswerCountAccountId(@Param(value = "accountId") long accountId);
     int selectMyCollectCountAccountId(@Param(value = "accountId") long accountId);
     int selectMyAttentionCountById(@Param(value = "accountId") long accountId);
+    int selectMyGiftCount(@Param(value = "accountId") long accountId);
 
     List<MyAnswer> selectMyAnswerByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
     List<MyCollect> selectMyCollectByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
     List<MyAttention> selectMyAttentionByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
+    List<MyGift> selectMyGift(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
 
 
 }

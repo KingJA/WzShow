@@ -1,9 +1,6 @@
 package com.service.imp;
 
-import com.bean.MyAnswer;
-import com.bean.MyAttention;
-import com.bean.MyCollect;
-import com.bean.Question;
+import com.bean.*;
 import com.controller.web.NewsController;
 import com.dao.PersonalDao;
 import com.service.PersonalService;
@@ -70,6 +67,18 @@ public class PersonalServiceImpl implements PersonalService {
         page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<MyAttention> attentions = personalDao.selectMyAttentionByAccountId(accountId,page.getStartRow(), pageSize);
         page.setPageDatas(attentions);
+        return page;
+    }
+
+    public Page<MyGift> getMyGiftByPage(long accountId, int currentPage, int pageSize) {
+        int myGiftCount = personalDao.selectMyGiftCount(accountId);
+        Page<MyGift> page = new Page<MyGift>();
+        page.setTotelItems(myGiftCount);
+        page.setCurrentPage(currentPage);
+        page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
+        List<MyGift> myGifts = personalDao.selectMyGift(accountId,page.getStartRow(), pageSize);
+        page.setPageDatas(myGifts);
         return page;
     }
 }

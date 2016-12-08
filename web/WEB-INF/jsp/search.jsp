@@ -1,16 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>介么办</title>
+    <title>搜索</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/home.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -18,6 +19,8 @@
 <body style="padding-top: 50px">
 <jsp:include page="common/nav.jsp"></jsp:include>
 <div class="container">
+
+    <p  style="padding: 12px">共搜索到<span>${fn:length(pageInfo.pageDatas)}</span>个问题</p>
     <div class="row">
         <div class="col-md-9">
             <!-- Example row of columns -->
@@ -58,7 +61,6 @@
 
         </div>
 
-        <%--===========================================右=======================================================--%>
         <div class="col-md-3">
             <div class="jumbotron">
                 <h3>${sessionScope.account.name},欢迎来到“介么办”，马上体验问答的快乐</h3>

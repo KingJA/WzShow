@@ -15,7 +15,7 @@
                 <li class=""><a href="/">Other</a></li>
             </ul>
 
-            <form class="navbar-form navbar-left" role="form" action="/home/search" method="post">
+            <form class="navbar-form navbar-left" role="form" action="/search/question" method="get">
                 <div class="form-group">
                     <input type="text" placeholder="请输入关键字" class="form-control" name="keyword">
                 </div>
@@ -23,6 +23,9 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/shop/1">礼物店</a></li>
+                <%--<li><a href="/personal/${sessionScope.account.accountId}"><img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle"></a></li>--%>
+
                 <li class="dropdown">
                     <div class="navbar-form dropdown-toggle" data-toggle="dropdown">
                         <img src="${sessionScope.account.avatar}" width="32px" height="32px" class="img-circle">
