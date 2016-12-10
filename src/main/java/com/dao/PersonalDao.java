@@ -30,6 +30,7 @@ public interface PersonalDao {
     List<MyCollect> selectMyCollectByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
     List<MyAttention> selectMyAttentionByAccountId(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
     List<MyGift> selectMyGift(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
+    List<MyFootprint> selectMyFootprint(@Param(value = "accountId") long accountId, @Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
 
 
 }

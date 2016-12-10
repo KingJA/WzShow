@@ -81,4 +81,15 @@ public class PersonalServiceImpl implements PersonalService {
         page.setPageDatas(myGifts);
         return page;
     }
+
+    public Page<MyFootprint> getMyFootprintByPage(long accountId, int currentPage, int pageSize) {
+        Page<MyFootprint> page = new Page<MyFootprint>();
+        page.setCurrentPage(currentPage);
+        page.setPageSize(pageSize);
+        page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
+        List<MyFootprint> myFootprints = personalDao.selectMyFootprint(accountId,page.getStartRow(), pageSize);
+        page.setPageDatas(myFootprints);
+        page.setTotelItems(myFootprints.size());
+        return page;
+    }
 }

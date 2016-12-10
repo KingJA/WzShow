@@ -45,12 +45,12 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "doPublish", method = RequestMethod.POST)
-    public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request,HttpSession session) {
-        logger.debug("recordDoPublish");
+    public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpSession session) {
+        logger.debug("Question================"+question.toString());
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
-        Long accountId =(Long) (session.getAttribute("accountId"));
+        Long accountId = (Long) (session.getAttribute("accountId"));
         long questionId = questionService.saveQuestion(question, files, request);
-        operationService.doPublish(accountId,questionId,question.getTitle());
+        operationService.doPublish(accountId, questionId, question.getTitle());
         return modelAndView;
     }
 
@@ -71,11 +71,12 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView("questionDetail");
         Account currentAccount = (Account) session.getAttribute("account");
         int ifCollect = questionDao.selectIfCollect(currentAccount.getAccountId(), questionId);
+        logger.debug("ifCollect:" + ifCollect);
         logger.debug("questionDetail");
         Question question = questionDao.selectQuestionById(questionId);
         Account questionCccount = questionDao.selectAccountByQuestionId(questionId);
         List<AnswerResult> answerResults = questionDao.selectAnsewersByQuestionId(questionId);
-        modelAndView.addObject("collect",new SingleValue(ifCollect>0?0:1,ifCollect>0?"取消收藏":"收藏"));
+        modelAndView.addObject("collect", new SingleValue(ifCollect > 0 ? 1 : 0, ifCollect > 0 ? "已收藏" : "收藏"));
         modelAndView.addObject("question", question);
         modelAndView.addObject("account", questionCccount);
         modelAndView.addObject("answerResults", answerResults);
@@ -84,49 +85,46 @@ public class QuestionController {
 
     @ResponseBody
     @RequestMapping(value = "/detail/praise", method = RequestMethod.POST)
-    public AppResult praise(@RequestParam("accountId") long accountId,@RequestParam("answerId") long answerId,
-                            @RequestParam("questionId") long questionId,@RequestParam("title") String title,
-                            @RequestParam("accountBId") long accountBId,@RequestParam("name") String name) {
+    public AppResult praise(@RequestParam("accountId") long accountId, @RequestParam("answerId") long answerId,
+                            @RequestParam("questionId") long questionId, @RequestParam("title") String title,
+                            @RequestParam("accountBId") long accountBId, @RequestParam("name") String name) {
         AppResult<SingleValue> appResult = new AppResult();
         logger.debug("praise");
         if (questionDao.selectPraiseRecord(accountId, answerId) > 0) {
             appResult.setResultCode(4).setResultText("您已经点过赞了").setResultData(new SingleValue(0));
-        }else{
+        } else {
             int praiseCount = questionDao.selectPraiseCountByAnswerId(answerId);
             questionDao.addPraise(answerId);
-            questionDao.insertPraiseRecord(accountId,answerId);
-            operationService.doPraise(accountId,questionId,title,accountBId,name);
-            appResult.setResultCode(0).setResultText("点赞成功").setResultData(new SingleValue(praiseCount + 1 ));
+            questionDao.insertPraiseRecord(accountId, answerId);
+            operationService.doPraise(accountId, questionId, title, accountBId, name);
+            appResult.setResultCode(0).setResultText("点赞成功").setResultData(new SingleValue(praiseCount + 1));
         }
 
         return appResult;
     }
+
     @ResponseBody
     @RequestMapping(value = "/detail/collect", method = RequestMethod.POST)
-    public SingleValue collect(@RequestParam("accountId") long accountId,@RequestParam("questionId") long questionId,@RequestParam("collectCode") int collectCode) {
-         SingleValue singleValue=null;
+    public SingleValue collect(@RequestParam("accountId") long accountId, @RequestParam("accountBId") long accountBId,
+                               @RequestParam("name") String name, @RequestParam("questionId") long questionId, @RequestParam("title") String title) {
+        SingleValue singleValue = new SingleValue();
         logger.debug("collect");
-        if (collectCode == 1) {//添加收藏
-            questionDao.addCollect(accountId,questionId);
-            singleValue=new SingleValue(0,"取消收藏");
-        }else{//取消收藏
-            questionDao.cancelCollect(accountId,questionId);
-            singleValue=new SingleValue(1,"收藏");
-        }
+        questionDao.addCollect(accountId, questionId);
+        operationService.beQuestionCollected(accountId, questionId, title, accountBId, name);
         return singleValue;
     }
 
     @RequestMapping(value = "/detail/answer", method = RequestMethod.POST)
-    public ModelAndView answer(@RequestParam("content") String content,@RequestParam("questionId") long questionId,@RequestParam("title") String title, @RequestParam("files") MultipartFile[] files,
-                               HttpServletRequest request,HttpSession session) {
+    public ModelAndView answer(@RequestParam("content") String content, @RequestParam("questionId") long questionId, @RequestParam("title") String title, @RequestParam("files") MultipartFile[] files,
+                               HttpServletRequest request, HttpSession session) {
         logger.debug("answer");
-        logger.debug("questionId============="+questionId);
-        ModelAndView modelAndView = new ModelAndView("redirect:/question/detail/"+questionId);
+        logger.debug("questionId=============" + questionId);
+        ModelAndView modelAndView = new ModelAndView("redirect:/question/detail/" + questionId);
         Account account = (Account) session.getAttribute("account");
         long accountId = account.getAccountId();
         String imgUrls = UploadUtil.uploadMultiImages(files, request);
-        questionDao.answerQuestion(accountId,questionId,content,imgUrls);
-        operationService.doAnswer(accountId,questionId,title);
+        questionDao.answerQuestion(accountId, questionId, content, imgUrls);
+        operationService.doAnswer(accountId, questionId, title);
         return modelAndView;
     }
 

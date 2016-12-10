@@ -17,6 +17,9 @@ public class AnswerResult {
     private String name;
     private String avatar;
     private String content;
+    private Date createTime;
+    private int praiseCount;
+    private int collectCount;
 
     public long getQuestionId() {
         return questionId;
@@ -90,7 +93,5 @@ public class AnswerResult {
         this.collectCount = collectCount;
     }
 
-    private Date createTime;
-    private int praiseCount;
-    private int collectCount;
+
 }

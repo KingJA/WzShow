@@ -4,16 +4,17 @@ import com.bean.*;
 import com.dao.AccountDao;
 import com.dao.PersonalDao;
 import com.service.PersonalService;
-import com.util.HtmlBuilder;
 import com.util.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * Description：TODO
@@ -33,154 +34,127 @@ public class PersonalController {
     @Autowired
     PersonalService personalService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView personal() {
-        ModelAndView modelAndView = new ModelAndView("personal");
 
+    /**
+     * 个人中心主页
+     * @param accountId
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
+    public ModelAndView personal(@PathVariable long accountId, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personal");
+        setWho(accountId, session, modelAndView);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
-    public ModelAndView personal(@PathVariable long accountId, HttpSession session) {
+    /**
+     * 我的礼物
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myGift", method = RequestMethod.GET)
+    public ModelAndView myGift(@PathVariable("accountId") long accountId,@RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyGift");
+        setWho(accountId, session, modelAndView);
+        Page<MyGift> myGiftByPage = personalService.getMyGiftByPage(accountId, page, 8);
+        modelAndView.addObject("pageInfo",myGiftByPage);
+        return modelAndView;
+    }
+
+
+    /**
+     * 我的问题
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myAsk", method = RequestMethod.GET)
+    public ModelAndView myAsk(@PathVariable("accountId") long accountId, @RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyAsk");
+        setWho(accountId, session, modelAndView);
+        Page<Question> questionPage = personalService.getMyAskByPage(accountId, page, Page.DEFAULT_PAGE_SIZE);
+        modelAndView.addObject("pageInfo",questionPage);
+        return modelAndView;
+
+    }
+
+    /**
+     * 我的收藏
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myCollect", method = RequestMethod.GET)
+    public ModelAndView myCollect(@PathVariable("accountId") long accountId, @RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyCollect");
+        setWho(accountId, session, modelAndView);
+        Page<MyCollect> myCollectPage = personalService.getMyCollectByPage(accountId, page, Page.DEFAULT_PAGE_SIZE);
+        modelAndView.addObject("pageInfo",myCollectPage);
+        return modelAndView;
+
+    }
+
+    /**
+     * 我的关注
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myAttention", method = RequestMethod.GET)
+    public ModelAndView myAttention(@PathVariable("accountId") long accountId, @RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyAttention");
+        setWho(accountId, session, modelAndView);
+        Page<MyAttention> myAttentionPage = personalService.getMyAttentionByPage(accountId, page, Page.DEFAULT_PAGE_SIZE);
+        modelAndView.addObject("pageInfo",myAttentionPage);
+        return modelAndView;
+    }
+
+    /**
+     * 我的回答
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myAnswer", method = RequestMethod.GET)
+    public ModelAndView myAnswer(@PathVariable("accountId") long accountId, @RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyAnswer");
+        setWho(accountId, session, modelAndView);
+        Page<MyAnswer> myAnswerPage = personalService.getMyAnswerByPage(accountId, page, Page.DEFAULT_PAGE_SIZE);
+        modelAndView.addObject("pageInfo",myAnswerPage);
+        return modelAndView;
+    }
+
+    /**
+     * 我的足迹
+     * @param accountId
+     * @param page
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/{accountId}/myFootprint", method = RequestMethod.GET)
+    public ModelAndView myFootprint(@PathVariable("accountId") long accountId, @RequestParam("page") int page,HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("personal/personalMyFootprint");
+        setWho(accountId, session, modelAndView);
+        Page<MyFootprint> myFootprintPage = personalService.getMyFootprintByPage(accountId, page, Page.DEFAULT_PAGE_SIZE);
+        modelAndView.addObject("pageInfo",myFootprintPage);
+        return modelAndView;
+    }
+
+    private void setWho(long accountId, HttpSession session, ModelAndView modelAndView) {
         Account sessionAccount = (Account) session.getAttribute("account");
-        ModelAndView modelAndView = new ModelAndView("personal");
+        Account account = accountDao.selectAccountById(accountId);
+        modelAndView.addObject("account",account);
         if (sessionAccount.getAccountId() == accountId) {
             modelAndView.addObject("who", "我");
         }else{
             modelAndView.addObject("who", "TA");
         }
-
-        Account account = accountDao.selectAccountById(accountId);
-        modelAndView.addObject("account", account);
-        return modelAndView;
     }
-    @RequestMapping(value = "/mygift", method = RequestMethod.POST)
-    public ModelAndView personal(@RequestParam("accountId") long accountId,@RequestParam("currentPage") int currentPage) {
-        logger.error("==========================accountId======================="+accountId);
-        logger.error("==========================currentPage======================="+currentPage);
-        ModelAndView modelAndView = new ModelAndView("personal/myGift");
-        Page<MyGift> myGiftByPage = personalService.getMyGiftByPage(accountId, currentPage, 8);
-        modelAndView.addObject("gitfPage",myGiftByPage);
-        modelAndView.addObject("accountId",accountId);
-        return modelAndView;
-    }
-
-    /**
-     * 我的问题
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "myAsk", method = RequestMethod.POST)
-    public SingleValue myAsk(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
-        Page<Question> page = personalService.getMyAskByPage(accountId, currentPage, Page.DEFAULT_PAGE_SIZE);
-        StringBuilder sb = new StringBuilder();
-        if (!(page.getPageDatas().size() > 0)) {
-            sb = new StringBuilder("<h3>暂无内容</h3>");
-        }
-        for (Question question : page.getPageDatas()) {
-            //TODO 增加点赞
-            sb.append("<div class='selectItem row'>" +
-                    "<div class='col-md-1'> <a  class='btn btn-success btn-xs'><span class='glyphicon glyphicon-star'></span> 5</a></div>" +
-                    "<div class='col-md-9'><a target='_blank' class='singleText' href='/question/detail/" + question.getQuestionId() + "'>" + question.getTitle() + "</a></div>" +
-                    "<div class='col-md-2'><span class=''>" + question.getCreateYearDay() + "</span></div>" +
-                    "</div>");
-        }
-        sb.append(HtmlBuilder.getPageHtml(page, "myAsk", Page.DEFAULT_VISIBLE_PAGE_SIZE));
-        SingleValue singleValue = new SingleValue(sb.toString());
-        return singleValue;
-    }
-
-    /**
-     * 我的收藏
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "myCollect", method = RequestMethod.POST)
-    public SingleValue myCollect(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
-        Page<MyCollect> page = personalService.getMyCollectByPage(accountId, currentPage, Page.DEFAULT_PAGE_SIZE);
-        StringBuilder sb = new StringBuilder();
-        if (!(page.getPageDatas().size() > 0)) {
-            sb = new StringBuilder("<h3>暂无内容</h3>");
-        }
-        for (MyCollect collect : page.getPageDatas()) {
-            sb.append("<div class='selectItem row'>" +
-                    "<div class='col-md-1'> <a  class='btn btn-success btn-xs'><span class='glyphicon glyphicon-star'></span> 5</a></div>" +
-                    "<div class='col-md-9'><a target='_blank' class='singleText' href='/question/detail/" + collect.getQuestionId() + "'>" + collect.getTitle() + "</a></div>" +
-                    "<div class='col-md-2'><span class=''>" + collect.getCreateYearDay() + "</span></div>" +
-                    "</div>");
-        }
-        sb.append(HtmlBuilder.getPageHtml(page, "myCollect", Page.DEFAULT_VISIBLE_PAGE_SIZE));
-        SingleValue singleValue = new SingleValue(sb.toString());
-        return singleValue;
-    }
-
-    /**
-     * 我的关注
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "myAttention", method = RequestMethod.POST)
-    public SingleValue myAttention(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
-        Page<MyAttention> page = personalService.getMyAttentionByPage(accountId, currentPage, Page.DEFAULT_PAGE_SIZE);
-        StringBuilder sb = new StringBuilder();
-        List<MyAttention> pageDatas = page.getPageDatas();
-        if (!(pageDatas.size() > 0)) {
-            sb = new StringBuilder("<h3>暂无内容</h3>");
-        }
-
-        for (int i = 0; i < pageDatas.size(); i++) {
-
-            if (i % 3 == 0) {//另起一行
-                sb.append("<div class='row'>");
-                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
-            } else if ((i + 1) % 3 == 0) {
-                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
-                sb.append("</div >");
-            } else {
-                sb.append("<div class='col-md-4 selectItem'><img src='" + pageDatas.get(i).getAvatar() + "' width='96px' height='96px' class='img-circle'><a target='_blank' href='/personal/" + pageDatas.get(i).getOtherAccountId() + "'>" + pageDatas.get(i).getName() + "</a></div>");
-            }
-        }
-        sb.append("</div>");
-
-        sb.append(HtmlBuilder.getPageHtml(page, "myAttention", Page.DEFAULT_VISIBLE_PAGE_SIZE));
-        SingleValue singleValue = new SingleValue(sb.toString());
-        return singleValue;
-    }
-
-    /**
-     * 我的回答
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "myAnswer", method = RequestMethod.POST)
-    public SingleValue myAnswer(@RequestParam("accountId") long accountId, @RequestParam("currentPage") int currentPage) {
-        Page<MyAnswer> page = personalService.getMyAnswerByPage(accountId, currentPage, Page.DEFAULT_PAGE_SIZE);
-        StringBuilder sb = new StringBuilder();
-        if (!(page.getPageDatas().size() > 0)) {
-            sb = new StringBuilder("<h3>暂无内容</h3>");
-        }
-        for (MyAnswer answer : page.getPageDatas()) {
-            sb.append("<div class='selectItem '>" +
-                    "<div class='row'>" +
-                    "<div class='col-md-1'>" + "问题" + "</div>" +
-                    "<div class='col-md-11'><a target='_blank' class='text-overflow' href='/question/detail/" + answer.getQuestionId() + "'>" + answer.getTitle() + "</a></div>" +
-                    "</div>" +
-                    "<div class='row'>" +
-                    "<div class='col-md-1'>" + "回答" + "</div>" +
-                    "<div class='col-md-8'><a target='_blank' class='text-overflow' href='/question/detail/" + answer.getContent() + "'>" + answer.getContent() + "</a></div>" +
-                    "<div class='col-md-1'> <a  class='btn btn-success btn-xs'><span class='glyphicon glyphicon-thumbs-up'></span> 5</a></div>" +
-                    "<div class='col-md-2'><span class=''>" + answer.getCreateYearDay() + "</span></div>" +
-                    "</div>" +
-                    "</div>");
-        }
-        sb.append(HtmlBuilder.getPageHtml(page, "myAnswer", Page.DEFAULT_VISIBLE_PAGE_SIZE));
-        SingleValue singleValue = new SingleValue(sb.toString());
-        return singleValue;
-    }
-
-
 }

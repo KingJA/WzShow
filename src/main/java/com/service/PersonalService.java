@@ -16,5 +16,6 @@ public interface PersonalService {
     Page<MyCollect> getMyCollectByPage(long accountId, int currentPage, int pageSize);
     Page<MyAttention> getMyAttentionByPage(long accountId, int currentPage, int pageSize);
     Page<MyGift> getMyGiftByPage(long accountId, int currentPage, int pageSize);
+    Page<MyFootprint> getMyFootprintByPage(long accountId, int currentPage, int pageSize);
 
 }

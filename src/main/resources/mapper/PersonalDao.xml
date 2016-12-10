@@ -74,4 +74,16 @@ ORDER BY my_gift.createTime DESC
         select count(*) FROM my_gift WHERE accountId=#{accountId}
     </select>
 
+
+
+
+    <!--我的足迹-->
+    <select id="selectMyFootprint" resultType="com.bean.MyFootprint">
+        select pathId,accountId,operationCode,questionId,title,accountBId,name,createTime,experience,coin
+        FROM footprint
+        WHERE accountId=#{accountId}
+        ORDER BY createTime DESC
+        limit #{startRow},#{pageSize}
+    </select>
+
 </mapper>

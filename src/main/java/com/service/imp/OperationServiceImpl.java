@@ -43,8 +43,8 @@ public class OperationServiceImpl implements OperationService {
     }
 
     public void beQuestionCollected(long accountId, long questionId, String title, long accountBId, String name) {
-        operationDao.addIncome(accountId, 5, 5);
-        operationDao.recordBeQuestionCollected(accountBId, questionId, title, accountId, name, 5, 5);
+        operationDao.addIncome(accountBId, 5, 5);
+        operationDao.recordBeQuestionCollected(accountId, questionId, title, accountBId, name, 5, 5);
     }
 
     public void beAttentioned(long accountId, long accountBId, String name) {

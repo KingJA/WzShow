@@ -51,6 +51,7 @@
                     </c:if>
                 </select>
             </div>
+            <input type="hidden" value="${sessionScope.account.accountId}" name="accountId">
             <p> <button type="submit" class="btn btn-lg btn-success">Submit</button></p>
         </form>
     </div>

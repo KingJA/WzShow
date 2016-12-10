@@ -3,17 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.QuestionDao">
-    <resultMap type="com.bean.AnswerResult" id="AnswerResult">
-        <result property="questionId" column="questionId"/>
-        <result property="accountId" column="accountId"/>
-        <result property="name" column="name"/>
-        <result property="avatar" column="avatar"/>
-        <result property="answerId" column="answerId"/>
-        <result property="content" column="content"/>
-        <result property="createTime" column="createTime"/>
-        <result property="praiseCount" column="praiseCount"/>
-        <result property="collectCount" column="collectCount"/>
-    </resultMap>
     <!--获取标签-->
     <select id="selectAllTag" resultType="com.bean.Tag">
         SELECT * FROM tag
@@ -24,15 +13,16 @@
     </select>
     <!--添加问题-->
     <insert id="insertQuestion" parameterType="com.bean.Question" useGeneratedKeys="true" keyProperty="questionId">
-        INSERT INTO question (title,content,tagId,imgUrls) VALUES (#{title},#{content},#{tagId},#{imgUrls})
+        INSERT INTO question (title,content,tagId,imgUrls,accountId) VALUES (#{title},#{content},#{tagId},#{imgUrls},#{accountId})
     </insert>
     <!--获取问题数量-->
     <select id="selectQuestionCount" resultType="int">
        select count(*) from question
     </select>
+
     <!--根据问题Id获取问题详情-->
     <select id="selectQuestionById" resultType="com.bean.Question">
-       select * from question WHERE questionId=#{questionId}
+       select questionId,title,content,imgUrls,tagId,createTime from question WHERE questionId=#{questionId}
     </select>
 
     <!--根据问题Id获取提问者信息-->
@@ -43,7 +33,7 @@
       WHERE question.questionId=#{questionId}
     </select>
     <!--根据问题Id获取回答-->
-    <select id="selectAnsewersByQuestionId" resultMap="AnswerResult">
+    <select id="selectAnsewersByQuestionId" resultType="com.bean.AnswerResult">
         SELECT question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.praiseCount,answer.collectCount
         FROM answer
         LEFT JOIN question

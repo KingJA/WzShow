@@ -16,6 +16,7 @@ public class MyCollect {
     private String title;
     private int collectCount;
     private int answerCount;
+    private Date createYearDay;
     private Date createTime;
 
     public long getCollectId() {

@@ -12,11 +12,13 @@ import java.util.Date;
  */
 public class Question {
     private long questionId;
+    private long accountId;
     private String title;
     private String content;
     private String imgUrls;
     private String tagId;
     private Date createTime;
+    private Date createYearDay;
 
     public long getQuestionId() {
         return questionId;
@@ -68,5 +70,27 @@ public class Question {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", accountId=" + accountId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", imgUrls='" + imgUrls + '\'' +
+                ", tagId='" + tagId + '\'' +
+                ", createTime=" + createTime +
+                ", createYearDay=" + createYearDay +
+                '}';
     }
 }

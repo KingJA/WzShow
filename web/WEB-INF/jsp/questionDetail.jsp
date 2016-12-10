@@ -9,28 +9,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="/img/head_default.jpg">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 
-
     <script type="text/javascript">
 
-        function setCollect(obj, collectCode) {//collectCode 1收藏0取消收藏
+        function addCollect(accountId, accountBId, name, questionId,  obj) {
             if (false) window.location.href = "/account/login";
             else {
                 $.ajax({
+
                     type: "POST",
                     url: "/question/detail/collect/",
                     data: {
-                        "questionId":${question.questionId},
-                        "accountId": "${sessionScope.account.accountId}",
-                        "collectCode": collectCode
+                        questionId: questionId,
+                        title: title,
+                        accountId: accountId,
+                        accountBId: accountBId,
+                        title:"${question.title}",
+                        name: name
                     },
                     dataType: "json",
                     success: function (retult) {
-                        $(obj).attr("onclick", "setCollect(this," + retult.resultInt + ")");
-                        $(obj).text(retult.resultText);
+                        $(obj).text("已收藏");
+                        $(obj).attr('disabled', "true");
                     },
                     error: function () {
                         alert("哈哈，厉害了");
@@ -38,19 +42,20 @@
                 });
             }
         }
-        function addPraise(answerId, accountBId, name, obj) {
-            if ("${sessionScope.account.accountId}" == "") window.location.href = "/account/login";
+
+        function addPraise(answerId, accountBId, name, questionId, accountId, title, obj) {
+            if (false) window.location.href = "/account/login";
             else {
                 $.ajax({
                     type: "POST",
                     url: "/question/detail/praise/",
                     data: {
-                        "answerId": answerId,
-                        "accountBId": accountBId,
-                        "name": name,
-                        "questionId": "${question.questionId}",
-                        "title": "${question.title}",
-                        "accountId": "${sessionScope.account.accountId}"
+                        answerId: answerId,
+                        accountBId: accountBId,
+                        name: name,
+                        questionId: questionId,
+                        accountId: accountId,
+                        title: title
                     },
                     dataType: "json",
                     success: function (result) {
@@ -67,7 +72,9 @@
             }
         }
 
+
     </script>
+
 </head>
 
 <body>
@@ -128,16 +135,25 @@
             <p class="lead">${question.content}</p>
         </div>
         <hr>
-        <c:forTokens items="${question.imgUrls}" delims="#" var="imgUrl">
-            <img src="${imgUrl}"><br>
-        </c:forTokens>
-
+        <c:if test="${!empty question.imgUrls}">
+            <c:forTokens items="${question.imgUrls}" delims="#" var="imgUrl">
+                <img src="${imgUrl}"><br>
+            </c:forTokens>
+        </c:if>
         <div class="row">
             <div class="pull-right">
                 <p class="lead">${question.createTime}<a href="/personal/${account.accountId}">${account.name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-success" onclick="setCollect(this,${collect.resultInt})"><i
-                            class="icon-white icon-star"></i>
-                        ${collect.resultText}</button>
+                    <c:if test="${account.accountId!=sessionScope.accountId}">
+                        <c:if test="${collect.resultInt>0}">
+                            <button class="btn btn-success" disabled="disabled">${collect.resultText}</button>
+                        </c:if>
+                        <c:if test="${collect.resultInt==0}">
+                            <button class="btn btn-success"
+                                    onclick="addCollect('${sessionScope.account.accountId}','${account.accountId}','${account.name}','${question.questionId}',this)">${collect.resultText}</button>
+                        </c:if>
+                        <%--accountId,accountBId,name,questionId,title--%>
+                    </c:if>
+
                 </p>
             </div>
         </div>
@@ -164,9 +180,8 @@
                     <div class="row">
                         <div class="pull-right">
                             <button class="btn btn-success"
-                                    onclick="addPraise('${answer.answerId}','${answer.accountId}','${answer.name}',this)"><i
-                                    class="icon-white icon-heart"></i>
-                                赞(${answer.praiseCount})
+                                    onclick="addPraise('${answer.answerId}','${answer.accountId}','${answer.name}','${question.questionId}','${sessionScope.account.accountId}','${question.title}',this)">
+                                <i class="icon-white icon-heart"></i>赞(${answer.praiseCount})
                             </button>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
@@ -229,4 +244,5 @@
     </div>
 </div>
 </body>
+
 </html>

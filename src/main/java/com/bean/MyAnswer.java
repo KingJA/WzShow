@@ -15,6 +15,7 @@ public class MyAnswer {
     private int paiseCount;
     private String content;
     private Date createTime;
+    private Date createYearDay;
     private String title;
 
     public long getQuestionId() {

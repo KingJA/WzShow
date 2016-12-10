@@ -107,19 +107,22 @@
             }
         }
         function myGift(accountId,currentPage) {
-            $("#selectContainer").load("/personal/mygift",
-                    {
-                        "accountId": accountId,
-                        "currentPage": currentPage
-                    }, function () {
-                    });
+            $("#selectContainer").load("/personal/mygift?accountId="+accountId+"&currentPage="+currentPage);
         }
+//        function myGift(accountId,currentPage) {
+//            $("#selectContainer").load("/personal/mygift?accountId="+accountId+"currentPage="+currentPage,
+//                    {
+//                        "accountId": accountId,
+//                        "currentPage": currentPage
+//                    }, function () {
+//                    });
+//        }
 
     </script>
 </head>
 
 <body style="padding-top: 50px">
-<jsp:include page="common/nav.jsp"></jsp:include>
+<jsp:include page="../common/nav.jsp"></jsp:include>
 <%--头部导航栏--%>
 
 <div class="personal-container">
@@ -128,7 +131,7 @@
             <div class="row">
                 <div class="col-md-2 ">
                     <div class="">
-                        <img src="/img/head_3.jpg" alt="..." class="img-circle" width="160px" height="160px">
+                        <img src="${account.avatar}" alt="..." class="img-circle" width="160px" height="160px">
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -158,18 +161,19 @@
                 <div class="col-md-2">
                     <div>
                         <ul class="nav nav-pills nav-stacked profile__nav">
-                            <li><a href="javascript:void(0);" onclick="myAsk(1)">${who}的提问</a></li>
-                            <li><a href="javascript:void(0);" onclick="myAnswer(1)">${who}的回答</a></li>
-                            <li><a href="javascript:void(0);" onclick="myAttention(1)">${who}的关注</a></li>
-                            <li><a href="javascript:void(0);" onclick="myCollect(1)">${who}的收藏</a></li>
-                            <li><a href="javascript:void(0);" onclick="myGift('${account.accountId}',1)">${who}的礼物</a></li>
+                            <li><a href="/personal/${account.accountId}/myAsk?page=1">${who}的提问</a></li>
+                            <li><a href="/personal/${account.accountId}/myAnswer?page=1">${who}的回答</a></li>
+                            <li><a href="/personal/${account.accountId}/myAttention?page=1" >${who}的关注</a></li>
+                            <li><a href="/personal/${account.accountId}/myCollect?page=1">${who}的收藏</a></li>
+                            <li><a href="/personal/${account.accountId}/myGift?page=1">${who}的礼物</a></li>
+                            <li><a href="/personal/${account.accountId}/myFootprint?page=1">${who}的足迹</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-10">
                     <div class="nav-content">
                         <p class="lead" id="selectTitle">页面标题</p>
-                        <div class="nav-page" id="selectContainer">
+                        <div class="nav-page" id="selectContainer"><%--这里插入页面--%>
 
                         </div>
                     </div>
@@ -181,6 +185,6 @@
     </div>
     <%--container--%>
 </div>
-<jsp:include page="common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

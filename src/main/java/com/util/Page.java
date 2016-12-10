@@ -27,6 +27,17 @@ public class Page<T> {
     private int visiblePages=10;
     private int rightPages;
     private int leftPages;
+    private int nextPage;
+
+    public int getNextPage() {
+        return getCurrentPage()+1;
+    }
+
+    public int getPreviousPage() {
+        return getCurrentPage()-1;
+    }
+
+    private int previousPage;
 
     public int getPageStart() {
         return getCurrentPage()>visiblePages?(getCurrentPage()-leftPages):1;
