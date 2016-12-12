@@ -1,6 +1,7 @@
 package com.controller.web;
 
 
+import com.google.gson.Gson;
 import com.websocket.common.UserPool;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
@@ -26,6 +27,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			TextMessage message) throws Exception {
 		super.handleTextMessage(session, message);
 		System.out.println("message"+message.getPayload());
+		Gson gson = new Gson();
 		sendAll(session, message);
 	}
 

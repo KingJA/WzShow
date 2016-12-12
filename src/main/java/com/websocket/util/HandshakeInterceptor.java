@@ -14,6 +14,7 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 	public boolean beforeHandshake(ServerHttpRequest request,
                                    ServerHttpResponse response, WebSocketHandler wsHandler,
                                    Map<String, Object> attributes) throws Exception {
+		System.out.println("beforeHandshake");
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}
 
@@ -21,6 +22,7 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 	public void afterHandshake(ServerHttpRequest request,
                                ServerHttpResponse response, WebSocketHandler wsHandler,
                                Exception ex) {
+		System.out.println("afterHandshake");
 		super.afterHandshake(request, response, wsHandler, ex);
 	}
 }
