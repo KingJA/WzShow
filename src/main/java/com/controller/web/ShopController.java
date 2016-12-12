@@ -30,15 +30,14 @@ public class ShopController {
     private AccountDao accountDao;
     @Autowired
     private ShopService shopService;
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(ShopController.class);
 
     /**
-     * 获取所有礼品
+     * 获取所有礼品(分页)
      * @return
      */
     @RequestMapping(value = "/{currentPage}", method = RequestMethod.GET)
     public ModelAndView shop(@PathVariable int currentPage, HttpSession session) {
-        logger.error("==========================shop===========================");
         ModelAndView modelAndView = new ModelAndView("shop");
         Page<Gift> gitfPage = shopService.getGiftByPage(currentPage, 8);
         Account account = (Account) session.getAttribute("account");
@@ -52,15 +51,9 @@ public class ShopController {
      * 购买礼品
      * @return
      */
-
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
     public SingleValue buy(@RequestParam("giftId") long giftId, @RequestParam("giftCount") int giftCount, @RequestParam("giftCost") int giftCost, @RequestParam("accountId") long accountId) {
-        logger.error("==========================giftId==========================="+giftId);
-        logger.error("==========================giftCount==========================="+giftCount);
-        logger.error("==========================giftCost==========================="+giftCost);
-        logger.error("==========================accountId==========================="+accountId);
-        logger.error("==========================accountId==========================="+accountId);
         SingleValue singleValue = shopService.buyGift(accountId, giftId, giftCount, giftCost);
         return singleValue;
     }

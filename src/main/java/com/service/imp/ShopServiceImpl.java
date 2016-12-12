@@ -2,7 +2,6 @@ package com.service.imp;
 
 import com.bean.Gift;
 import com.bean.SingleValue;
-import com.controller.web.NewsController;
 import com.dao.ShopDao;
 import com.service.ShopService;
 import com.util.Page;
@@ -23,7 +22,7 @@ import java.util.List;
 public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopDao shopDao;
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(ShopServiceImpl.class);
 
     public Page<Gift> getGiftByPage(int currentPage, int pageSize) {
         int giftCount = shopDao.selectGiftCount();

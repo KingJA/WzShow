@@ -1,7 +1,6 @@
 package com.service.imp;
 
 import com.bean.Question;
-import com.controller.web.NewsController;
 import com.dao.SearchDao;
 import com.service.SearchService;
 import com.util.Page;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class SearchServiceImpl implements SearchService {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(SearchServiceImpl.class);
     @Autowired
     private SearchDao searchDao;
 

@@ -20,17 +20,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/search")
 public class SearchController {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(SearchController.class);
     @Autowired
     SearchService searchService;
+
+    /**
+     * 搜索页面(分页)
+     * @param keyword
+     * @return
+     */
     @RequestMapping(value = "/question", method = RequestMethod.GET)
     public ModelAndView searchQuestion(@RequestParam("keyword") String keyword) {
-        logger.debug("keyword==============="+keyword );
         ModelAndView modelAndView = new ModelAndView("search");
-        Page<Question> pageInfo = searchService.getSelectedQuestionsByPage(keyword, 1,Page.DEFAULT_PAGE_SIZE);
+        Page<Question> pageInfo = searchService.getSelectedQuestionsByPage(keyword, 1, Page.DEFAULT_PAGE_SIZE);
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;
     }
-
-
 }

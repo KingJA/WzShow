@@ -44,7 +44,7 @@
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="/account/register">注册</a></li>
                     <li><a href="/account/login">登录</a></li>
-                    <li><a href="/question/detail/17">详情</a></li>
+                    <li><a href="/chat">聊天室</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

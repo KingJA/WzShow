@@ -1,7 +1,6 @@
 package com.service.imp;
 
 import com.bean.Question;
-import com.controller.web.NewsController;
 import com.dao.QuestionDao;
 import com.service.QuestionService;
 import com.util.Page;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @Service
 public class QuestionServiceImpl implements QuestionService {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(QuestionServiceImpl.class);
     @Autowired
     QuestionDao questionDao;
 

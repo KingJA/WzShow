@@ -3,7 +3,6 @@ package com.controller.mobile;
 import com.bean.Account;
 import com.bean.AppResult;
 import com.bean.SingleValue;
-import com.controller.web.NewsController;
 import com.dao.AccountDao;
 import com.service.AccountService;
 import com.util.Constant;
@@ -31,7 +30,7 @@ import java.io.IOException;
 @Controller()
 @RequestMapping(value = "/mobile/account")
 public class AppAccountController {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(AppAccountController.class);
     @Autowired
     AccountService accountService;
     @Autowired

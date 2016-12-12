@@ -1,7 +1,6 @@
 package com.service.imp;
 
 import com.bean.*;
-import com.controller.web.NewsController;
 import com.dao.PersonalDao;
 import com.service.PersonalService;
 import com.util.Page;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class PersonalServiceImpl implements PersonalService {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(PersonalServiceImpl.class);
     @Autowired
     PersonalDao personalDao;
     public Page<Question> getMyAskByPage(long accountId,int currentPage, int pageSize) {

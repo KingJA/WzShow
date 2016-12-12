@@ -26,7 +26,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/question")
 public class QuestionController {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(QuestionController.class);
     @Autowired
     QuestionDao questionDao;
     @Autowired
@@ -34,9 +34,12 @@ public class QuestionController {
     @Autowired
     OperationService operationService;
 
-    @RequestMapping(value = "publish", method = RequestMethod.GET)
+    /**
+     * 发布问题页面
+     * @return
+     */
+    @RequestMapping(value = "/publish", method = RequestMethod.GET)
     public ModelAndView publish() {
-        logger.debug("publish");
         ModelAndView modelAndView = new ModelAndView("publish");
         List<Tag> tags = questionDao.selectAllTag();
         logger.debug(tags.size());
@@ -44,9 +47,16 @@ public class QuestionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "doPublish", method = RequestMethod.POST)
+    /**
+     * 处理发布问题
+     * @param question
+     * @param files
+     * @param request
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/doPublish", method = RequestMethod.POST)
     public ModelAndView doPublish(Question question, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpSession session) {
-        logger.debug("Question================"+question.toString());
         ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
         Long accountId = (Long) (session.getAttribute("accountId"));
         long questionId = questionService.saveQuestion(question, files, request);
@@ -54,25 +64,31 @@ public class QuestionController {
         return modelAndView;
     }
 
+    /**
+     * 问题列表
+     * @param page
+     * @return
+     */
     @RequestMapping(value = "/questionPage", method = RequestMethod.GET)
     public ModelAndView questionPage(@RequestParam("page") String page) {
         Integer currentPage = Integer.valueOf(page);
         Page<Question> pageInfo = questionService.getQuestionsByPage(currentPage, Page.DEFAULT_PAGE_SIZE);
-        logger.debug("pageInfo===============" + pageInfo.toString());
-        logger.debug("getTotelPages" + pageInfo.getTotelPages());
-        logger.debug("getTotelItems" + pageInfo.getTotelItems());
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;
     }
 
+    /**
+     * 问题详情
+     * @param questionId
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/detail/{questionId}", method = RequestMethod.GET)
     public ModelAndView detail(@PathVariable long questionId, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("questionDetail");
         Account currentAccount = (Account) session.getAttribute("account");
         int ifCollect = questionDao.selectIfCollect(currentAccount.getAccountId(), questionId);
-        logger.debug("ifCollect:" + ifCollect);
-        logger.debug("questionDetail");
         Question question = questionDao.selectQuestionById(questionId);
         Account questionCccount = questionDao.selectAccountByQuestionId(questionId);
         List<AnswerResult> answerResults = questionDao.selectAnsewersByQuestionId(questionId);
@@ -83,13 +99,22 @@ public class QuestionController {
         return modelAndView;
     }
 
+    /**
+     * 点赞
+     * @param accountId
+     * @param answerId
+     * @param questionId
+     * @param title
+     * @param accountBId
+     * @param name
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/detail/praise", method = RequestMethod.POST)
     public AppResult praise(@RequestParam("accountId") long accountId, @RequestParam("answerId") long answerId,
                             @RequestParam("questionId") long questionId, @RequestParam("title") String title,
                             @RequestParam("accountBId") long accountBId, @RequestParam("name") String name) {
         AppResult<SingleValue> appResult = new AppResult();
-        logger.debug("praise");
         if (questionDao.selectPraiseRecord(accountId, answerId) > 0) {
             appResult.setResultCode(4).setResultText("您已经点过赞了").setResultData(new SingleValue(0));
         } else {
@@ -103,22 +128,38 @@ public class QuestionController {
         return appResult;
     }
 
+    /**
+     * 收藏问题
+     * @param accountId
+     * @param accountBId
+     * @param name
+     * @param questionId
+     * @param title
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/detail/collect", method = RequestMethod.POST)
     public SingleValue collect(@RequestParam("accountId") long accountId, @RequestParam("accountBId") long accountBId,
                                @RequestParam("name") String name, @RequestParam("questionId") long questionId, @RequestParam("title") String title) {
         SingleValue singleValue = new SingleValue();
-        logger.debug("collect");
         questionDao.addCollect(accountId, questionId);
         operationService.beQuestionCollected(accountId, questionId, title, accountBId, name);
         return singleValue;
     }
 
+    /**
+     * 回答问题
+     * @param content
+     * @param questionId
+     * @param title
+     * @param files
+     * @param request
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/detail/answer", method = RequestMethod.POST)
     public ModelAndView answer(@RequestParam("content") String content, @RequestParam("questionId") long questionId, @RequestParam("title") String title, @RequestParam("files") MultipartFile[] files,
                                HttpServletRequest request, HttpSession session) {
-        logger.debug("answer");
-        logger.debug("questionId=============" + questionId);
         ModelAndView modelAndView = new ModelAndView("redirect:/question/detail/" + questionId);
         Account account = (Account) session.getAttribute("account");
         long accountId = account.getAccountId();

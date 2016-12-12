@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @Controller()
 @RequestMapping(value = "/personal")
 public class PersonalController {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(PersonalController.class);
     @Autowired
     PersonalDao personalDao;
     @Autowired
@@ -49,7 +49,7 @@ public class PersonalController {
     }
 
     /**
-     * 我的礼物
+     * 我的礼物(分页)
      * @param accountId
      * @param page
      * @param session
@@ -66,7 +66,7 @@ public class PersonalController {
 
 
     /**
-     * 我的问题
+     * 我的问题(分页)
      * @param accountId
      * @param page
      * @param session
@@ -83,7 +83,7 @@ public class PersonalController {
     }
 
     /**
-     * 我的收藏
+     * 我的收藏(分页)
      * @param accountId
      * @param page
      * @param session
@@ -100,7 +100,7 @@ public class PersonalController {
     }
 
     /**
-     * 我的关注
+     * 我的关注(分页)
      * @param accountId
      * @param page
      * @param session
@@ -116,7 +116,7 @@ public class PersonalController {
     }
 
     /**
-     * 我的回答
+     * 我的回答(分页)
      * @param accountId
      * @param page
      * @param session
@@ -132,7 +132,7 @@ public class PersonalController {
     }
 
     /**
-     * 我的足迹
+     * 我的足迹(分页)
      * @param accountId
      * @param page
      * @param session

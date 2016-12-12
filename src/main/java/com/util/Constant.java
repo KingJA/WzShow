@@ -9,4 +9,5 @@ package com.util;
 public class Constant {
     /*头像保存路径*/
     public static final String saveAvatarPath = "/upload/avatar/";
+
 }

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,59 +24,79 @@ import javax.servlet.http.HttpSession;
 @Controller()
 @RequestMapping(value = "/account")
 public class AccountController {
-    private static Logger logger = Logger.getLogger(NewsController.class);
+    private static Logger logger = Logger.getLogger(AccountController.class);
     @Autowired
     AccountService accountService;
     @Autowired
     AccountDao accountDao;
 
+    /**
+     * 注册页面
+     *
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
-        logger.debug("register");
         ModelAndView modelAndView = new ModelAndView("register");
         return modelAndView;
     }
 
+    /**
+     * 登录页面
+     *
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
-        logger.debug("login");
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
     }
 
+    /**
+     * 退出逻辑
+     *
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/quit", method = RequestMethod.GET)
     public ModelAndView quit(HttpSession session) {
         session.removeAttribute("account");
-        logger.debug("quit");
         ModelAndView modelAndView = new ModelAndView("redirect:/account/login");
         return modelAndView;
     }
 
+    /**
+     * 注册逻辑
+     *
+     * @param account
+     * @return
+     */
     @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
     public ModelAndView doRegister(Account account) {
-        logger.debug("recordDoRegister");
-        logger.debug("account" + account.toString());
         ModelAndView modelAndView = new ModelAndView("register");
         accountService.register(account);
         return modelAndView;
     }
 
+    /**
+     * 登录逻辑
+     *
+     * @param name
+     * @param password
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public SingleValue dologin(HttpServletRequest httpServletRequest, HttpSession session) {
-        String name = httpServletRequest.getParameter("name");
-        String password = httpServletRequest.getParameter("password");
-
-//        ModelAndView modelAndView = new ModelAndView("redirect:/question/questionPage?page=1");
+    public SingleValue dologin(@RequestParam("name") String name, @RequestParam("password") String password, HttpSession session) {
         Account account = accountService.login(name, password);
         if (account != null) {
             session.setAttribute("account", account);
             session.setAttribute("accountId", account.getAccountId());
-            logger.error("登录成功:" + account.getName());
-            return new SingleValue(1,"登录成功");
+            return new SingleValue(1, "登录成功");
         } else {
             logger.error("登录失败");
-            return new SingleValue(0,"账号或密码错误，请重新登录");
+            return new SingleValue(0, "账号或密码错误，请重新登录");
         }
     }
 
