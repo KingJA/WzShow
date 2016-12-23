@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * 用户通讯聊天控制器类
  * @author yyp
- *2014年12月27日下午6:56:46
+ *2014年12月27日下午14:51:46
  */
 @RequestMapping("websocket")
 public class ChatHandler extends TextWebSocketHandler {
