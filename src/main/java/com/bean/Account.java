@@ -2,6 +2,8 @@ package com.bean;
 
 import com.util.DateUtil;
 
+import java.util.Date;
+
 /**
  * Description：TODO
  * Create Time：2016/11/15 15:17
@@ -20,8 +22,8 @@ public class Account {
     private long accountId;
     private String name;
     private String password;
-    private String createTime;
-    private String modifyTime;
+    private Date createTime;
+    private Date modifyTime;
     private String nickName;
     private String phone;
     private String token;
@@ -72,7 +74,7 @@ public class Account {
         return DateUtil.getDateTime(createTime);
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -80,7 +82,7 @@ public class Account {
         return DateUtil.getDateTime(modifyTime);
     }
 
-    public void setModifyTime(String modifyTime) {
+    public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
 

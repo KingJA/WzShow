@@ -20,7 +20,7 @@ public class DateUtil {
 	}
 	public static String getYearDay(Object date){
 		if(date==null) return "";
-		SimpleDateFormat f=new SimpleDateFormat("yyyy年MM月dd日");
+		SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 		return f.format(date);
 	}
 	public static String getTimeTip(String time) {

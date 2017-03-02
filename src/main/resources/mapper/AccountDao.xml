@@ -10,8 +10,8 @@
 
 
     <insert id="insertAccount" parameterType="com.bean.Account">
-        INSERT INTO account (name,password) VALUES (#{name},#{password})
-    </insert>
+    INSERT INTO account (name,password) VALUES (#{name},#{password})
+</insert>
 
     <update id="insertAvatar" parameterType="map">
        update account set avatar=#{avatar} where accountId=#{accountId}
