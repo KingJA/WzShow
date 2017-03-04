@@ -1,9 +1,5 @@
 package com.bean;
 
-import com.util.DateUtil;
-
-import java.util.Date;
-
 /**
  * Description：TODO
  * Create Time：2016/11/15 15:17
@@ -11,19 +7,13 @@ import java.util.Date;
  * Email:kingjavip@gmail.com
  */
 public class Account {
-    @Override
-    public String toString() {
-        return "Account{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
 
     private long accountId;
     private String name;
-    private String password;
-    private Date createTime;
-    private Date modifyTime;
+//    private String password;
+//    private Date createTime;
+//    private Date modifyTime;
     private String nickName;
     private String phone;
     private String token;
@@ -61,30 +51,30 @@ public class Account {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCreateTime() {
-        return DateUtil.getDateTime(createTime);
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getModifyTime() {
-        return DateUtil.getDateTime(modifyTime);
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public String getCreateTime() {
+//        return DateUtil.getDateTime(createTime);
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public String getModifyTime() {
+//        return DateUtil.getDateTime(modifyTime);
+//    }
+//
+//    public void setModifyTime(Date modifyTime) {
+//        this.modifyTime = modifyTime;
+//    }
 
     public String getNickName() {
         return nickName;
