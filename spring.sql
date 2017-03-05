@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : kingja
-Source Server Version : 50709
+Source Server Version : 50716
 Source Host           : localhost:3306
 Source Database       : spring
 
 Target Server Type    : MYSQL
-Target Server Version : 50709
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-12-10 15:09:36
+Date: 2017-03-05 21:24:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,9 +43,9 @@ INSERT INTO `account` VALUES ('3', '哈哈adsdf', '哈哈111', '2016-11-15 15:01
 INSERT INTO `account` VALUES ('4', 'dsfd ', '都是', '2016-11-15 15:01:37', '2016-11-23 09:37:30', '', null, '', '/upload/avatar/head_4.jpg', '200', '0');
 INSERT INTO `account` VALUES ('5', '科比', '也来了', '2016-11-15 15:01:37', '2016-11-23 09:37:32', '', null, '1350ebd07b7b416f9180b9756d3d9fca', '/upload/avatar/head_5.jpg', '200', '0');
 INSERT INTO `account` VALUES ('6', '詹姆斯', '也来了', '2016-11-16 15:09:57', '2016-11-23 09:37:36', '', '', '', '/upload/avatar/head_6.jpg', '200', '0');
-INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2016-11-23 09:37:39', '', '', '', '/upload/avatar/head_7.jpg', '200', '0');
+INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2017-02-28 23:24:57', '', '', '44672286cc57471c9c245ed0699786c5', '/upload/avatar/head_7.jpg', '200', '0');
 INSERT INTO `account` VALUES ('8', '乔丹', 'ccc', '2016-11-16 15:17:21', '2016-11-23 09:37:42', '', '', '', '/upload/avatar/head_8.jpg', '200', '0');
-INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2016-12-10 14:54:23', '', '', '', '/upload/avatar/head_9.jpg', '99814', '146');
+INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2017-02-28 23:24:57', '', '', '44672286cc57471c9c245ed0699786c5', '/upload/avatar/head_9.jpg', '99814', '146');
 INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-12-10 14:16:36', '', '', '', '/upload/avatar/head_default.jpg', '247', '47');
 INSERT INTO `account` VALUES ('11', '1', '1', '2016-11-22 10:58:32', '2016-11-23 09:37:59', '', '', '', '/upload/avatar/head_default.jpg', '200', '0');
 INSERT INTO `account` VALUES ('12', 'ddd', 'ddd', '2016-11-22 10:58:36', '2016-11-29 16:01:57', '', '', '', '/upload/avatar/head_default.jpg', '200', '0');
@@ -70,7 +70,7 @@ CREATE TABLE `answer` (
   KEY `questionId` (`questionId`),
   CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of answer
@@ -353,42 +353,43 @@ CREATE TABLE `question` (
   `collectCount` int(11) DEFAULT '0' COMMENT '收藏数',
   `accountId` int(11) DEFAULT NULL COMMENT '用户id',
   `tagId` int(11) DEFAULT '1' COMMENT '标签id',
+  `solved` tinyint(1) DEFAULT '0' COMMENT '是否解决 0 未解决 1 解决',
   PRIMARY KEY (`questionId`),
   KEY `accout_id` (`accountId`),
   KEY `tag_id` (`tagId`),
   CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15711 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-29 15:16:27', '0', '0', '1', '1');
-INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-29 15:16:28', '0', '0', '2', '1');
-INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-29 15:16:29', '0', '0', '3', '1');
-INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2016-11-29 15:16:30', '0', '0', '4', '1');
-INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2016-11-29 15:16:31', '0', '0', '3', '1');
-INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-22 17:22:45', '0', '0', '1', '6');
-INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-22 17:22:57', '0', '0', '4', '6');
-INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-22 17:22:55', '0', '0', '3', '6');
-INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-22 17:22:55', '0', '0', '3', '6');
-INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-28 13:03:27', '0', '0', '9', '6');
-INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-28 11:18:21', '0', '0', '9', '6');
-INSERT INTO `question` VALUES ('16', '搞清楚上述内容后，我想就不必要纠结于经验获得的公式算法了，相反经验和升级不是一个公式化就能搞定的东西，有些情况下可以根据实际需求进行调整，当然调整的手段和规模尽量保证低风险和高效用', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2016-11-28 14:59:47', '0', '0', '9', '6');
-INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2016-11-26 10:40:41', '0', '0', '9', '6');
-INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2016-11-26 17:34:33', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '0', '2', '1');
-INSERT INTO `question` VALUES ('20', '哪里可以吃到好吃的饺子', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-29 09:14:01', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('21', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:14', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('22', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('23', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('24', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:34:13', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('25', '请问大家一个问题24', '具体问题请看标题24', '', '2016-11-29 09:34:06', '2016-11-29 09:39:22', '0', '0', '9', '1');
-INSERT INTO `question` VALUES ('26', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1');
-INSERT INTO `question` VALUES ('27', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1');
-INSERT INTO `question` VALUES ('28', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1');
-INSERT INTO `question` VALUES ('29', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1');
-INSERT INTO `question` VALUES ('30', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:17:13', '0', '0', '8', '1');
+INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-29 15:16:27', '0', '0', '1', '1', '0');
+INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-29 15:16:28', '0', '0', '2', '1', '0');
+INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-29 15:16:29', '0', '0', '3', '1', '0');
+INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2017-03-05 19:00:09', '0', '0', '4', '1', '1');
+INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2017-03-05 19:00:12', '0', '0', '3', '1', '1');
+INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-22 17:22:45', '0', '0', '1', '6', '0');
+INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-22 17:22:57', '0', '0', '4', '6', '0');
+INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-22 17:22:55', '0', '0', '3', '6', '0');
+INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-22 17:22:55', '0', '0', '3', '6', '0');
+INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-28 13:03:27', '0', '0', '9', '6', '0');
+INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-28 11:18:21', '0', '0', '9', '6', '0');
+INSERT INTO `question` VALUES ('16', '搞清楚上述内容后，我想就不必要纠结于经验获得的公式算法了，相反经验和升级不是一个公式化就能搞定的东西，有些情况下可以根据实际需求进行调整，当然调整的手段和规模尽量保证低风险和高效用', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2017-03-05 19:00:14', '0', '0', '9', '6', '1');
+INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2017-03-05 19:00:18', '0', '0', '9', '6', '1');
+INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2017-03-05 19:00:22', '0', '0', '9', '1', '1');
+INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '0', '2', '1', '0');
+INSERT INTO `question` VALUES ('20', '哪里可以吃到好吃的饺子', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-29 09:14:01', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('21', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:14', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('22', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('23', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('24', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:34:13', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('25', '请问大家一个问题24', '具体问题请看标题24', '', '2016-11-29 09:34:06', '2016-11-29 09:39:22', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('26', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('27', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('28', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('29', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('30', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:17:13', '0', '0', '8', '1', '0');
 
 -- ----------------------------
 -- Table structure for tag
@@ -415,8 +416,7 @@ INSERT INTO `tag` VALUES ('6', '求助', '2016-11-21 10:25:57');
 -- View structure for myview
 -- ----------------------------
 DROP VIEW IF EXISTS `myview`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `myview` AS SELECT name,password
-FROM account ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `myview` AS select `account`.`name` AS `name`,`account`.`password` AS `password` from `account` ;
 
 -- ----------------------------
 -- Procedure structure for addAttention
