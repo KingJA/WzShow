@@ -2,12 +2,8 @@ package com.controller.mobile;
 
 import com.bean.Account;
 import com.bean.AppResult;
-import com.bean.SingleValue;
 import com.dao.AccountDao;
 import com.service.AccountService;
-import com.util.Constant;
-import com.util.StringUtil;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Description：TODO
@@ -38,28 +29,33 @@ public class AppQuestionController {
 
     /**
      * 登录
-     * @param httpServletRequest
+     *
+     * @param
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "questions", method = RequestMethod.POST)
-    public AppResult getQuestions(HttpServletRequest httpServletRequest) {
-        return null;
-    }
+    @RequestMapping(value = "/getQuestions", method = RequestMethod.POST)
+    public AppResult getQuestions(@RequestParam("token") String token, @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
 
+        logger.error("token: "+token);
+        logger.error("pageIndex: "+pageIndex);
+        logger.error("pageSize: "+pageSize);
+        return new AppResult();
+    }
 
 
     /**
      * 检验token
+     *
      * @param token
      * @return
      */
 
-    public  long checkTokenAvail(String token) {
-        long accountId=-1;
+    public long checkTokenAvail(String token) {
+        long accountId = -1;
         Account account = accountDao.selectIdByToken(token);
         if (account != null) {
-            accountId=account.getAccountId();
+            accountId = account.getAccountId();
         }
         return accountId;
     }

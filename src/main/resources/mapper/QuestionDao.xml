@@ -78,4 +78,25 @@
     </insert>
 
 
+
+
+    <!--APP=========================================================-->
+
+
+    <select id="getQuestionsBySolved" resultType="com.bean.Question">
+        select account.`name`,account.avatar,question.title,question.content,question.imgUrls,question.solved,question.answerCount,question.collectCount,question.createTime,question.tagId
+        FROM question LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE question.solved=#{soled}
+        ORDER BY question.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+   <select id="getQuestions" resultType="com.bean.Question">
+        select account.`name`,account.avatar,question.title,question.content,question.imgUrls,question.solved,question.answerCount,question.collectCount,question.createTime,question.tagId
+        FROM question LEFT JOIN account
+        ON question.accountId=account.accountId
+        ORDER BY question.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
 </mapper>

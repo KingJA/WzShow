@@ -42,7 +42,7 @@ public class AppAccountController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "doLogin.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public AppResult doLogin(HttpServletRequest httpServletRequest) {
         String name = httpServletRequest.getParameter("name");
         String password = httpServletRequest.getParameter("password");
