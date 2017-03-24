@@ -1,4 +1,6 @@
-package com.bean;
+package com.appbean;
+
+import com.bean.RankInfo;
 
 /**
  * Description：TODO
@@ -6,7 +8,7 @@ package com.bean;
  * Author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class Account {
+public class AppAccount {
 
 
     private long accountId;
@@ -20,6 +22,9 @@ public class Account {
     private int attentionCount;
     private int fansCount;
 
+    public RankInfo getRankInfo() {
+        return new RankInfo(experience);
+    }
     public int getAttentionCount() {
         return attentionCount;
     }
@@ -35,11 +40,6 @@ public class Account {
     public void setFansCount(int fansCount) {
         this.fansCount = fansCount;
     }
-
-    public RankInfo getRankInfo() {
-        return new RankInfo(experience);
-    }
-
 
     public int getExperience() {
         return experience;

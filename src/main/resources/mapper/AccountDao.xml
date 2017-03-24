@@ -17,7 +17,7 @@
        update account set avatar=#{avatar} where accountId=#{accountId}
     </update>
     <update id="insertToken" parameterType="map">
-        update account set token=#{token} where name=#{name}
+        update account set token=#{token} where accountId=#{id}
     </update>
 
 
@@ -44,6 +44,8 @@
         SELECT * FROM account
         where accountId = #{accountId}
     </select>
+
+
 
 
 </mapper>

@@ -86,4 +86,60 @@ ORDER BY my_gift.createTime DESC
         limit #{startRow},#{pageSize}
     </select>
 
+
+
+
+    <!--APP-->
+    <!--我的关注-->
+    <select id="getMyAttentions" resultType="com.appbean.AppMyAttention">
+        select attention.attentionId,attention.otherAccountId,account.name,account.avatar ,account.des,attention.createTime,account.experience
+        FROM attention
+        LEFT JOIN account
+        ON attention.otherAccountId=account.accountId
+        WHERE attention.myAccountId=#{accountId}
+        ORDER BY attention.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+    <!--我的粉丝-->
+    <select id="getMyFans" resultType="com.appbean.AppMyAttention">
+        select attention.attentionId,attention.otherAccountId,attention.myAccountId,account.name,account.avatar ,account.des,attention.createTime,account.experience
+        FROM attention
+        LEFT JOIN account
+        ON attention.myAccountId=account.accountId
+        WHERE attention.otherAccountId=#{accountId}
+        ORDER BY attention.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+
+    <select id="getMyCollects" resultType="com.appbean.AppQuestion">
+        select (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)
+        AS isCollected,question.accountId,
+        account.`name`,account.avatar,account.experience,question.questionId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
+        FROM collect
+        LEFT JOIN question
+        ON collect.questionId=question.questionId
+        LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE question.accountId=#{accountId}
+        ORDER BY question.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+
+    <select id="getOtherUserInfo" resultType="com.appbean.AppOtherUser">
+        SELECT account.accountId,account.`name` ,account.experience,account.des,account.avatar,
+        (SELECT COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=#{otherAccountId}) AS isAttention,
+        (SELECT COUNT(*) FROM attention WHERE attention.myAccountId=#{otherAccountId}) AS attentionCount,
+        (SELECT COUNT(*) FROM attention WHERE attention.otherAccountId=#{otherAccountId}) AS fansCount
+        FROM account WHERE account.accountId=#{otherAccountId}
+    </select>
+
+    <select id="getUserInfo"  resultType="com.appbean.AppAccount">
+        SELECT account.accountId,account.`name` ,account.experience,account.des,account.avatar,account.nickName,account.phone,
+        (SELECT COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId}) AS attentionCount,
+        (SELECT COUNT(*) FROM attention WHERE attention.otherAccountId=#{accountId}) AS fansCount
+        FROM account WHERE account.accountId=#{accountId}
+    </select>
 </mapper>

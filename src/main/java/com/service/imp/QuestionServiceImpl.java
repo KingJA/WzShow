@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -40,9 +41,22 @@ public class QuestionServiceImpl implements QuestionService {
         page.setPageSize(pageSize);
         page.setVisiblePages(Page.DEFAULT_VISIBLE_PAGE_SIZE);
         List<Question> questions = questionDao.selectQuestionsByPage(page.getStartRow(), pageSize);
-        logger.debug("List<Question>============="+questions.toString());
+        logger.debug("List<AppQuestion>============="+questions.toString());
         page.setPageDatas(questions);
         return page;
     }
+
+    public long publish(long accountId, String title, String content, long tagId, MultipartFile[] files, HttpSession session) {
+        String imgUrls = UploadUtil.savePublishedPictures(files, session);
+        long publish = questionDao.publish(accountId, title, content, tagId, imgUrls);
+        return publish;
+    }
+
+    public long answer(long accountId, long questionId, String content, MultipartFile[] files, HttpSession session) {
+        String imgUrls = UploadUtil.saveAnswerPictures(files, session);
+        long answer = questionDao.answer(accountId, questionId, content, imgUrls);
+        return answer;
+    }
+
 
 }

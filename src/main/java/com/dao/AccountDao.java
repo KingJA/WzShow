@@ -17,6 +17,7 @@ public interface AccountDao {
     int selectAccount(Account account);
 
     int selectAccountByName(@Param(value = "name") String name);
+
     Account selectAccountById(@Param(value = "accountId") long accountId);
 
     Account selectAccountByMap(Map<String, Object> map);
@@ -24,8 +25,10 @@ public interface AccountDao {
     Account selectIdByToken(@Param(value = "token") String token);
 
     void insertAccount(Account account);
-    void insertAvatar(@Param(value = "accountId") String accountId, @Param(value = "avatar")String avatar);
 
-    void insertToken(@Param(value = "token") String token, @Param(value = "name") String name);
+    void insertAvatar(@Param(value = "accountId") String accountId, @Param(value = "avatar") String avatar);
+
+    void insertToken(@Param(value = "token") String token, @Param(value = "id") long id);
+
 
 }

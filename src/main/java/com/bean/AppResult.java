@@ -11,6 +11,14 @@ public class AppResult<T> {
     private String resultText;
     private T resultData;
 
+    public AppResult() {
+
+    }  public AppResult(int resultCode, String resultText, T resultData) {
+        this.resultCode = resultCode;
+        this.resultText = resultText;
+        this.resultData = resultData;
+    }
+
     public String getResultText() {
         return resultText;
     }

@@ -1,5 +1,8 @@
 package com.dao;
 
+import com.appbean.AppAnswer;
+import com.appbean.AppMyAnswer;
+import com.appbean.AppQuestion;
 import com.bean.Account;
 import com.bean.AnswerResult;
 import com.bean.Question;
@@ -51,8 +54,31 @@ public interface QuestionDao {
     int answerQuestion(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId, @Param(value = "content") String content, @Param(value = "imgUrls") String imgUrls);
 /*app=================================================*/
 
-    List<Question> getQuestionsBySolved(@Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize, @Param(value = "solved") int solved);
+    List<AppQuestion> getQuestionsBySolved(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize, @Param(value = "solved") int solved);
 
-    List<Question> getQuestions(@Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+    List<AppQuestion> getQuestions(@Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
+    List<AppQuestion> getMyQuestions(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
+    List<AppMyAnswer> getMyAnswers(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
+    List<AppMyAnswer> getOtherAnswers(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+    List<AppQuestion> getOtherQuestions(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
+    List<AppAnswer> getAnswers(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
+    long publish(@Param(value = "accountId") long accountId, @Param(value = "title") String title, @Param(value = "content") String content, @Param(value = "tagId") long tagId, @Param(value = "imgUrls") String imgUrls);
+
+    long answer(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId, @Param(value = "content") String content, @Param(value = "imgUrls") String imgUrls);
+
+    int collect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
+
+    int cancleCollect(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
+
+    int attention(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId);
+
+    int cancleAttention(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId);
+
+    int praise(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
 
 }

@@ -82,7 +82,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
+        return "AppQuestion{" +
                 "questionId=" + questionId +
                 ", accountId=" + accountId +
                 ", title='" + title + '\'' +

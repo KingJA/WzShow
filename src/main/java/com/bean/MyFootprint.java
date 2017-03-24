@@ -79,7 +79,7 @@ public class MyFootprint {
     }
 
     public String getCreateTime() {
-        return DateUtil.getTimeTip(DateUtil.getDateTime(createTime));
+        return DateUtil.getTimeTip(createTime);
     }
 
     public void setCreateTime(Date createTime) {

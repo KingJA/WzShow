@@ -36,4 +36,20 @@
         UPDATE account SET coin=coin-#{giftTotleCost} WHERE accountId=#{accountId}
     </update>
 
+
+
+
+    <!--APP=========================================================-->
+    <select id="getGifts" resultType="com.appbean.AppGift">
+        select giftId,giftName,giftDes,giftCost,giftRank,giftUrl FROM gift ORDER BY createTime DESC
+    </select>
+
+    <select id="getMyGifts" resultType="com.appbean.AppGift">
+       select gift.giftId,gift.giftName,my_gift.giftCount,gift.giftCost,gift.giftRank,gift.giftUrl
+FROM my_gift
+LEFT JOIN gift
+ON my_gift.giftId=gift.giftId
+WHERE my_gift.accountId=#{accountId}
+ORDER BY my_gift.createTime DESC
+    </select>
 </mapper>

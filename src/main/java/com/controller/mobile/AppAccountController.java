@@ -5,7 +5,7 @@ import com.bean.AppResult;
 import com.bean.SingleValue;
 import com.dao.AccountDao;
 import com.service.AccountService;
-import com.util.Constant;
+import com.util.Constants;
 import com.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -44,14 +44,14 @@ public class AppAccountController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public AppResult doLogin(HttpServletRequest httpServletRequest) {
-        String name = httpServletRequest.getParameter("name");
+        String name = httpServletRequest.getParameter("userName");
         String password = httpServletRequest.getParameter("password");
         Account account = accountService.login(name, password);
         AppResult<Account> accountAppResult = new AppResult<Account>();
         if (account != null) {
             String token = StringUtil.getUUID();
             account.setToken(token);
-            accountDao.insertToken(token,name);
+            accountDao.insertToken(token,account.getAccountId());
             accountAppResult.setResultCode(0).setResultText("登录成功").setResultData(account);
         }else{
             accountAppResult.setResultCode(4).setResultText("登录失败").setResultData(account);
@@ -92,7 +92,7 @@ public class AppAccountController {
         long accountId = checkTokenAvail(token);
         if (accountId!=-1) {
             if (file!=null&&!file.isEmpty()) {
-                String savePath = uploadImg(file, request, Constant.saveAvatarPath);
+                String savePath = uploadImg(file, request, Constants.AVATAR_SAVED_PATH);
                 appResult.setResultCode(0).setResultText("头像上传成功").setResultData(new SingleValue(savePath));
                 accountDao.insertAvatar(accountId+"",savePath);
             }

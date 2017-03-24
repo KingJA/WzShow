@@ -78,24 +78,126 @@
     </insert>
 
 
-
-
     <!--APP=========================================================-->
 
 
-    <select id="getQuestionsBySolved" resultType="com.bean.Question">
-        select account.`name`,account.avatar,question.title,question.content,question.imgUrls,question.solved,question.answerCount,question.collectCount,question.createTime,question.tagId
+    <select id="getQuestionsBySolved" resultType="com.appbean.AppQuestion">
+        select (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS
+        isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND
+        attention.otherAccountId=question.accountId) AS isAttentioned,
+        account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
         FROM question LEFT JOIN account
         ON question.accountId=account.accountId
-        WHERE question.solved=#{soled}
+        <if test="solved!=-1">
+            WHERE question.solved=#{solved}
+        </if>
         ORDER BY question.createTime DESC
         limit #{pageIndex},#{pageSize}
     </select>
-   <select id="getQuestions" resultType="com.bean.Question">
-        select account.`name`,account.avatar,question.title,question.content,question.imgUrls,question.solved,question.answerCount,question.collectCount,question.createTime,question.tagId
+    <!--根据问题Id获取回答-->
+    <select id="getAnswers" resultType="com.appbean.AppAnswer">
+        SELECT
+         (select COUNT(*)FROM praise WHERE praise.answerId=answer.answerId)AS praiseCount,
+         (select COUNT(*) FROM praise WHERE praise.accountId=#{accountId} AND praise.answerId=answer.answerId) AS isPraised,
+         question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.imgUrls
+        FROM answer
+        LEFT JOIN question
+        ON answer.questionId=question.questionId
+        LEFT JOIN account
+        ON answer.accountId=account.accountId
+        WHERE question.questionId=#{questionId}
+        ORDER BY answer.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <insert id="publish">
+        INSERT INTO question (title,content,tagId,imgUrls,accountId) VALUES (#{title},#{content},#{tagId},#{imgUrls},#{accountId})
+    </insert>
+
+    <insert id="answer">
+        INSERT INTO answer (accountId,questionId,content,imgUrls) VALUES (#{accountId},#{questionId},#{content},#{imgUrls})
+    </insert>
+
+    <insert id="collect">
+        INSERT INTO collect (accountId,questionId) VALUES (#{accountId},#{questionId})
+    </insert>
+
+    <delete id="cancleCollect">
+        DELETE FROM collect WHERE accountId=#{accountId} AND  questionId=#{questionId}
+</delete>
+
+
+    <insert id="attention">
+        INSERT INTO attention (myAccountId,otherAccountId) VALUES (#{accountId},#{otherAccountId})
+    </insert>
+
+    <delete id="cancleAttention">
+        DELETE FROM attention WHERE myAccountId=#{accountId} AND  otherAccountId=#{otherAccountId}
+    </delete>
+
+
+    <insert id="praise">
+        INSERT INTO praise (accountId,answerId) VALUES (#{accountId},#{answerId})
+    </insert>
+
+
+    <select id="getMyQuestions" resultType="com.appbean.AppQuestion">
+        select (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId) AS isAttentioned,
+        question.accountId,account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
         FROM question LEFT JOIN account
         ON question.accountId=account.accountId
+        WHERE question.accountId=#{accountId}
         ORDER BY question.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="getOtherQuestions" resultType="com.appbean.AppQuestion">
+        select (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId) AS isAttentioned,
+        question.accountId,account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
+        FROM question LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE question.accountId=#{otherAccountId}
+        ORDER BY question.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="getMyAnswers" resultType="com.appbean.AppMyAnswer">
+        select answer.content AS answerContent ,answer.imgUrls AS answerImgUrls,answer.createTime AS answerTime,
+        (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*)FROM praise WHERE answer.answerId=praise.answerId) AS praiseCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId) AS isAttentioned,
+        account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
+        FROM answer
+        LEFT JOIN question
+        ON answer.questionId=question.questionId
+        LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE answer.accountId=#{accountId}
+        ORDER BY answer.createTime DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="getOtherAnswers" resultType="com.appbean.AppMyAnswer">
+        select answer.content AS answerContent ,answer.imgUrls AS answerImgUrls,answer.createTime AS answerTime,
+        (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*)FROM praise WHERE answer.answerId=praise.answerId) AS praiseCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId) AS isAttentioned,
+        account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
+        FROM answer
+        LEFT JOIN question
+        ON answer.questionId=question.questionId
+        LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE answer.accountId=#{otherAccountId}
+        ORDER BY answer.createTime DESC
         limit #{pageIndex},#{pageSize}
     </select>
 

@@ -29,5 +29,7 @@ public interface ShopDao {
     int selectCoin(@Param(value = "accountId") long accountId);
 
     List<Gift> selectGiftByPage(@Param(value = "startRow") int startRow, @Param(value = "pageSize") int pageSize);
+    List<Gift> getGifts();
+    List<Gift> getMyGifts(@Param(value = "accountId") long accountId);
 
 }

@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : kingja
-Source Server Version : 50716
+Source Server Version : 50709
 Source Host           : localhost:3306
 Source Database       : spring
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2017-03-05 21:24:11
+Date: 2017-03-24 16:33:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,24 +31,25 @@ CREATE TABLE `account` (
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '头像',
   `coin` int(11) unsigned DEFAULT '200',
   `experience` int(11) unsigned DEFAULT '0' COMMENT '经验值',
+  `des` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '个性签名',
   PRIMARY KEY (`accountId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', '韩梅梅', '123456', '2016-11-15 15:01:37', '2016-11-23 09:37:02', '', null, '', '/upload/avatar/head_1.jpg', '200', '0');
-INSERT INTO `account` VALUES ('2', '哈哈', '哈哈', '2016-11-15 15:01:37', '2016-11-23 09:37:26', '', null, '', '/upload/avatar/head_2.jpg', '200', '0');
-INSERT INTO `account` VALUES ('3', '哈哈adsdf', '哈哈111', '2016-11-15 15:01:37', '2016-11-23 09:37:28', '', null, '', '/upload/avatar/head_3.jpg', '200', '0');
-INSERT INTO `account` VALUES ('4', 'dsfd ', '都是', '2016-11-15 15:01:37', '2016-11-23 09:37:30', '', null, '', '/upload/avatar/head_4.jpg', '200', '0');
-INSERT INTO `account` VALUES ('5', '科比', '也来了', '2016-11-15 15:01:37', '2016-11-23 09:37:32', '', null, '1350ebd07b7b416f9180b9756d3d9fca', '/upload/avatar/head_5.jpg', '200', '0');
-INSERT INTO `account` VALUES ('6', '詹姆斯', '也来了', '2016-11-16 15:09:57', '2016-11-23 09:37:36', '', '', '', '/upload/avatar/head_6.jpg', '200', '0');
-INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2017-02-28 23:24:57', '', '', '44672286cc57471c9c245ed0699786c5', '/upload/avatar/head_7.jpg', '200', '0');
-INSERT INTO `account` VALUES ('8', '乔丹', 'ccc', '2016-11-16 15:17:21', '2016-11-23 09:37:42', '', '', '', '/upload/avatar/head_8.jpg', '200', '0');
-INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2017-02-28 23:24:57', '', '', '44672286cc57471c9c245ed0699786c5', '/upload/avatar/head_9.jpg', '99814', '146');
-INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-12-10 14:16:36', '', '', '', '/upload/avatar/head_default.jpg', '247', '47');
-INSERT INTO `account` VALUES ('11', '1', '1', '2016-11-22 10:58:32', '2016-11-23 09:37:59', '', '', '', '/upload/avatar/head_default.jpg', '200', '0');
-INSERT INTO `account` VALUES ('12', 'ddd', 'ddd', '2016-11-22 10:58:36', '2016-11-29 16:01:57', '', '', '', '/upload/avatar/head_default.jpg', '200', '0');
+INSERT INTO `account` VALUES ('1', '韩梅梅', '123456', '2016-11-15 15:01:37', '2017-03-21 15:35:37', '', null, '', '/upload/avatar/head_1.jpg', '200', '0', '我是我，不一样的烟火');
+INSERT INTO `account` VALUES ('2', '哈哈', '哈哈', '2016-11-15 15:01:37', '2017-03-21 15:36:03', '', null, '', '/upload/avatar/head_2.jpg', '200', '10', '心情一直棒棒的');
+INSERT INTO `account` VALUES ('3', '哈哈adsdf', '哈哈111', '2016-11-15 15:01:37', '2017-03-21 15:36:14', '', null, '', '/upload/avatar/head_3.jpg', '200', '200', '专业治疗师');
+INSERT INTO `account` VALUES ('4', 'dsfd ', '都是', '2016-11-15 15:01:37', '2017-03-21 15:35:39', '', null, '', '/upload/avatar/head_4.jpg', '200', '200', '我是我，不一样的烟火');
+INSERT INTO `account` VALUES ('5', '科比', '也来了', '2016-11-15 15:01:37', '2017-03-21 15:35:40', '', null, '1350ebd07b7b416f9180b9756d3d9fca', '/upload/avatar/head_5.jpg', '200', '50', '我是我，不一样的烟火');
+INSERT INTO `account` VALUES ('6', '詹姆斯', '也来了', '2016-11-16 15:09:57', '2017-03-09 13:13:18', '', '', '', '/upload/avatar/head_6.jpg', '200', '100', '');
+INSERT INTO `account` VALUES ('7', 'aaa', 'ccc', '2016-11-16 15:17:04', '2017-03-21 15:36:22', '', '', 'd5ca5cbb8b47438e9cb83328951116e9', '/upload/avatar/head_7.jpg', '200', '50', '你怎么舍得我伤悲');
+INSERT INTO `account` VALUES ('8', '乔丹', 'ccc', '2016-11-16 15:17:21', '2017-03-24 13:10:35', '', '', '', '/upload/avatar/head_8.jpg', '200', '20', '接班人,别跟我说是詹姆斯，哦对了，我从来没有接班人，至少我看得上的，目前没有...');
+INSERT INTO `account` VALUES ('9', 'aaa', 'bbb', '2016-11-18 13:34:13', '2017-03-24 16:19:13', '', '', 'd2a5d2f2e3ae4c01adee928c20e83e0e', '/upload/avatar/head_9.jpg', '99794', '146', '我是我，不一样的烟火');
+INSERT INTO `account` VALUES ('10', 'ccc', 'bbb', '2016-11-18 13:55:54', '2016-12-10 14:16:36', '', '', '', '/upload/avatar/head_default.jpg', '247', '47', '');
+INSERT INTO `account` VALUES ('11', '1', '1', '2016-11-22 10:58:32', '2017-03-21 15:35:43', '', '', '', '/upload/avatar/head_default.jpg', '200', '50', '我是我，不一样的烟火');
+INSERT INTO `account` VALUES ('12', 'ddd', 'ddd', '2016-11-22 10:58:36', '2017-03-21 15:36:41', '', '', '', '/upload/avatar/head_default.jpg', '200', '20', '本地区基本没人比我帅');
 
 -- ----------------------------
 -- Table structure for answer
@@ -68,20 +69,32 @@ CREATE TABLE `answer` (
   PRIMARY KEY (`answerId`),
   KEY `accountId` (`accountId`),
   KEY `questionId` (`questionId`),
-  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
-  CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `accountId` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON UPDATE CASCADE,
+  CONSTRAINT `questionId` FOREIGN KEY (`questionId`) REFERENCES `question` (`questionId`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
-INSERT INTO `answer` VALUES ('3', '好像是的', '', '3', '0', '2016-11-02 11:06:10', '2016-11-23 14:43:30', '7', '17', '0');
+INSERT INTO `answer` VALUES ('3', '好像是的', '', '3', '0', '2016-11-02 11:06:10', '2017-03-13 15:09:04', '7', '18', '0');
 INSERT INTO `answer` VALUES ('4', '这个可以有', '', '2', '0', '2016-11-03 11:06:10', '2016-11-23 14:05:09', '5', '5', '0');
 INSERT INTO `answer` VALUES ('5', '必须点', '', '2', '0', '2016-11-21 11:06:10', '2016-11-23 15:42:12', '5', '7', '0');
-INSERT INTO `answer` VALUES ('6', '楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:03:48', '2016-11-28 16:29:18', '9', '7', '0');
-INSERT INTO `answer` VALUES ('7', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '0', '0', '2016-11-24 15:09:51', '2016-11-24 15:09:51', '9', '17', '0');
-INSERT INTO `answer` VALUES ('8', '自己家门口', '/upload/#', '0', '0', '2016-11-24 15:20:54', '2016-11-24 15:20:54', '9', '17', '0');
-INSERT INTO `answer` VALUES ('9', '我也不知道啊', '/upload/#', '0', '0', '2016-11-24 15:22:14', '2016-11-24 15:22:14', '9', '17', '0');
+INSERT INTO `answer` VALUES ('6', '楼主记得早起', '/upload/275785422767016085266878617378913609278.jpg#', '0', '0', '2016-11-24 15:03:48', '2017-03-10 13:57:16', '9', '7', '0');
+INSERT INTO `answer` VALUES ('7', '洞头可以看到日出，楼主记得早起', '/upload/275785422767016085266878617378913609278.jpg#/upload/275973204128748668658315770757783316030.jpg#/upload/276203771233540155247118095303592994366#', '0', '0', '2016-11-24 15:09:51', '2017-03-21 13:45:46', '9', '17', '0');
+INSERT INTO `answer` VALUES ('8', '自己家门口', '/upload/275785422767016085266878617378913609278.jpg#', '0', '0', '2016-11-24 15:20:54', '2017-03-10 13:57:52', '9', '17', '0');
+INSERT INTO `answer` VALUES ('9', '我也不知道啊', '/upload/275785422767016085266878617378913609278.jpg#/upload/275973204128748668658315770757783316030.jpg#', '0', '0', '2016-11-24 15:22:14', '2017-03-10 13:57:06', '9', '17', '0');
+INSERT INTO `answer` VALUES ('10', '大神，求我啊', '', '0', '0', '2017-03-13 14:55:52', '2017-03-23 16:56:13', '9', '17', '0');
+INSERT INTO `answer` VALUES ('11', '我要保命', '', '0', '0', '2017-03-13 14:56:17', '2017-03-23 16:58:23', '8', '17', '0');
+INSERT INTO `answer` VALUES ('12', '沙发太大了', '', '0', '0', '2017-03-13 14:56:17', '2017-03-23 16:56:26', '9', '16', '0');
+INSERT INTO `answer` VALUES ('13', '尼玛的', '', '0', '0', '2017-03-13 14:56:17', '2017-03-23 16:56:40', '9', '16', '0');
+INSERT INTO `answer` VALUES ('14', '疯狂变身中', '', '0', '0', '2017-03-13 14:56:18', '2017-03-23 16:56:45', '9', '16', '0');
+INSERT INTO `answer` VALUES ('15', '什么情况', '', '0', '0', '2017-03-13 14:56:18', '2017-03-23 16:56:50', '9', '16', '0');
+INSERT INTO `answer` VALUES ('16', '我TM也是醉了', '', '0', '0', '2017-03-13 14:56:18', '2017-03-23 16:56:57', '9', '16', '0');
+INSERT INTO `answer` VALUES ('17', '直播中', '', '0', '0', '2017-03-13 14:56:19', '2017-03-23 16:57:55', '8', '16', '0');
+INSERT INTO `answer` VALUES ('18', '这可不是开玩笑的', '', '0', '0', '2017-03-13 14:56:19', '2017-03-23 16:58:00', '8', '16', '0');
+INSERT INTO `answer` VALUES ('19', '对了，就这样', '', '0', '0', '2017-03-13 14:56:19', '2017-03-23 16:58:02', '8', '16', '0');
+INSERT INTO `answer` VALUES ('20', '哈哈， 终于占了', '', '0', '0', '2017-03-13 14:56:19', '2017-03-23 16:58:05', '8', '16', '0');
+INSERT INTO `answer` VALUES ('21', '我看还行', '/upload/answer/db25202aa0a74d3b8ad2f79e2eb44023.png#', '0', '0', '2017-03-15 17:17:18', '2017-03-23 16:58:15', '8', '45', '0');
 
 -- ----------------------------
 -- Table structure for attention
@@ -97,19 +110,24 @@ CREATE TABLE `attention` (
   KEY `b` (`otherAccountId`),
   CONSTRAINT `a` FOREIGN KEY (`myAccountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `b` FOREIGN KEY (`otherAccountId`) REFERENCES `account` (`accountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='关注表';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='关注表';
 
 -- ----------------------------
 -- Records of attention
 -- ----------------------------
 INSERT INTO `attention` VALUES ('1', '9', '1', '2016-11-29 15:51:52');
 INSERT INTO `attention` VALUES ('2', '9', '2', '2016-11-29 15:51:52');
-INSERT INTO `attention` VALUES ('3', '9', '3', '2016-11-29 15:51:52');
 INSERT INTO `attention` VALUES ('4', '9', '4', '2016-11-29 15:51:52');
 INSERT INTO `attention` VALUES ('5', '9', '5', '2016-11-29 15:51:52');
-INSERT INTO `attention` VALUES ('6', '9', '6', '2016-11-29 15:51:52');
 INSERT INTO `attention` VALUES ('7', '9', '7', '2016-11-29 15:51:52');
 INSERT INTO `attention` VALUES ('8', '9', '8', '2016-11-29 15:51:52');
+INSERT INTO `attention` VALUES ('16', '3', '9', '2017-03-22 15:36:18');
+INSERT INTO `attention` VALUES ('17', '4', '9', '2017-03-22 15:36:19');
+INSERT INTO `attention` VALUES ('18', '5', '9', '2017-03-22 15:36:19');
+INSERT INTO `attention` VALUES ('19', '6', '9', '2017-03-22 15:36:20');
+INSERT INTO `attention` VALUES ('20', '3', '8', '2017-03-22 15:37:04');
+INSERT INTO `attention` VALUES ('27', '9', '3', '2017-03-24 15:27:54');
+INSERT INTO `attention` VALUES ('30', '9', '6', '2017-03-24 15:31:17');
 
 -- ----------------------------
 -- Table structure for collect
@@ -121,54 +139,22 @@ CREATE TABLE `collect` (
   `questionId` int(11) DEFAULT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`collectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of collect
 -- ----------------------------
 INSERT INTO `collect` VALUES ('1', '2', '17', '2016-11-24 10:33:35');
 INSERT INTO `collect` VALUES ('2', '9', '18', '2016-11-28 15:29:20');
-INSERT INTO `collect` VALUES ('3', '9', '15749', '2016-11-29 13:09:08');
-INSERT INTO `collect` VALUES ('4', '9', '15755', '2016-11-29 14:46:33');
-INSERT INTO `collect` VALUES ('5', '9', '15756', '2016-11-29 14:46:48');
-INSERT INTO `collect` VALUES ('6', '9', '20', '2016-11-29 15:02:07');
-INSERT INTO `collect` VALUES ('7', '9', '21', '2016-11-29 15:02:07');
-INSERT INTO `collect` VALUES ('8', '9', '22', '2016-11-29 15:02:07');
-INSERT INTO `collect` VALUES ('9', '9', '23', '2016-11-29 15:02:07');
-INSERT INTO `collect` VALUES ('10', '9', '24', '2016-11-29 15:02:07');
-INSERT INTO `collect` VALUES ('11', '9', '25', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('12', '9', '26', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('13', '9', '27', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('14', '9', '28', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('15', '9', '29', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('16', '9', '30', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('17', '9', '31', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('18', '9', '32', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('19', '9', '33', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('20', '9', '34', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('21', '9', '35', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('22', '9', '36', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('23', '9', '37', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('24', '9', '38', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('25', '9', '39', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('26', '9', '40', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('27', '9', '41', '2016-11-29 15:02:08');
-INSERT INTO `collect` VALUES ('28', '9', '42', '2016-11-29 15:02:08');
 INSERT INTO `collect` VALUES ('29', '9', '43', '2016-11-29 15:02:08');
 INSERT INTO `collect` VALUES ('30', '9', '44', '2016-11-29 15:02:27');
-INSERT INTO `collect` VALUES ('31', '9', '45', '2016-11-29 15:02:28');
-INSERT INTO `collect` VALUES ('32', '9', '46', '2016-11-29 15:02:29');
-INSERT INTO `collect` VALUES ('33', '9', '47', '2016-11-29 15:02:30');
-INSERT INTO `collect` VALUES ('34', '9', '48', '2016-11-29 15:02:31');
-INSERT INTO `collect` VALUES ('35', '9', '49', '2016-11-29 15:02:32');
-INSERT INTO `collect` VALUES ('36', '9', '50', '2016-11-29 15:02:33');
-INSERT INTO `collect` VALUES ('37', '9', '15762', '2016-12-09 16:19:34');
-INSERT INTO `collect` VALUES ('38', '9', '15762', '2016-12-09 16:20:52');
-INSERT INTO `collect` VALUES ('39', '9', '15752', '2016-12-10 09:44:34');
-INSERT INTO `collect` VALUES ('40', '10', '15701', '2016-12-10 13:48:12');
-INSERT INTO `collect` VALUES ('41', '10', '15705', '2016-12-10 14:01:35');
-INSERT INTO `collect` VALUES ('42', '9', '15706', '2016-12-10 14:16:36');
-INSERT INTO `collect` VALUES ('43', '10', '15707', '2016-12-10 14:18:15');
+INSERT INTO `collect` VALUES ('32', '9', '10', '2016-11-29 15:02:29');
+INSERT INTO `collect` VALUES ('33', '9', '11', '2016-11-29 15:02:30');
+INSERT INTO `collect` VALUES ('34', '9', '12', '2016-11-29 15:02:31');
+INSERT INTO `collect` VALUES ('35', '9', '13', '2016-11-29 15:02:32');
+INSERT INTO `collect` VALUES ('36', '9', '14', '2016-11-29 15:02:33');
+INSERT INTO `collect` VALUES ('49', '9', '15', '2017-03-16 14:30:00');
+INSERT INTO `collect` VALUES ('50', '9', '16', '2017-03-18 14:34:37');
 
 -- ----------------------------
 -- Table structure for footprint
@@ -223,29 +209,30 @@ CREATE TABLE `gift` (
   `giftRank` tinyint(3) unsigned DEFAULT '1' COMMENT '礼物等级',
   `giftUrl` varchar(100) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '图片地址',
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `giftDes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '礼品描述',
   PRIMARY KEY (`giftId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of gift
 -- ----------------------------
-INSERT INTO `gift` VALUES ('1', '爱心', '20', '1', '/img/gift/ax.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('2', '棒棒糖', '5', '2', '/img/gift/bbt.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('3', '冰棍', '5', '2', '/img/gift/bg.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('4', '巧克力', '10', '3', '/img/gift/ckl.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('5', '蛋糕', '20', '5', '/img/gift/dg.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('6', '肥皂', '10', '1', '/img/gift/fz.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('7', '红包', '50', '1', '/img/gift/hb.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('8', '口红', '100', '2', '/img/gift/kh.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('9', '红玫瑰', '99', '1', '/img/gift/mg.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('10', '啤酒', '30', '1', '/img/gift/pj.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('11', '情书', '200', '2', '/img/gift/qs.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('12', '香槟', '500', '3', '/img/gift/xb.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('13', '香蕉', '15', '1', '/img/gift/xj.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('14', '茉莉', '80', '2', '/img/gift/ml.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('15', '药丸', '30', '1', '/img/gift/yw.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('16', '甜粽子', '15', '1', '/img/gift/tzz.png', '2016-11-30 10:13:48');
-INSERT INTO `gift` VALUES ('17', '咸粽子', '15', '1', '/img/gift/xzz.png', '2016-11-30 10:13:48');
+INSERT INTO `gift` VALUES ('1', '爱心', '20', '1', '/img/gift/ax.png', '2016-11-30 10:13:48', '爱心');
+INSERT INTO `gift` VALUES ('2', '棒棒糖', '5', '2', '/img/gift/bbt.png', '2016-11-30 10:13:48', '棒棒糖');
+INSERT INTO `gift` VALUES ('3', '冰棍', '5', '2', '/img/gift/bg.png', '2016-11-30 10:13:48', '冰棍');
+INSERT INTO `gift` VALUES ('4', '巧克力', '10', '3', '/img/gift/ckl.png', '2016-11-30 10:13:48', '巧克力');
+INSERT INTO `gift` VALUES ('5', '蛋糕', '20', '3', '/img/gift/dg.png', '2016-11-30 10:13:48', '蛋糕');
+INSERT INTO `gift` VALUES ('6', '肥皂', '10', '1', '/img/gift/fz.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('7', '红包', '50', '1', '/img/gift/hb.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('8', '口红', '100', '2', '/img/gift/kh.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('9', '红玫瑰', '99', '1', '/img/gift/mg.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('10', '啤酒', '30', '1', '/img/gift/pj.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('11', '情书', '200', '2', '/img/gift/qs.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('12', '香槟', '500', '3', '/img/gift/xb.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('13', '香蕉', '15', '1', '/img/gift/xj.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('14', '茉莉', '80', '2', '/img/gift/ml.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('15', '药丸', '30', '1', '/img/gift/yw.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('16', '甜粽子', '15', '1', '/img/gift/tzz.png', '2016-11-30 10:13:48', '');
+INSERT INTO `gift` VALUES ('17', '咸粽子', '15', '1', '/img/gift/xzz.png', '2016-11-30 10:13:48', '');
 
 -- ----------------------------
 -- Table structure for my_gift
@@ -262,7 +249,7 @@ CREATE TABLE `my_gift` (
 -- ----------------------------
 -- Records of my_gift
 -- ----------------------------
-INSERT INTO `my_gift` VALUES ('9', '1', '1', '2016-11-30 14:56:22', '2016-12-01 14:07:56');
+INSERT INTO `my_gift` VALUES ('9', '1', '2', '2016-11-30 14:56:22', '2017-03-20 14:02:37');
 INSERT INTO `my_gift` VALUES ('9', '2', '11', '2016-11-30 14:56:22', '2016-12-01 17:31:12');
 INSERT INTO `my_gift` VALUES ('9', '3', '5', '2016-11-30 14:56:22', '2016-12-07 14:43:53');
 INSERT INTO `my_gift` VALUES ('9', '4', '4', '2016-11-30 14:56:22', '2016-12-01 14:07:56');
@@ -332,11 +319,19 @@ CREATE TABLE `praise` (
   KEY `answerId` (`answerId`),
   CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `praise_ibfk_2` FOREIGN KEY (`answerId`) REFERENCES `answer` (`answerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of praise
 -- ----------------------------
+INSERT INTO `praise` VALUES ('1', '9', '21', '2017-03-16 16:18:04', '0');
+INSERT INTO `praise` VALUES ('2', '1', '21', '2017-03-16 16:18:28', '0');
+INSERT INTO `praise` VALUES ('3', '9', '9', '2017-03-16 16:18:31', '0');
+INSERT INTO `praise` VALUES ('4', '9', '11', '2017-03-16 17:14:52', '0');
+INSERT INTO `praise` VALUES ('5', '9', '11', '2017-03-16 17:16:04', '0');
+INSERT INTO `praise` VALUES ('6', '9', '11', '2017-03-16 17:17:07', '0');
+INSERT INTO `praise` VALUES ('7', '9', '17', '2017-03-17 10:03:59', '0');
+INSERT INTO `praise` VALUES ('8', '9', '19', '2017-03-17 10:04:11', '0');
 
 -- ----------------------------
 -- Table structure for question
@@ -359,37 +354,51 @@ CREATE TABLE `question` (
   KEY `tag_id` (`tagId`),
   CONSTRAINT `accout_id` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`),
   CONSTRAINT `tag_id` FOREIGN KEY (`tagId`) REFERENCES `tag` (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2016-11-29 15:16:27', '0', '0', '1', '1', '0');
-INSERT INTO `question` VALUES ('6', '标题2', '内容2', '', '2016-11-18 17:05:30', '2016-11-29 15:16:28', '0', '0', '2', '1', '0');
-INSERT INTO `question` VALUES ('7', '标题3', '内容3', '', '2016-11-18 17:05:30', '2016-11-29 15:16:29', '0', '0', '3', '1', '0');
-INSERT INTO `question` VALUES ('8', '标题4', '内容4', '', '2016-11-18 17:05:30', '2017-03-05 19:00:09', '0', '0', '4', '1', '1');
-INSERT INTO `question` VALUES ('9', '标题5', '内容5', '', '2016-11-18 17:05:30', '2017-03-05 19:00:12', '0', '0', '3', '1', '1');
-INSERT INTO `question` VALUES ('10', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 15:53:46', '2016-11-22 17:22:45', '0', '0', '1', '6', '0');
-INSERT INTO `question` VALUES ('11', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:08', '2016-11-22 17:22:57', '0', '0', '4', '6', '0');
-INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:23', '2016-11-22 17:22:55', '0', '0', '3', '6', '0');
-INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:06:42', '2016-11-22 17:22:55', '0', '0', '3', '6', '0');
-INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:07:11', '2016-11-28 13:03:27', '0', '0', '9', '6', '0');
-INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:08:13', '2016-11-28 11:18:21', '0', '0', '9', '6', '0');
-INSERT INTO `question` VALUES ('16', '搞清楚上述内容后，我想就不必要纠结于经验获得的公式算法了，相反经验和升级不是一个公式化就能搞定的东西，有些情况下可以根据实际需求进行调整，当然调整的手段和规模尽量保证低风险和高效用', '怎么上火星', '/upload/bg_menu.png#/upload/bg_msg.png#', '2016-11-21 16:11:26', '2017-03-05 19:00:14', '0', '0', '9', '6', '1');
-INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '', '2016-11-22 10:17:55', '2017-03-05 19:00:18', '0', '0', '9', '6', '1');
-INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '', '2016-11-22 10:48:39', '2017-03-05 19:00:22', '0', '0', '9', '1', '1');
-INSERT INTO `question` VALUES ('19', '1', '1', '', '2016-11-22 10:59:06', '2016-11-22 17:22:52', '0', '0', '2', '1', '0');
-INSERT INTO `question` VALUES ('20', '哪里可以吃到好吃的饺子', '洞头可以看到日出，楼主记得早起', '/upload/head_default.jpg#', '2016-11-24 15:01:38', '2016-11-29 09:14:01', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('21', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:14', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('22', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('23', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:14:15', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('24', '请问大家一个问题', '具体问题请看标题', '', '2016-11-29 09:13:40', '2016-11-29 09:34:13', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('25', '请问大家一个问题24', '具体问题请看标题24', '', '2016-11-29 09:34:06', '2016-11-29 09:39:22', '0', '0', '9', '1', '0');
-INSERT INTO `question` VALUES ('26', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1', '0');
-INSERT INTO `question` VALUES ('27', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:40', '0', '0', '8', '1', '0');
-INSERT INTO `question` VALUES ('28', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1', '0');
-INSERT INTO `question` VALUES ('29', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:16:41', '0', '0', '8', '1', '0');
-INSERT INTO `question` VALUES ('30', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2016-11-29 15:17:13', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('5', '标题1', '内容1', '', '2016-11-18 17:05:30', '2017-03-07 16:38:55', '0', '0', '1', '1', '0');
+INSERT INTO `question` VALUES ('6', '标题2', '内容2', '/upload/275456607036279209870861864829104776766.jpg#/upload/275785422767016085266878617378913609278.jpg#', '2016-11-18 17:05:30', '2017-03-07 16:40:48', '0', '0', '2', '1', '0');
+INSERT INTO `question` VALUES ('7', '标题3', '内容3', '/upload/275785422767016085266878617378913609278.jpg', '2016-11-18 17:05:30', '2017-03-07 16:40:50', '0', '0', '3', '1', '0');
+INSERT INTO `question` VALUES ('8', '标题4', '内容4', '/upload/275785422767016085266878617378913609278.jpg', '2016-11-18 17:05:30', '2017-03-07 16:40:52', '0', '0', '4', '1', '1');
+INSERT INTO `question` VALUES ('9', '标题5', '内容5', '/upload/275785422767016085266878617378913609278.jpg', '2016-11-18 17:05:30', '2017-03-07 16:40:54', '0', '0', '3', '1', '1');
+INSERT INTO `question` VALUES ('10', '这是没图片的', '怎么上火星', '', '2016-11-21 15:53:46', '2017-03-07 16:42:00', '0', '0', '1', '6', '0');
+INSERT INTO `question` VALUES ('11', '这图片是错误的', '怎么上火星', '275905063947578275615563891567481153086.jpg', '2016-11-21 16:06:08', '2017-03-07 16:42:14', '0', '0', '4', '6', '0');
+INSERT INTO `question` VALUES ('12', '怎么上火星', '怎么上火星', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-21 16:06:23', '2017-03-07 16:40:58', '0', '0', '3', '6', '0');
+INSERT INTO `question` VALUES ('13', '怎么上火星', '怎么上火星', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-21 16:06:42', '2017-03-07 16:41:01', '0', '0', '3', '6', '0');
+INSERT INTO `question` VALUES ('14', '怎么上火星', '怎么上火星', '', '2016-11-21 16:07:11', '2017-03-07 16:38:52', '0', '0', '9', '6', '0');
+INSERT INTO `question` VALUES ('15', '怎么上火星', '怎么上火星', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-21 16:08:13', '2017-03-07 16:41:02', '0', '0', '9', '6', '0');
+INSERT INTO `question` VALUES ('16', '搞清楚上述内容后，我想就不必要纠结于经验获得的公式算法了，相反经验和升级不是一个公式化就能搞定的东西，有些情况下可以根据实际需求进行调整，当然调整的手段和规模尽量保证低风险和高效用', '怎么上火星', '', '2016-11-21 16:11:26', '2017-03-07 16:38:10', '0', '0', '9', '6', '1');
+INSERT INTO `question` VALUES ('17', '哪里可以看日出', '哪里可以看日出哪里可以看日出哪里可以看日出哪里可以看日出', '/upload/275785422767016085266878617378913609278.jpg#/upload/275973204128748668658315770757783316030.jpg#', '2016-11-22 10:17:55', '2017-03-07 16:41:11', '0', '0', '9', '6', '1');
+INSERT INTO `question` VALUES ('18', '怎么轻松来一个720转身扣篮', '醒醒，哥们，起来搬砖了。', '/upload/275785422767016085266878617378913609278.jpg', '2016-11-22 10:48:39', '2017-03-07 16:41:13', '0', '0', '9', '1', '1');
+INSERT INTO `question` VALUES ('19', '1', '1', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-22 10:59:06', '2017-03-07 16:41:15', '0', '0', '2', '1', '0');
+INSERT INTO `question` VALUES ('20', '哪里可以吃到好吃的饺子', '洞头可以看到日出，楼主记得早起', '', '2016-11-24 15:01:38', '2017-03-22 13:30:03', '0', '0', '2', '1', '0');
+INSERT INTO `question` VALUES ('21', '请问大家一个问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:13:40', '2017-03-07 16:41:17', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('22', '请问大家一个问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:13:40', '2017-03-07 16:41:19', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('23', '请问大家一个问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:13:40', '2017-03-07 16:41:21', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('24', '请问大家一个问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:13:40', '2017-03-07 16:41:23', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('25', '请问大家一个问题24', '具体问题请看标题24', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:34:06', '2017-03-07 16:41:25', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('26', '这是一个新的问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:38:54', '2017-03-07 16:41:26', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('27', '这是一个新的问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:38:54', '2017-03-07 16:41:28', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('28', '这是一个新的问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:38:54', '2017-03-07 16:41:31', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('29', '这是一个新的问题', '具体问题请看标题', '/upload/275905063947578275615563891567481153086.jpg', '2016-11-29 09:38:54', '2017-03-07 16:41:34', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('30', '这是一个新的问题', '具体问题请看标题', '', '2016-11-29 09:38:54', '2017-03-07 16:41:40', '0', '0', '8', '1', '0');
+INSERT INTO `question` VALUES ('32', 'rrf', 'ggh', '', '2017-03-15 13:22:08', '2017-03-15 13:48:13', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('33', 'rrf', 'ggh', '', '2017-03-15 13:22:08', '2017-03-15 13:48:17', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('34', 'rrf', 'ggh', '', '2017-03-15 13:25:55', '2017-03-15 13:48:21', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('35', '哪里有好吃的料理？', '如题', '/upload/publish/108d6fe2d37d4e85bfe85aae877c0394.png#', '2017-03-15 14:51:48', '2017-03-15 14:51:48', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('36', '吧', '啦啦啦', '', '2017-03-15 14:57:29', '2017-03-15 14:57:29', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('37', '测试下事件总线', '如题', '/upload/publish/c3abaabb8f7b4a98935b6605b468cd6e.png#', '2017-03-15 15:07:07', '2017-03-15 15:07:07', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('38', '我刚来，不知道问什么', '哈哈', '/upload/publish/94f02c823deb4697a6c1c1fb78de0f16.png#', '2017-03-15 15:14:32', '2017-03-15 15:14:32', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('39', '我感觉我要火', '如题', '/upload/publish/c16fb67105f947b4ac5a6b1749b3c5a3.png#', '2017-03-15 15:17:17', '2017-03-15 15:17:17', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('40', '又来一个哈哈', '哈哈', '', '2017-03-15 15:24:07', '2017-03-15 15:24:07', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('41', '差不多了', '是的', '', '2017-03-15 15:26:52', '2017-03-15 15:26:52', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('42', 'rrr', 'rrr', '', '2017-03-15 15:35:12', '2017-03-15 15:35:12', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('43', 'ttt', 'ttt', '', '2017-03-15 15:36:56', '2017-03-15 15:36:56', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('44', '好了吧', '好了Y(^o^)Y', '', '2017-03-15 15:48:09', '2017-03-15 15:48:09', '0', '0', '9', '1', '0');
+INSERT INTO `question` VALUES ('45', '这张图怎样', '哈哈', '/upload/publish/a07e5c316049497ab64a44785d7bfea2.png#', '2017-03-15 15:50:25', '2017-03-22 13:54:34', '0', '0', '3', '1', '0');
 
 -- ----------------------------
 -- Table structure for tag
@@ -416,7 +425,7 @@ INSERT INTO `tag` VALUES ('6', '求助', '2016-11-21 10:25:57');
 -- View structure for myview
 -- ----------------------------
 DROP VIEW IF EXISTS `myview`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `myview` AS select `account`.`name` AS `name`,`account`.`password` AS `password` from `account` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `myview` AS select `account`.`name` AS `name`,`account`.`password` AS `password` from `account` ;
 
 -- ----------------------------
 -- Procedure structure for addAttention

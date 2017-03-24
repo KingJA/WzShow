@@ -1,6 +1,4 @@
-package com.bean;
-
-import java.util.Date;
+package com.appbean;
 
 /**
  * Description：TODO
@@ -8,25 +6,21 @@ import java.util.Date;
  * Author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class Gift {
+public class AppGift {
     private long giftId;
     private String giftName;
-
-    public String getGiftDes() {
-        return giftDes;
-    }
-
-    public void setGiftDes(String giftDes) {
-        this.giftDes = giftDes;
-    }
-
     private String giftDes;
     private int giftCost;
-    private int giftRank;
     private int giftCount;
+    private int giftRank;
     private String giftUrl;
-    private Date createTime;
+    public int getGiftCount() {
+        return giftCount;
+    }
 
+    public void setGiftCount(int giftCount) {
+        this.giftCount = giftCount;
+    }
     public long getGiftId() {
         return giftId;
     }
@@ -66,20 +60,12 @@ public class Gift {
     public void setGiftUrl(String giftUrl) {
         this.giftUrl = giftUrl;
     }
-
-    public Date getCreateTime() {
-        return createTime;
+    public String getGiftDes() {
+        return giftDes;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setGiftDes(String giftDes) {
+        this.giftDes = giftDes;
     }
 
-    public int getGiftCount() {
-        return giftCount;
-    }
-
-    public void setGiftCount(int giftCount) {
-        this.giftCount = giftCount;
-    }
 }
