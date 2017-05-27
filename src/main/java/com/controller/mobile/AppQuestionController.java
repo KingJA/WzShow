@@ -2,6 +2,7 @@ package com.controller.mobile;
 
 import com.appbean.AppAnswer;
 import com.appbean.AppQuestion;
+import com.appbean.AppQuestionDetail;
 import com.appbean.SingleInt;
 import com.bean.Account;
 import com.bean.AppResult;
@@ -49,12 +50,36 @@ public class AppQuestionController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/getHotQuestions", method = RequestMethod.POST)
+    public AppResult getHotQuestions(@RequestParam("token") String token, @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
+        long accountId = checkTokenAvail(token);
+        if (accountId != -1) {
+            return new AppResult<List<AppQuestion>>(0, "获取热门列表成功", questionDao.getHotQuestions(accountId, pageIndex, pageSize));
+        } else {
+            return new AppResult(4, "Token error", null);
+        }
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getAnswers", method = RequestMethod.POST)
     public AppResult getAnswers(@RequestParam("token") String token, @RequestParam("questionId") long questionId, @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
         long accountId = checkTokenAvail(token);
         logger.error(accountId);
         if (accountId != -1) {
             return new AppResult<List<AppAnswer>>(0, "获取回答列表成功", questionDao.getAnswers(accountId, questionId, pageIndex, pageSize));
+        } else {
+            return new AppResult(4, "Token error", null);
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getQuestionDetail", method = RequestMethod.POST)
+    public AppResult getQuestionDetail(@RequestParam("token") String token, @RequestParam("questionId") long questionId) {
+        long accountId = checkTokenAvail(token);
+        logger.error(accountId);
+        if (accountId != -1) {
+            return new AppResult<AppQuestionDetail>(0, "获取回答列表成功", new AppQuestionDetail(questionDao.getQuestionInfo(accountId,questionId),questionDao.getAnswers(accountId,questionId,0,20)));
         } else {
             return new AppResult(4, "Token error", null);
         }
@@ -115,9 +140,10 @@ public class AppQuestionController {
         }
     }
 
- @ResponseBody
+    @ResponseBody
     @RequestMapping(value = "/attention", method = RequestMethod.POST)
-    public AppResult attention(@RequestParam("token") String token, @RequestParam("otherAccountId") long questionId, @RequestParam("ifAttention") int ifCollect) {
+    public AppResult attention(@RequestParam("token") String token, @RequestParam("otherAccountId") long questionId,
+                               @RequestParam("ifAttention") int ifCollect) {
         long accountId = checkTokenAvail(token);
         if (accountId == -1) {
             return new AppResult(4, "Token error", null);
@@ -150,6 +176,24 @@ public class AppQuestionController {
             } else {
                 return new AppResult<Object>(4, "点赞失败", null);
             }
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setBestAnswer", method = RequestMethod.POST)
+    public AppResult setBestQuestion(@RequestParam("token") String token, @RequestParam("questionId") long questionId,
+                                     @RequestParam("answerId") long answerId,
+                                     @RequestParam("answerAccountId") long answerAccountId) {
+        long accountId = checkTokenAvail(token);
+        if (accountId != -1) {
+            if (questionDao.setBestAnswer(answerId) > 0 && questionDao.setQuestionSolved(questionId )> 0) {
+                return new AppResult<Object>(0, "设为最佳答案成功", null);
+            }else{
+                return new AppResult<Object>(4, "设为最佳答案粗错了哦", null);
+            }
+
+        } else {
+            return new AppResult<Object>(4, "Token error", null);
         }
     }
 

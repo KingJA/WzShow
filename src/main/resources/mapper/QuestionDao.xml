@@ -101,7 +101,7 @@
         SELECT
          (select COUNT(*)FROM praise WHERE praise.answerId=answer.answerId)AS praiseCount,
          (select COUNT(*) FROM praise WHERE praise.accountId=#{accountId} AND praise.answerId=answer.answerId) AS isPraised,
-         question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.content,answer.createTime,answer.imgUrls
+         question.questionId,account.accountId,account.name,account.avatar,answer.answerId,answer.isBest,answer.content,answer.createTime,answer.imgUrls
         FROM answer
         LEFT JOIN question
         ON answer.questionId=question.questionId
@@ -200,5 +200,40 @@
         ORDER BY answer.createTime DESC
         limit #{pageIndex},#{pageSize}
     </select>
+
+    <select id="getHotQuestions" resultType="com.appbean.AppQuestion">
+        select * from (select (select COUNT(*)FROM answer WHERE answer.questionId=question.questionId) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=question.questionId)AS
+        isCollected,(select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId) AS isAttentioned,
+        account.`name`,account.avatar,account.experience,question.questionId,question.accountId,question.title,question.content,question.imgUrls,question.solved,question.collectCount,question.createTime,question.tagId
+        FROM question LEFT JOIN account
+        ON question.accountId=account.accountId
+        ORDER BY question.createTime DESC) questions
+        ORDER BY answerCount DESC
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="getQuestionInfo" resultType="com.appbean.AppQuestion">
+        select
+        (select COUNT(*)FROM answer WHERE answer.questionId=#{questionId}) AS answerCount,
+        (select COUNT(*) FROM collect WHERE collect.accountId=#{accountId} AND collect.questionId=#{questionId})AS isCollected,
+        (select COUNT(*) FROM attention WHERE attention.myAccountId=#{accountId} AND attention.otherAccountId=question.accountId)AS isAttentioned,
+        account.`name`,account.avatar,account.des,account.experience,account.accountId,
+        question.questionId,question.title,question.content,question.imgUrls,question.solved,question.tagId,question.createTime
+        from question
+        LEFT JOIN account
+        ON question.accountId=account.accountId
+        WHERE question.questionId=#{questionId}
+    </select>
+
+
+    <!--回答为最佳答案-->
+    <update id="setBestAnswer">
+        UPDATE answer SET isBest=1 WHERE answerId=#{answerId}
+    </update>
+    <!--问题设为已解决-->
+    <update id="setQuestionSolved">
+        UPDATE question SET solved=1 WHERE questionId=#{questionId}
+    </update>
 
 </mapper>

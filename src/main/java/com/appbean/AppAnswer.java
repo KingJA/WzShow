@@ -21,7 +21,14 @@ public class AppAnswer {
     private Date createTime;//回答时间
     private int praiseCount;//点赞数
     private int isPraised;//是否点赞过
+    private int isBest;//是否最佳答案
+    public int getIsBest() {
+        return isBest;
+    }
 
+    public void setIsBest(int isBest) {
+        this.isBest = isBest;
+    }
     public long getQuestionId() {
         return questionId;
     }

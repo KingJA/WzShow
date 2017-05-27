@@ -10,6 +10,8 @@ import com.util.StringUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description：TODO
@@ -43,9 +46,10 @@ public class AppAccountController {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public AppResult doLogin(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<AppResult<Account>> doLogin(HttpServletRequest httpServletRequest) {
         String name = httpServletRequest.getParameter("userName");
         String password = httpServletRequest.getParameter("password");
+        logger.error("userName:"+name+" password:"+password);
         Account account = accountService.login(name, password);
         AppResult<Account> accountAppResult = new AppResult<Account>();
         if (account != null) {
@@ -56,7 +60,10 @@ public class AppAccountController {
         }else{
             accountAppResult.setResultCode(4).setResultText("登录失败").setResultData(account);
         }
-        return accountAppResult;
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(1, TimeUnit.HOURS))
+                .body(accountAppResult);
+
     }
 
     /**

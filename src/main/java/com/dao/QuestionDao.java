@@ -56,6 +56,8 @@ public interface QuestionDao {
 
     List<AppQuestion> getQuestionsBySolved(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize, @Param(value = "solved") int solved);
 
+    List<AppQuestion> getHotQuestions(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
     List<AppQuestion> getQuestions(@Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
 
     List<AppQuestion> getMyQuestions(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
@@ -63,6 +65,7 @@ public interface QuestionDao {
     List<AppMyAnswer> getMyAnswers(@Param(value = "accountId") long accountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
 
     List<AppMyAnswer> getOtherAnswers(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
+
     List<AppQuestion> getOtherQuestions(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
 
     List<AppAnswer> getAnswers(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId, @Param(value = "pageIndex") int pageIndex, @Param(value = "pageSize") int pageSize);
@@ -80,5 +83,11 @@ public interface QuestionDao {
     int cancleAttention(@Param(value = "accountId") long accountId, @Param(value = "otherAccountId") long otherAccountId);
 
     int praise(@Param(value = "accountId") long accountId, @Param(value = "answerId") long answerId);
+
+    int setBestAnswer(@Param(value = "answerId") long answerId);
+
+    int setQuestionSolved(@Param(value = "questionId") long questionId);
+
+    AppQuestion getQuestionInfo(@Param(value = "accountId") long accountId, @Param(value = "questionId") long questionId);
 
 }

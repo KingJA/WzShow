@@ -17,13 +17,13 @@
 
     <!--我的回答-->
     <select id="selectMyAnswerByAccountId" resultType="com.bean.MyAnswer">
-select answer.questionId,answer.praiseCount,answer.content,answer.createTime,question.title
-FROM answer
-LEFT JOIN question
-ON answer.questionId=question.questionId
-WHERE answer.accountId=#{accountId}
-ORDER BY answer.createTime DESC
-limit #{startRow},#{pageSize}
+        select answer.questionId,answer.praiseCount,answer.content,answer.createTime,question.title
+        FROM answer
+        LEFT JOIN question
+        ON answer.questionId=question.questionId
+        WHERE answer.accountId=#{accountId}
+        ORDER BY answer.createTime DESC
+        limit #{startRow},#{pageSize}
     </select>
     <select id="selectMyAnswerCountAccountId" resultType="int">
         select count(*) FROM answer WHERE accountId=#{accountId}
@@ -32,11 +32,11 @@ limit #{startRow},#{pageSize}
     <!--我的收藏-->
     <select id="selectMyCollectByAccountId" resultType="com.bean.MyCollect">
         select collect.collectId,collect.questionId,question.title,question.collectCount,question.answerCount,collect.createTime
-FROM collect
-LEFT JOIN question
-ON collect.questionId=question.questionId
-WHERE collect.accountId=#{accountId}
-ORDER BY collect.createTime DESC
+        FROM collect
+        LEFT JOIN question
+        ON collect.questionId=question.questionId
+        WHERE collect.accountId=#{accountId}
+        ORDER BY collect.createTime DESC
         limit #{startRow},#{pageSize}
     </select>
 
@@ -47,21 +47,21 @@ ORDER BY collect.createTime DESC
 
     <!--我的关注-->
     <select id="selectMyAttentionByAccountId" resultType="com.bean.MyAttention">
-select attention.attentionId,attention.otherAccountId,account.name,account.avatar ,attention.createTime
-FROM attention
-LEFT JOIN account
-ON attention.otherAccountId=account.accountId
-WHERE attention.myAccountId=#{accountId}
-ORDER BY attention.createTime DESC
+        select attention.attentionId,attention.otherAccountId,account.name,account.avatar ,attention.createTime
+        FROM attention
+        LEFT JOIN account
+        ON attention.otherAccountId=account.accountId
+        WHERE attention.myAccountId=#{accountId}
+        ORDER BY attention.createTime DESC
         limit #{startRow},#{pageSize}
     </select>
 
     <!--我的礼物-->
     <select id="selectMyGift" resultType="com.bean.MyGift">
-select my_gift.accountId,my_gift.giftId,my_gift.giftCount,gift.giftCost,gift.giftName,gift.giftUrl,gift.giftRank,my_gift.createTime
-FROM my_gift LEFT JOIN gift ON my_gift.giftId=gift.giftId
-WHERE my_gift.accountId=#{accountId}
-ORDER BY my_gift.createTime DESC
+        select my_gift.accountId,my_gift.giftId,my_gift.giftCount,gift.giftCost,gift.giftName,gift.giftUrl,gift.giftRank,my_gift.createTime
+        FROM my_gift LEFT JOIN gift ON my_gift.giftId=gift.giftId
+        WHERE my_gift.accountId=#{accountId}
+        ORDER BY my_gift.createTime DESC
         limit #{startRow},#{pageSize}
     </select>
 

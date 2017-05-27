@@ -14,9 +14,6 @@ import java.util.Date;
 public class AppQuestion {
 
     private long questionId;
-
-
-
     private long accountId;
     private String name;
     private String avatar;

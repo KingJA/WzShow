@@ -1,5 +1,6 @@
 package com.controller.mobile;
 
+import com.appbean.AppQuestion;
 import com.bean.Account;
 import com.bean.AppResult;
 import com.dao.AccountDao;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Description：TODO
@@ -39,7 +42,8 @@ public class AppMineController {
     public AppResult getMyQuestions(@RequestParam("token") String token, @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
         long accountId = checkTokenAvail(token);
         if (accountId != -1) {
-            return new AppResult(0, "Token error", questionDao.getMyQuestions(accountId, pageIndex * pageSize, pageSize));
+            List<AppQuestion> myQuestions = questionDao.getMyQuestions(accountId, pageIndex * pageSize, pageSize);
+            return new AppResult(0, "Token error", myQuestions);
         } else {
             return new AppResult(4, "Token error", null);
         }
